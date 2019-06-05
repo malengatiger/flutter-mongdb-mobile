@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
 
   Random random = Random(DateTime.now().millisecondsSinceEpoch);
   Future insertDocument() async {
-    debugPrint('\n\n💙 💙  inserting sample document ....');
+    debugPrint('\n\n💙 💙  inserting a typical document ....');
     dynamic result;
     try {
       var carrier = Carrier(db: 'testdb', collection: 'testCollection2', data: {

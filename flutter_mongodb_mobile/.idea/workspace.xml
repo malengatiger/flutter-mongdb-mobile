@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc47c90a-3f9f-4e01-943a-c41d6a2ef117" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/com/aftarobot/flutter_mongodb_mobile/Carrier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/com/aftarobot/flutter_mongodb_mobile/LocalDBUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/Carrier.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/caches/gradle_models.ser" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/aftarobot/flutter_mongodb_mobile/FlutterMongodbMobilePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/aftarobot/flutter_mongodb_mobile/FlutterMongodbMobilePlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/aftarobot/flutter_mongodb_mobile/Util.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/aftarobot/flutter_mongodb_mobile/LocalDBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/aftarobot/flutter_mongodb_mobile/LocalDBUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/Carrier.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/Carrier.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/flutter_mongodb_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/flutter_mongodb_mobile.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
@@ -33,17 +25,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/flutter_mongodb_mobile.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="129">
+              <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
                 <element signature="e#272#478#0" expanded="true" />
                 <element signature="e#527#775#0" expanded="true" />
                 <element signature="e#901#1132#0" expanded="true" />
                 <element signature="e#1187#1441#0" expanded="true" />
+                <element signature="e#1506#1798#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/Carrier.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+            <state relative-caret-position="38">
+              <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
               <folding>
                 <element signature="e#213#306#0" expanded="true" />
               </folding>
@@ -61,15 +54,17 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="161" column="16" selection-start-line="161" selection-start-column="16" selection-end-line="161" selection-end-column="16" />
+            <state relative-caret-position="79">
+              <caret line="54" column="44" selection-start-line="54" selection-start-column="44" selection-end-line="54" selection-end-column="44" />
               <folding>
                 <element signature="e#727#1356#0" expanded="true" />
-                <element signature="e#1485#2291#0" expanded="true" />
-                <element signature="e#2410#2958#0" expanded="true" />
+                <element signature="e#2585#3178#0" expanded="true" />
+                <element signature="e#3333#3986#0" expanded="true" />
+                <element signature="e#3361#3751#0" expanded="true" />
+                <element signature="e#3009#6998#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -97,9 +92,9 @@
       <list>
         <option value="$PROJECT_DIR$/android/build.gradle" />
         <option value="$PROJECT_DIR$/android/src/main/com/aftarobot/mongodb/FlutterMongoDBPlugin.java" />
+        <option value="$PROJECT_DIR$/example/lib/main.dart" />
         <option value="$PROJECT_DIR$/lib/Carrier.dart" />
         <option value="$PROJECT_DIR$/lib/flutter_mongodb_mobile.dart" />
-        <option value="$PROJECT_DIR$/example/lib/main.dart" />
       </list>
     </option>
   </component>
@@ -200,16 +195,30 @@
       <option name="project" value="LOCAL" />
       <updated>1559738544694</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="🍀 documents added and retrieved 🍀 🍀 🍀 🍀">
+      <created>1559755638983</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1559755638983</updated>
+    </task>
+    <task id="LOCAL-00005" summary=" 🍎 🍎 keep on keeping on">
+      <created>1559764174493</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1559764174495</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1659" y="-47" width="1633" height="1011" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22878693" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.27115384" visible="true" weight="0.08862351" />
       <window_info id="Captures" order="1" side_tool="true" />
-      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Structure" order="2" sideWeight="0.72884613" side_tool="true" visible="true" weight="0.23758642" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="Build Variants" order="5" side_tool="true" />
@@ -218,7 +227,7 @@
       <window_info anchor="bottom" id="Find" weight="0.3297062" />
       <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.3297062" />
       <window_info anchor="bottom" id="Docker" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.41893363" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43090317" />
       <window_info anchor="bottom" id="TODO" order="3" />
       <window_info anchor="bottom" id="Android Profiler" order="4" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="5" />
@@ -245,7 +254,9 @@
     <MESSAGE value="     initial commit -   project set up" />
     <MESSAGE value=" connected mongodb " />
     <MESSAGE value="  refactored connection to mongo on wild side" />
-    <option name="LAST_COMMIT_MESSAGE" value="  refactored connection to mongo on wild side" />
+    <MESSAGE value=" documents added and retrieved    " />
+    <MESSAGE value="   keep on keeping on" />
+    <option name="LAST_COMMIT_MESSAGE" value="   keep on keeping on" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/android/build.gradle">
@@ -265,10 +276,24 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/src/main/com/aftarobot/mongodb/FlutterMongoDBPlugin.java" />
+    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="79">
+          <caret line="54" column="44" selection-start-line="54" selection-start-column="44" selection-end-line="54" selection-end-column="44" />
+          <folding>
+            <element signature="e#727#1356#0" expanded="true" />
+            <element signature="e#2585#3178#0" expanded="true" />
+            <element signature="e#3333#3986#0" expanded="true" />
+            <element signature="e#3361#3751#0" expanded="true" />
+            <element signature="e#3009#6998#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/Carrier.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+        <state relative-caret-position="38">
+          <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
           <folding>
             <element signature="e#213#306#0" expanded="true" />
           </folding>
@@ -277,26 +302,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/flutter_mongodb_mobile.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="129">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <element signature="e#272#478#0" expanded="true" />
             <element signature="e#527#775#0" expanded="true" />
             <element signature="e#901#1132#0" expanded="true" />
             <element signature="e#1187#1441#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="161" column="16" selection-start-line="161" selection-start-column="16" selection-end-line="161" selection-end-column="16" />
-          <folding>
-            <element signature="e#727#1356#0" expanded="true" />
-            <element signature="e#1485#2291#0" expanded="true" />
-            <element signature="e#2410#2958#0" expanded="true" />
+            <element signature="e#1506#1798#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -8,6 +8,7 @@ class FlutterMongodbMobile {
   static const MethodChannel _channel =
       const MethodChannel('flutter_mongodb_mobile');
 
+  /// getPlatformVersion
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     debugPrint(
@@ -15,6 +16,7 @@ class FlutterMongodbMobile {
     return version;
   }
 
+  /// set MongoDB appID
   static Future<String> setAppID(dynamic config) async {
     var res = await _channel.invokeMethod('setAppID', config);
     debugPrint(
@@ -22,6 +24,7 @@ class FlutterMongodbMobile {
     return '🧩🧩🧩 appID has been set';
   }
 
+  /// insert one document intp collection
   static Future insert(Carrier carrier) async {
     var res = await _channel.invokeMethod('insert', carrier.toJson());
     debugPrint(
@@ -29,6 +32,7 @@ class FlutterMongodbMobile {
     return res;
   }
 
+  /// getAll - get all documents from collection
   static Future getAll(Carrier carrier) async {
     var res = await _channel.invokeMethod('getAll', carrier.toJson());
     debugPrint(
@@ -37,7 +41,6 @@ class FlutterMongodbMobile {
     return res;
   }
 
-  //getByProperty
   static Future getByProperty(Carrier carrier) async {
     var res = await _channel.invokeMethod('getByProperty', carrier.toJson());
     debugPrint(

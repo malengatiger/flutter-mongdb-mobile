@@ -45,7 +45,7 @@ public class LocalDBUtil {
         assert id != null;
 
         FindIterable<Document>  mongoIterable = client.getDatabase(db).getCollection(collection)
-                .find(eq("name", "Tiger Malenga"));
+                .find(eq("name", "Beauty"));
         MongoCursor<Document> cursor = mongoIterable.iterator();
         List<Object> list = new ArrayList<>();
         while (cursor.hasNext()) {
