@@ -28,11 +28,11 @@ import java.util.Map;
 /** FlutterMongodbMobilePlugin */
 public class FlutterMongodbMobilePlugin implements MethodCallHandler {
   /** Plugin registration. */
-  static StitchAppClient client;
-  static MongoClient mobileClient;
-  static RemoteMongoClient  remoteMongoClient;
-  public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-  public static final String TAG = FlutterMongodbMobilePlugin.class.getSimpleName();
+  private static StitchAppClient client;
+  private static MongoClient mobileClient;
+  private static RemoteMongoClient  remoteMongoClient;
+  private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+  private static final String TAG = FlutterMongodbMobilePlugin.class.getSimpleName();
 
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_mongodb_mobile");
@@ -46,6 +46,12 @@ public class FlutterMongodbMobilePlugin implements MethodCallHandler {
 
     try {
       switch (call.method) {
+        case "getByProperty":
+          Map args0 = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:getByProperty:  ..... args: \uD83C\uDF3F ☘ ️" + args0);
+          Object object0 = LocalDBUtil.getByProperty(mobileClient, args0);
+          result.success(object0);
+          break;
         case "insert":
           Map args = (Map) call.arguments;
           Log.d(TAG, "onMethodCall:insert:  ..... args: \uD83C\uDF3F ☘ ️" + args);

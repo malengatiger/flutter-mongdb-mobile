@@ -36,4 +36,13 @@ class FlutterMongodbMobile {
         '\n\n$res\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩\n');
     return res;
   }
+
+  //getByProperty
+  static Future getByProperty(Carrier carrier) async {
+    var res = await _channel.invokeMethod('getByProperty', carrier.toJson());
+    debugPrint(
+        '\n\n🍎 FlutterMongodbMobile: 🍀  getByProperty records retrieved, result from call: \n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩 '
+        '\n\n$res\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩\n');
+    return res;
+  }
 }

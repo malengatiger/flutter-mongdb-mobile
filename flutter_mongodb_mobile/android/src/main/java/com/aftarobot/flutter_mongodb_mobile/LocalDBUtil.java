@@ -6,12 +6,15 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-
+import com.mongodb.client.model.Filters.*;
 import org.bson.Document;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class LocalDBUtil {
     private static final String TAG = LocalDBUtil.class.getSimpleName();
@@ -29,6 +32,29 @@ public class LocalDBUtil {
         assert dataMap != null;
         client.getDatabase(db).getCollection(collection).insertOne(document);
         Log.d(TAG, "insert: 🍎 🍎 document inserted: " + document.toJson()  +"  🍎 🍎 🍎 🍎 \n");
+        return 0;
+    }
+    public static Object getByProperty(MongoClient client, Map carrier) {
+        Log.d(TAG, "\uD83C\uDF3F ☘️ getByProperty: map: " + carrier.toString());
+        String db = (String) carrier.get("db");
+        String collection = (String) carrier.get("collection");
+        String id = (String) carrier.get("id");
+
+        assert collection != null;
+        assert db != null;
+        assert id != null;
+
+        FindIterable<Document>  mongoIterable = client.getDatabase(db).getCollection(collection)
+                .find(eq("name", "Tiger Malenga"));
+        MongoCursor<Document> cursor = mongoIterable.iterator();
+        List<Object> list = new ArrayList<>();
+        while (cursor.hasNext()) {
+            Document doc = cursor.next();
+            list.add(doc.toJson());
+            Log.d(TAG, "🍎 getAll: one doc:  \uD83C\uDF6F  \uD83C\uDF6F  " + doc.toJson());
+
+        }
+        Log.d(TAG, "getByProperty: 🍎 🍎 documents found: " + list.size()  +"  🍎 🍎 🍎 🍎 \n");
         return 0;
     }
     public static List<Object>  getAll(MongoClient client, Map carrier) {

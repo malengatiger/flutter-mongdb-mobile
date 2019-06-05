@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,20 +50,26 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  Random random = Random(DateTime.now().millisecondsSinceEpoch);
   Future insertDocument() async {
     debugPrint('\n\n💙 💙  inserting sample document ....');
     dynamic result;
     try {
       var carrier = Carrier(db: 'testdb', collection: 'testCollection2', data: {
-        'name': 'Tiger Malenga',
+        'name': 'Beauty',
         'lastName': 'Malabie',
-        'wealth': 9800000000.09,
+        'wealth': random.nextInt(99999999) * 1.04,
         'date': DateTime.now().toUtc().toIso8601String(),
-        'desc': '💙💙💙 serve with purpose 💙💙💙'
+        'desc': '💙  🍎 🍎  serve with purpose  🍎 🍎 💙'
       });
       result = await FlutterMongodbMobile.insert(carrier);
       debugPrint(
           '\n\n🧩🧩🧩🧩🧩🧩  _MyAppState: insertDocument 🧩🧩🧩 document added : 🍎 statusCode: $result\n\n\n');
+      showSnackbar(
+          message: ' 🧩🧩🧩  Document inserted',
+          scaffoldKey: _key,
+          backgroundColor: Colors.black,
+          textColor: Colors.white);
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
       result = 'Failed to get platform version.';
@@ -80,21 +87,75 @@ class _MyAppState extends State<MyApp> {
       documents = await FlutterMongodbMobile.getAll(carrier);
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState: getAllDocuments 🧩🧩🧩  retrieved : 🍎 ${documents.length} documents 🍎 \n\n\n');
-      setState(() {});
+
+      showSnackbar(
+          message: ' 🍎 🍎 🍎  ${documents.length} documents found',
+          scaffoldKey: _key,
+          backgroundColor: Colors.black,
+          textColor: Colors.white);
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
       result = 'Failed to get platform version.';
     }
   }
 
+  Future getByProperty() async {
+    debugPrint('\n\n💙 💙  getByProperty ....');
+    try {
+      var carrier = Carrier(db: 'testdb', collection: 'testCollection2');
+      var object = await FlutterMongodbMobile.getByProperty(carrier);
+      debugPrint(
+          '\n\n🍎 🍎 🍎 _MyAppState: getByProperty 🧩🧩🧩  retrieved : 🍎 $object documents 🍎 \n\n\n');
+      //debugPrint(object);
+
+      showSnackbar(
+          message: ' 🍎 🍎 🍎  ${documents.length} documents found',
+          scaffoldKey: _key,
+          backgroundColor: Colors.teal,
+          textColor: Colors.white);
+    } on PlatformException catch (f) {
+      print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
+    }
+  }
+
+  void showSnackbar(
+      {@required GlobalKey<ScaffoldState> scaffoldKey,
+      @required String message,
+      @required Color textColor,
+      @required Color backgroundColor}) {
+    if (scaffoldKey.currentState == null) {
+      print('AppSnackbar.showSnackbar --- currentState is NULL, quit ..');
+      return;
+    }
+    scaffoldKey.currentState.removeCurrentSnackBar();
+    scaffoldKey.currentState.showSnackBar(new SnackBar(
+      content: _getText(message, textColor),
+      duration: new Duration(seconds: 15),
+      backgroundColor: backgroundColor,
+    ));
+  }
+
+  static Widget _getText(
+    String message,
+    Color textColor,
+  ) {
+    return Text(
+      message,
+      overflow: TextOverflow.clip,
+      style: new TextStyle(color: textColor),
+    );
+  }
+
+  GlobalKey<ScaffoldState> _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        key: _key,
         appBar: AppBar(
-          title: const Text('MongoDB Mobile Example App'),
-          backgroundColor: Colors.deepOrange.shade600,
+          title: const Text('MongoDB Plugin Example App'),
+          backgroundColor: Colors.deepOrange.shade300,
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(100),
             child: Padding(
@@ -110,63 +171,95 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
+        backgroundColor: Colors.brown.shade50,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.bug_report),
+          backgroundColor: Colors.red.shade700,
+          elevation: 24,
+        ),
         body: Center(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 100,
-              ),
-              Text(
-                '$_platformVersion\n',
-                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24),
-              ),
-              Container(
-                width: 300,
-                child: RaisedButton(
-                  onPressed: insertDocument,
-                  elevation: 16,
-                  color: Colors.pink.shade700,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      'Insert One Document',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: 300,
-                child: RaisedButton(
-                  onPressed: getAllDocuments,
-                  elevation: 16,
-                  color: Colors.purple.shade700,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Text(
-                          'Get All Documents',
-                          style: TextStyle(color: Colors.white),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Card(
+              elevation: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ListView(
+                  children: <Widget>[
+                    Container(
+                      width: 300,
+                      child: RaisedButton(
+                        onPressed: insertDocument,
+                        elevation: 16,
+                        color: Colors.pink.shade300,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(
+                            'Insert One Document',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      width: 300,
+                      child: RaisedButton(
+                        onPressed: getAllDocuments,
+                        elevation: 16,
+                        color: Colors.purple.shade300,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(
+                            'Get All Documents',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      width: 300,
+                      child: RaisedButton(
+                        onPressed: getByProperty,
+                        elevation: 16,
+                        color: Colors.teal.shade300,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(
+                            'Get By Property',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      width: 300,
+                      child: RaisedButton(
+                        onPressed: getAllDocuments,
+                        elevation: 16,
+                        color: Colors.blue.shade400,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(
+                            'Delete Document',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: 8,
-              ),
-              documents.isEmpty
-                  ? Container()
-                  : Text(
-                      documents.isEmpty ? "" : "${documents.length} documents",
-                      style: TextStyle(color: Colors.purple, fontSize: 20),
-                    ),
-            ],
+            ),
           ),
         ),
       ),
