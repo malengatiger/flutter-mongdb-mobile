@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     try {
       platformVersion = await FlutterMongodbMobile.platformVersion;
       debugPrint('_MyAppState: 🧩🧩🧩 Platform Version : 🍎  $platformVersion');
-      await FlutterMongodbMobile.setAppID;
+      await FlutterMongodbMobile.setAppID('98768769769876');
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }

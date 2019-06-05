@@ -10,14 +10,14 @@ class FlutterMongodbMobile {
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     debugPrint(
-        '🍎 🍎 🍎  Flutter MongoDB Mobile Platform Version : 🧩🧩🧩  $version');
+        '🍎 🍎  FlutterMongodbMobile:platformVersion 🍎  Flutter MongoDB Mobile Platform Version : 🧩🧩🧩  $version');
     return version;
   }
 
-  static Future<String> get setAppID async {
-    await _channel.invokeMethod('setAppID', 'myStichAppID');
+  static Future<String> setAppID(String appID) async {
+    var res = await _channel.invokeMethod('setAppID', {'appID': appID});
     debugPrint(
-        '🍎 MongoDB Stitch AppID has been set on the wild side: 🧩🧩🧩 ');
+        '🍎 FlutterMongodbMobile:setAppID   🍀  MongoDB Stitch AppID has been set on the wild side: 🧩🧩🧩 $res');
     return '🧩🧩🧩 appID has been set';
   }
 }

@@ -31,12 +31,7 @@ public class FlutterMongodbMobilePlugin implements MethodCallHandler {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutter_mongodb_mobile");
     channel.setMethodCallHandler(new FlutterMongodbMobilePlugin());
 
-    // Create the default Stitch Client
-
-
-// Create a Client for MongoDB Mobile (initializing MongoDB Mobile)
-    mobileClient =
-            client.getServiceClient(LocalMongoDbService.clientFactory);
+    Log.d(TAG, "registerWith: \uD83D\uDE0E  \uD83D\uDE0E Registering FlutterMongodbMobilePlugin channel: 🧩 " + channel.toString());
   }
 
   @Override
@@ -51,7 +46,14 @@ public class FlutterMongodbMobilePlugin implements MethodCallHandler {
         break;
       case "setAppID":
         String key = call.argument("appID");
-        client = Stitch.initializeDefaultAppClient(key);
+        Log.d(TAG, "onMethodCall: appID received : " + key + ", setting up MongoDB client");
+        try {
+          client = Stitch.initializeDefaultAppClient(key);
+          mobileClient =
+                  client.getServiceClient(LocalMongoDbService.clientFactory);
+        } catch (Exception e) {
+          Log.e(TAG, "\uD83D\uDC7F \uD83D\uDC7F \uD83D\uDC7F registerWith: failed to get MongoDB mobile client", e );
+        }
         Log.d(TAG, "🍎 🍎 🍎 onMethodCall: setAppID 🧩🧩🧩 " + key + "  🧩🧩🧩");
         result.success("We cool with appID: 🍎 " + key + " 🍎 on the wild side");
         break;
