@@ -1,10 +1,15 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mongodb_mobile/flutter_mongodb_mobile.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  debugPrint(
+      '🍎 🍎 🍎  Flutter MongoDB Mobile Platform Example App starting ... : 🧩🧩🧩');
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -26,13 +31,11 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await FlutterMongodbMobile.platformVersion;
+      debugPrint('_MyAppState: 🧩🧩🧩 Platform Version : 🍎  $platformVersion');
+      await FlutterMongodbMobile.setAppID;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
@@ -43,12 +46,31 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('MongoDB Mobile Example App'),
+          backgroundColor: Colors.deepOrange.shade600,
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(100),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'Checking out Flutter MongoDB Plugin',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text(
+            '$_platformVersion\n',
+            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24),
+          ),
         ),
       ),
     );

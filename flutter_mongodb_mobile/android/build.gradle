@@ -1,5 +1,5 @@
 group 'com.aftarobot.flutter_mongodb_mobile'
-version '1.0-SNAPSHOT'
+version '0.0.1'
 
 buildscript {
     repositories {
@@ -25,10 +25,18 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
         disable 'InvalidPackage'
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'org.mongodb:stitch-android-sdk:4.1.0'
 }

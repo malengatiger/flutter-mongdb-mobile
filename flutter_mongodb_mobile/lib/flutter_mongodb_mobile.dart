@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 class FlutterMongodbMobile {
@@ -12,5 +12,12 @@ class FlutterMongodbMobile {
     debugPrint(
         '🍎 🍎 🍎  Flutter MongoDB Mobile Platform Version : 🧩🧩🧩  $version');
     return version;
+  }
+
+  static Future<String> get setAppID async {
+    await _channel.invokeMethod('setAppID', 'myStichAppID');
+    debugPrint(
+        '🍎 MongoDB Stitch AppID has been set on the wild side: 🧩🧩🧩 ');
+    return '🧩🧩🧩 appID has been set';
   }
 }
