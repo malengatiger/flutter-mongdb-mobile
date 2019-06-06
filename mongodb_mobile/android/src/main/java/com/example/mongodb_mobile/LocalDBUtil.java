@@ -8,6 +8,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Filters.*;
+import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 
@@ -16,12 +17,16 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import static com.mongodb.client.model.Accumulators.push;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.gt;
@@ -93,19 +98,44 @@ public class LocalDBUtil {
         Bson filter =  eq("_id", new ObjectId(id));
         UpdateResult result = getCollection(client, carrier).replaceOne(filter, document);
         Log.d(TAG, "replace: \uD83C\uDFC0  MatchedCount: " + result.getMatchedCount() + " \uD83C\uDFC0 ModifiedCount: " + result.getModifiedCount()  + " \uD83D\uDD06 wasAcknowledged: " + result.wasAcknowledged());
+
+        return result.getMatchedCount();
+    }
+
+    /**
+     * This method adds an element to an array within a document identified by _id
+     * @param client
+     * @param carrier
+     * @return result.getMatchedCount
+     */
+    static long addToArray(@NotNull MongoClient client, @NotNull Map carrier) {
+        Log.d(TAG, "\uD83C\uDF3F ☘️ addToArray: document: " + carrier.toString());
+        String id = (String) carrier.get("id");
+        String arrayName  = (String) carrier.get("arrayName");
+        Map data = (Map) carrier.get("data");
+        assert data != null;
+        assert arrayName != null;
+        assert id != null;
+
+        Document document = new Document().append(sdf.format(new Date()), data);
+
+        Bson filter =  eq("_id", new ObjectId(id));
+        UpdateResult result = getCollection(client, carrier).updateOne(filter, Updates.addToSet(arrayName, document));
+        Log.d(TAG, "addToArray: \uD83C\uDFC0  MatchedCount: " + result.getMatchedCount() + " \uD83C\uDFC0 ModifiedCount: " + result.getModifiedCount()  + " \uD83D\uDD06 wasAcknowledged: " + result.wasAcknowledged());
+
         return result.getMatchedCount();
     }
 
     /**
      *
      * @param client
-     * @param dbMap
+     * @param carrier
      * @return
      */
-    static Object query(MongoClient client, Map dbMap) {
-        Log.d(TAG, "\uD83C\uDF3F ☘️ query: dbMap: " + dbMap.toString());
+    static Object query(MongoClient client, Map carrier) {
+        Log.d(TAG, "\uD83C\uDF3F ☘️ query: carrier: " + carrier.toString());
 
-        Map query = (Map) dbMap.get("query");
+        Map query = (Map) carrier.get("query");
         assert query != null;
         List<Bson> filters = new ArrayList<>();
         boolean isAnd = false;
@@ -161,7 +191,7 @@ public class LocalDBUtil {
         }
         Log.d(TAG, "❤️  ❤️   ❤️ query: mFilter:  ❤️  ❤️ " + mFilter);
         assert mFilter != null;
-        FindIterable mongoIterable = getCollection(client, dbMap)
+        FindIterable mongoIterable = getCollection(client, carrier)
                 .find(mFilter);
         MongoCursor cursor = mongoIterable.iterator();
         List<Object> list = new ArrayList<>();
@@ -239,4 +269,6 @@ public class LocalDBUtil {
     public static void hello() {
         Log.d(TAG, "hello: Aubrey !!!");
     }
+    static final Locale locale = Locale.getDefault();
+    static final SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy HH:mm:ss:ss", locale);
 }

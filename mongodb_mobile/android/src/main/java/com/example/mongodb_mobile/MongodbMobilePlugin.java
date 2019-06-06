@@ -44,40 +44,46 @@ public class MongodbMobilePlugin implements MethodCallHandler {
     try {
       switch (call.method) {
         case "query":
-          Map args0 = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:query:  ..... args: \uD83C\uDF3F ☘ ️" + args0);
-          Object object0 = LocalDBUtil.query(mobileClient, args0);
-          result.success(object0);
+          Map queryArgs = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:query:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + queryArgs);
+          Object list = LocalDBUtil.query(mobileClient, queryArgs);
+          result.success(list);
           break;
         case "insert":
-          Map args = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:insert:  ..... args: \uD83C\uDF3F ☘ ️" + args);
-          String object = LocalDBUtil.insert(mobileClient, args);
-          result.success(object);
+          Map insArgs = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:insert:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + insArgs);
+          String objectId = LocalDBUtil.insert(mobileClient, insArgs);
+          result.success(objectId);
+          break;
+        case "addToArray":
+          Map arrArgs = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:insert:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + arrArgs);
+          long arrResult = LocalDBUtil.addToArray(mobileClient, arrArgs);
+          result.success(arrResult);
           break;
         case "replace":
-          Map argsx = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:replace:  ..... args: \uD83C\uDF3F ☘ ️" + argsx);
-          long objectx = LocalDBUtil.replace(mobileClient, argsx);
-          result.success(objectx);
+          Map replaceArgs = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:replace:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + replaceArgs);
+          long replaceResult = LocalDBUtil.replace(mobileClient, replaceArgs);
+          result.success(replaceResult);
           break;
         case "delete":
-          Map argsz = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:delete:  ..... args: \uD83C\uDF3F ☘ ️" + argsz);
-          Object objectz = LocalDBUtil.delete(mobileClient, argsz);
-          result.success(objectz);
+          Map deleteArgs = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:delete:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + deleteArgs);
+          Object deleteResult = LocalDBUtil.delete(mobileClient, deleteArgs);
+          result.success(deleteResult);
           break;
         case "getAll":
-          Map args2 = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:getAll:  ..... args: \uD83C\uDF3F ☘ ️" + args2);
-          Object object2 = LocalDBUtil.getAll(mobileClient, args2);
-          result.success(object2);
+          Map getArgs = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:getAll:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + getArgs);
+          Object resultList = LocalDBUtil.getAll(mobileClient, getArgs);
+          result.success(resultList);
           break;
         case "getOne":
-          Map args3 = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:getOne:  ..... args: \uD83C\uDF3F ☘ ️" + args3);
-          Object object3 = LocalDBUtil.getOne(mobileClient, args3);
-          result.success(object3);
+          Map oneArgs = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:getOne:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + oneArgs);
+          Object document = LocalDBUtil.getOne(mobileClient, oneArgs);
+          result.success(document);
           break;
         case "getPlatformVersion":
           Log.d(TAG, "onMethodCall: getPlatformVersion requested ....");
@@ -93,10 +99,19 @@ public class MongodbMobilePlugin implements MethodCallHandler {
             result.error("001", "\uD83D\uDC7F MongoDB client type missing, should be local or atlas", "");
             return;
           }
-          
+
           Log.d(TAG, "🍎 onMethodCall: appID received : " + key + ", setting up MongoDB client");
           try {
-            client = Stitch.initializeDefaultAppClient(key);
+            switch (type) {
+              case LOCAL_DATABASE:
+                client = Stitch.initializeDefaultAppClient(key);
+                Log.e(TAG, "\uD83D\uDC7F \uD83D\uDC7F \uD83D\uDC7F setAppID: LOCAL MongoDB mobile client set up!  \uD83D\uDC7D \uD83D\uDC7D IGNORE \uD83D\uDC7D \uD83D\uDC7D");
+                break;
+              case ATLAS_DATABASE:
+                result.error("003","MongoDB Atlas integration is under construction", "");
+                return;
+
+            }
           } catch (IllegalStateException e) {
             Log.e(TAG, "\uD83D\uDC7F \uD83D\uDC7F \uD83D\uDC7F registerWith:  MongoDB mobile client already set up with appID, \uD83D\uDC7D \uD83D\uDC7D IGNORE \uD83D\uDC7D \uD83D\uDC7D");
           } catch (Exception e) {
@@ -120,17 +135,18 @@ public class MongodbMobilePlugin implements MethodCallHandler {
   }
   private void setClient(String type) {
     switch (type) {
-      case "local":
+      case LOCAL_DATABASE:
         mobileClient =
                 client.getServiceClient(LocalMongoDbService.clientFactory);
-        Log.d(TAG, "🍎 onMethodCall:setClient: \uD83C\uDF40 local MongoDB client stood up!");
+        Log.d(TAG, "🍎 onMethodCall:setClient: \uD83C\uDF40 LOCAL MongoDB client stood up!");
         break;
-      case "atlas":
+      case ATLAS_DATABASE:
         remoteMongoClient =
                 client.getServiceClient(RemoteMongoClient.factory, "mongodb-atlas");
-        Log.d(TAG, "🍎 onMethodCall:setClient: \uD83C\uDF40 atlas MongoDB client stood up!");
+        Log.d(TAG, "🍎 onMethodCall:setClient: \uD83C\uDF40 ATLAS MongoDB client stood up!");
         break;
       
     }
   }
+  public static final String LOCAL_DATABASE = "local", ATLAS_DATABASE = "atlas";
 }

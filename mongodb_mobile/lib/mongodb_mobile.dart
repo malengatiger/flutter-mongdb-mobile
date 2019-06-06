@@ -53,6 +53,14 @@ class MongodbMobile {
     return res;
   }
 
+  /// replace one document in collection
+  static Future addToArray(Carrier carrier) async {
+    var res = await _channel.invokeMethod('addToArray', carrier.toJson());
+    debugPrint(
+        '\n\n🍎 MongodbMobile: 🍀  element added to array, result: 🧩🧩🧩🧩🧩 :  $res  🧩🧩🧩🧩');
+    return res;
+  }
+
   /// getAll - get all documents from collection
   static Future getAll(Carrier carrier) async {
     var res = await _channel.invokeMethod('getAll', carrier.toJson());

@@ -76,6 +76,39 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     }
   }
 
+  /// Add document to a collection
+  Future addToArray() async {
+    debugPrint('\n\n💙 💙 addToArray nested in  document ....');
+    dynamic result;
+    try {
+      var carrier = Carrier(
+          db: 'testdb',
+          collection: 'testCollection',
+          id: "5cf8a2206bc83124d1e93787",
+          arrayName: "musicTracks",
+          data: {
+            'artist': 'Michael Jackson',
+            'track': 'Crazy Suzy',
+            'date': new DateTime.now().toIso8601String(),
+          });
+      result = await MongodbMobile.addToArray(carrier);
+      debugPrint(
+          '\n\n🧩🧩🧩🧩🧩🧩 _MyAppState: addToArray 🧩🧩🧩 element added to nested array : 🍎 result: $result\n\n\n');
+      showSnackbar(
+          message: ' 🧩🧩🧩  element added to nested array',
+          scaffoldKey: _key,
+          backgroundColor: Colors.black,
+          textColor: Colors.lightBlue);
+    } on PlatformException catch (f) {
+      print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
+      showSnackbar(
+          scaffoldKey: _key,
+          message: f.message,
+          textColor: Colors.yellow,
+          backgroundColor: Colors.red);
+    }
+  }
+
   List documents = List();
 
   /// Get all documents from a collection
@@ -104,7 +137,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       var carrier = Carrier(
           db: 'testdb',
           collection: 'testCollection',
-          id: '5cf8a27c6bc83124d1e937b0');
+          id: '5cf972ec6bc831030099670d');
       var res = await MongodbMobile.delete(carrier);
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState:delete: 🧩🧩🧩  deleted : 🍎  : $res 🍎 \n\n\n');
@@ -148,11 +181,11 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       var carrier = Carrier(
           db: 'testdb',
           collection: 'testCollection',
-          id: '5cf8a2206bc83124d1e93787',
+          id: '5cf8d6ae6bc8315dd0a5174b',
           data: {
-            'name': 'Barack',
+            'name': 'Michelle',
             'lastName': 'Obama',
-            'wealth': 8880080.98,
+            'wealth': 555000000.98,
             'date': DateTime.now().toUtc().toIso8601String(),
             'desc': '💙 serve with UPDATED purpose 💙'
           });
@@ -175,7 +208,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     debugPrint('\n\n💙 💙  getByProperty ....');
     try {
       var carrier = Carrier(db: 'testdb', collection: 'testCollection', query: {
-        "gt": {"wealth": 90000},
+        "gt": {"wealth": 9000},
         "eq": {"lastName": "Obama"},
         "and": true,
         "or": false,
@@ -274,7 +307,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
                 child: ListView(
                   children: <Widget>[
                     Container(
-                      width: 300,
+                      width: 260,
                       child: RaisedButton(
                         onPressed: insertDocument,
                         elevation: 16,
@@ -292,7 +325,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
                       height: 20,
                     ),
                     Container(
-                      width: 300,
+                      width: 260,
                       child: RaisedButton(
                         onPressed: getAllDocuments,
                         elevation: 16,
@@ -310,7 +343,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
                       height: 20,
                     ),
                     Container(
-                      width: 300,
+                      width: 260,
                       child: RaisedButton(
                         onPressed: query,
                         elevation: 16,
@@ -328,7 +361,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
                       height: 20,
                     ),
                     Container(
-                      width: 300,
+                      width: 260,
                       child: RaisedButton(
                         onPressed: delete,
                         elevation: 16,
@@ -346,7 +379,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
                       height: 20,
                     ),
                     Container(
-                      width: 300,
+                      width: 260,
                       child: RaisedButton(
                         onPressed: replace,
                         elevation: 16,
@@ -364,7 +397,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
                       height: 20,
                     ),
                     Container(
-                      width: 300,
+                      width: 260,
                       child: RaisedButton(
                         onPressed: getOne,
                         elevation: 16,
@@ -377,6 +410,27 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
                           ),
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: 260,
+                      child: RaisedButton(
+                        onPressed: addToArray,
+                        elevation: 16,
+                        color: Colors.orange.shade500,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(
+                            'Add To Array',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
                     ),
                   ],
                 ),
