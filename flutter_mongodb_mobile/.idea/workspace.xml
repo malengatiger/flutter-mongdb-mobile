@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mongodb_mobile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mongodb_mobile/android/src/main/java/com/example/mongodb_mobile/LocalDBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/android/src/main/java/com/example/mongodb_mobile/LocalDBUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb_mobile/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mongodb_mobile/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mongodb_mobile/lib/carrier.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/lib/carrier.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mongodb_mobile/lib/mongodb_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/lib/mongodb_mobile.dart" afterDir="false" />
@@ -283,7 +284,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1846" y="-47" width="1633" height="1011" extended-state="1" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5105973" visible="true" weight="0.16656192" />
       <window_info id="Captures" order="1" side_tool="true" />

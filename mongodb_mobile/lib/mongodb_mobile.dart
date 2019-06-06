@@ -25,7 +25,7 @@ class MongodbMobile {
   static Future insert(Carrier carrier) async {
     var res = await _channel.invokeMethod('insert', carrier.toJson());
     debugPrint(
-        '\n\n🍎 MongodbMobile: 🍀  record inserted, result: 🧩🧩🧩🧩🧩🧩🧩🧩 statusCode:  $res  🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩');
+        '\n\n🍎 MongodbMobile: 🍀  document inserted, result: 🧩🧩🧩🧩🧩 statusCode:  $res  🧩🧩🧩🧩');
     return res;
   }
 
