@@ -54,9 +54,9 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     dynamic result;
     try {
       var carrier = Carrier(db: 'testdb', collection: 'testCollection', data: {
-        'name': 'Malia',
+        'name': 'Kassambe',
         'lastName': 'Obama',
-        'wealth': random.nextInt(10000) * 1.04,
+        'wealth': random.nextInt(100000) * 1.04,
         'date': DateTime.now().toUtc().toIso8601String(),
         'desc': '💙  🍎 🍎  serve with purpose  🍎 🍎 💙'
       });
@@ -181,11 +181,11 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       var carrier = Carrier(
           db: 'testdb',
           collection: 'testCollection',
-          id: '5cf8d6ae6bc8315dd0a5174b',
+          id: '5cf8a0c16bc831de7f4c9b85',
           data: {
-            'name': 'Michelle',
-            'lastName': 'Obama',
-            'wealth': 555000000.98,
+            'name': 'Aubrey St Vincent',
+            'lastName': 'Malabie III',
+            'wealth': 650000.09,
             'date': DateTime.now().toUtc().toIso8601String(),
             'desc': '💙 serve with UPDATED purpose 💙'
           });
