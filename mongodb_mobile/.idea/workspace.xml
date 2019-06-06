@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5679190e-33b7-41f5-93c6-75f71356f2e0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../flutter_mongodb_mobile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_mongodb_mobile/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/LocalDBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/LocalDBUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-    </list>
+    <list default="true" id="5679190e-33b7-41f5-93c6-75f71356f2e0" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -42,13 +37,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="673">
-              <caret line="120" column="41" selection-start-line="120" selection-start-column="41" selection-end-line="120" selection-end-column="41" />
+            <state relative-caret-position="-501">
+              <caret line="80" selection-start-line="80" selection-end-line="80" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
                 <element signature="e#299#421#0" expanded="true" />
                 <element signature="e#801#1477#0" expanded="true" />
                 <element signature="e#1546#2600#0" expanded="true" />
+                <element signature="e#3608#4298#0" expanded="true" />
                 <element signature="e#4242#4632#0" expanded="true" />
                 <element signature="e#4979#9074#0" expanded="true" />
               </folding>
@@ -178,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1559806199924</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="👌👌👌 added delete function  ✂️ ✂️ ✂️">
+      <created>1559808932958</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1559808932958</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -222,7 +225,8 @@
     <MESSAGE value=" commit after change to swift on th ios side   " />
     <MESSAGE value="  added parameterized query !! " />
     <MESSAGE value="    cleaned up method naming for query" />
-    <option name="LAST_COMMIT_MESSAGE" value="    cleaned up method naming for query" />
+    <MESSAGE value=" added delete function  ✂️ ✂️ ✂️" />
+    <option name="LAST_COMMIT_MESSAGE" value=" added delete function  ✂️ ✂️ ✂️" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/example/ios/Podfile">
@@ -311,13 +315,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="120" column="41" selection-start-line="120" selection-start-column="41" selection-end-line="120" selection-end-column="41" />
+        <state relative-caret-position="-501">
+          <caret line="80" selection-start-line="80" selection-end-line="80" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <element signature="e#299#421#0" expanded="true" />
             <element signature="e#801#1477#0" expanded="true" />
             <element signature="e#1546#2600#0" expanded="true" />
+            <element signature="e#3608#4298#0" expanded="true" />
             <element signature="e#4242#4632#0" expanded="true" />
             <element signature="e#4979#9074#0" expanded="true" />
           </folding>
