@@ -1,5 +1,7 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '11.0'
+use_frameworks!
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -38,6 +40,16 @@ target 'Runner' do
   system('rm -rf .symlinks')
   system('mkdir -p .symlinks/plugins')
 
+  # For core functionality and the Remote MongoDB Service
+  pod 'StitchSDK', '= 5.1.0'
+  # optional: for using the AWS service
+  pod 'StitchSDK/StitchAWSService', '= 5.1.0'
+  # optional: for using the Firebase Cloud Messaging service
+  pod 'StitchSDK/StitchFCMService', '= 5.1.0'
+  # optional: for using the HTTP service
+  pod 'StitchSDK/StitchHTTPService', '= 5.1.0'
+  # optional: for using the twilio service
+  pod 'StitchSDK/StitchTwilioService', '= 5.1.0'
   # Flutter Pods
   generated_xcode_build_settings = parse_KV_file('./Flutter/Generated.xcconfig')
   if generated_xcode_build_settings.empty?

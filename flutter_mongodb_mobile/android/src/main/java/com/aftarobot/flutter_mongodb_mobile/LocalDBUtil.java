@@ -14,7 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.gt;
 
 public class LocalDBUtil {
     private static final String TAG = LocalDBUtil.class.getSimpleName();
@@ -45,7 +47,7 @@ public class LocalDBUtil {
         assert id != null;
 
         FindIterable<Document>  mongoIterable = client.getDatabase(db).getCollection(collection)
-                .find(eq("name", "Beauty"));
+                .find(and(gt("wealth", 92000000), eq("lastName", "Malabie")));
         MongoCursor<Document> cursor = mongoIterable.iterator();
         List<Object> list = new ArrayList<>();
         while (cursor.hasNext()) {
@@ -55,7 +57,7 @@ public class LocalDBUtil {
 
         }
         Log.d(TAG, "getByProperty: 🍎 🍎 documents found: " + list.size()  +"  🍎 🍎 🍎 🍎 \n");
-        return 0;
+        return list;
     }
     public static List<Object>  getAll(MongoClient client, Map carrier) {
         Log.d(TAG, "\n🍎 getAll: get all documents in collection: " + carrier.toString() + "\n\n");

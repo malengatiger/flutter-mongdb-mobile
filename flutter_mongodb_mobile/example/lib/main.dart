@@ -105,13 +105,13 @@ class _MyAppState extends State<MyApp> {
       var carrier = Carrier(db: 'testdb', collection: 'testCollection2');
       var object = await FlutterMongodbMobile.getByProperty(carrier);
       debugPrint(
-          '\n\n🍎 🍎 🍎 _MyAppState: getByProperty 🧩🧩🧩  retrieved : 🍎 $object documents 🍎 \n\n\n');
-      //debugPrint(object);
+          '\n\n🍎 🍎 🍎 _MyAppState: getByProperty 🧩🧩🧩  retrieved : 🍎 ${object.length} documents 🍎 \n\n\n');
+      print(object);
 
       showSnackbar(
-          message: ' 🍎 🍎 🍎  ${documents.length} documents found',
+          message: ' 🍎 🍎 🍎  ${object.length} documents found',
           scaffoldKey: _key,
-          backgroundColor: Colors.teal,
+          backgroundColor: Colors.purple,
           textColor: Colors.white);
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');

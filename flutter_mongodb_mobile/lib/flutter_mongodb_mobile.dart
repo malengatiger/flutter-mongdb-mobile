@@ -36,16 +36,16 @@ class FlutterMongodbMobile {
   static Future getAll(Carrier carrier) async {
     var res = await _channel.invokeMethod('getAll', carrier.toJson());
     debugPrint(
-        '\n\n🍎 FlutterMongodbMobile: 🍀  records retrieved, result from call: \n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩 '
-        '\n\n$res\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩\n');
+        '\n\n🍎 FlutterMongodbMobile: 🍀  records retrieved, result from call: \n\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩 '
+        '\n\n$res\n\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩\n\n');
     return res;
   }
 
   static Future getByProperty(Carrier carrier) async {
     var res = await _channel.invokeMethod('getByProperty', carrier.toJson());
     debugPrint(
-        '\n\n🍎 FlutterMongodbMobile: 🍀  getByProperty records retrieved, result from call: \n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩 '
-        '\n\n$res\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩\n');
+        '\n\n🍎 FlutterMongodbMobile: 🍀  getByProperty records retrieved, result from call: \n\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩 '
+        '\n\n$res\n\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩\n');
     return res;
   }
 }
