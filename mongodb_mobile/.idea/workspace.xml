@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5679190e-33b7-41f5-93c6-75f71356f2e0" name="Default Changelist" comment="" />
+    <list default="true" id="5679190e-33b7-41f5-93c6-75f71356f2e0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../flutter_mongodb_mobile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_mongodb_mobile/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/example/.gitignore" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
     <ignored path="$PROJECT_DIR$/.pub/" />
@@ -34,20 +38,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-501">
-              <caret line="80" selection-start-line="80" selection-end-line="80" />
+            <state relative-caret-position="950">
+              <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
                 <element signature="e#299#421#0" expanded="true" />
-                <element signature="e#801#1477#0" expanded="true" />
-                <element signature="e#1546#2600#0" expanded="true" />
-                <element signature="e#3608#4298#0" expanded="true" />
-                <element signature="e#4242#4632#0" expanded="true" />
-                <element signature="e#4979#9074#0" expanded="true" />
+                <element signature="e#569#622#0" expanded="true" />
+                <element signature="e#737#1352#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/example/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="71" column="15" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -69,6 +79,7 @@
         <option value="$PROJECT_DIR$/lib/mongodb_mobile.dart" />
         <option value="$PROJECT_DIR$/example/pubspec.yaml" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
+        <option value="$PROJECT_DIR$/example/.gitignore" />
       </list>
     </option>
   </component>
@@ -181,11 +192,19 @@
       <option name="project" value="LOCAL" />
       <updated>1559808932958</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary=" 🍯 🍯 refactored example app UI ♻️">
+      <created>1559810019777</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1559810019777</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1661" y="-47" width="1633" height="1011" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Designer" />
       <window_info id="Build Variants" side_tool="true" />
@@ -194,9 +213,9 @@
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Captures" side_tool="true" />
       <window_info id="Structure" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2495286" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2495286" />
       <window_info anchor="bottom" id="Dart Analysis" weight="0.3297062" />
-      <window_info active="true" anchor="bottom" id="Run" visible="true" weight="0.44069642" />
+      <window_info anchor="bottom" id="Run" visible="true" weight="0.44069642" />
       <window_info anchor="bottom" id="Docker" />
       <window_info anchor="bottom" id="Android Profiler" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -226,7 +245,8 @@
     <MESSAGE value="  added parameterized query !! " />
     <MESSAGE value="    cleaned up method naming for query" />
     <MESSAGE value=" added delete function  ✂️ ✂️ ✂️" />
-    <option name="LAST_COMMIT_MESSAGE" value=" added delete function  ✂️ ✂️ ✂️" />
+    <MESSAGE value="   refactored example app UI ♻️" />
+    <option name="LAST_COMMIT_MESSAGE" value="   refactored example app UI ♻️" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/example/ios/Podfile">
@@ -315,17 +335,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-501">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        <state relative-caret-position="950">
+          <caret line="50" column="34" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <element signature="e#299#421#0" expanded="true" />
-            <element signature="e#801#1477#0" expanded="true" />
-            <element signature="e#1546#2600#0" expanded="true" />
-            <element signature="e#3608#4298#0" expanded="true" />
-            <element signature="e#4242#4632#0" expanded="true" />
-            <element signature="e#4979#9074#0" expanded="true" />
+            <element signature="e#569#622#0" expanded="true" />
+            <element signature="e#737#1352#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="71" column="15" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
         </state>
       </provider>
     </entry>
