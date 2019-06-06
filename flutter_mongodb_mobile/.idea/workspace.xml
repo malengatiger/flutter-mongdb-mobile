@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc47c90a-3f9f-4e01-943a-c41d6a2ef117" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../mongodb_mobile/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mongodb_mobile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mongodb_mobile/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb_mobile/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb_mobile/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/pubspec.yaml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -279,6 +281,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1846" y="-47" width="1633" height="1011" extended-state="1" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5105973" visible="true" weight="0.16656192" />
       <window_info id="Captures" order="1" side_tool="true" />
