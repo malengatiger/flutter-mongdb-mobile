@@ -28,25 +28,18 @@ public class LocalDBUtil {
 
     static Object insert(MongoClient client, Map carrier) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ insert: document: " + carrier.toString());
-        String db = (String) carrier.get("db");
-        String collection = (String) carrier.get("collection");
-
         Document document = new Document();
         Map dataMap = (Map) carrier.get("data");
-        document.putAll(dataMap);
-        assert collection != null;
-        assert db != null;
         assert dataMap != null;
-        client.getDatabase(db).getCollection(collection).insertOne(document);
+        document.putAll(dataMap);
+
+        getCollection(client, carrier).insertOne(document);
         Log.d(TAG, "insert: 🍎 🍎 document inserted: " + document.toJson()  +"  🍎 🍎 🍎 🍎 \n");
         return 0;
     }
     static Object query(MongoClient client, Map dbMap) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ query: dbMap: " + dbMap.toString());
-        String db = (String) dbMap.get("db");
-        String collection = (String) dbMap.get("collection");
-        assert collection != null;
-        assert db != null;
+
         Map query = (Map) dbMap.get("query");
         assert query != null;
         List<Bson> filters = new ArrayList<>();
@@ -107,13 +100,14 @@ public class LocalDBUtil {
 //        FindIterable<Document>  mongoIterable = client.getDatabase(db).getCollection(collection)
 //                .find(and(gt("wealth", 1299), eq("lastName", "Obama")));
 
-        FindIterable<Document>  mongoIterable = client.getDatabase(db).getCollection(collection)
+        assert mFilter != null;
+        FindIterable mongoIterable = getCollection(client, dbMap)
                 .find(mFilter);
-        MongoCursor<Document> cursor = mongoIterable.iterator();
+        MongoCursor cursor = mongoIterable.iterator();
         List<Object> list = new ArrayList<>();
         int cnt = 0;
         while (cursor.hasNext()) {
-            Document doc = cursor.next();
+            Document doc = (Document) cursor.next();
             list.add(doc.toJson());
             cnt++;
             Log.d(TAG, "🍎 getAll: doc: \uD83D\uDC99  #"+cnt+"  \uD83C\uDF6F  \uD83C\uDF6F  " + doc.toJson());
@@ -122,7 +116,30 @@ public class LocalDBUtil {
         Log.d(TAG, "query: 🍎 🍎 documents found: " + list.size()  +"  🍎 🍎 🍎 🍎 \n");
         return list;
     }
+    static Object delete(MongoClient client, Map carrier) {
+        Log.d(TAG, "\uD83C\uDF3F ☘️ insert: document: " + carrier.toString());
+        String db = (String) carrier.get("db");
+        String collection = (String) carrier.get("collection");
 
+        Document document = new Document();
+        Map dataMap = (Map) carrier.get("data");
+        document.putAll(dataMap);
+        assert collection != null;
+        assert db != null;
+        assert dataMap != null;
+        client.getDatabase(db).getCollection(collection).findOneAndDelete(document);
+        Log.d(TAG, "insert: 🍎 🍎 document deleted: " + document.toJson()  +"  🍎 🍎 🍎 🍎 \n");
+        MongoCollection<Document> collection1 = client.getDatabase(db).getCollection("test");
+        return 0;
+    }
+    private static MongoCollection getCollection(MongoClient client, Map carrier) {
+        Log.d(TAG, "\uD83C\uDF3F ☘️ getCollection: carrier: " + carrier.toString());
+        String db = (String) carrier.get("db");
+        String collection = (String) carrier.get("collection");
+        assert collection != null;
+        assert db != null;
+        return client.getDatabase(db).getCollection(collection);
+    }
     /**
      * @param client
      * @param carrier

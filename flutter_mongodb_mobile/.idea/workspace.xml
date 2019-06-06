@@ -5,10 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mongodb_mobile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mongodb_mobile/android/src/main/java/com/example/mongodb_mobile/LocalDBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/android/src/main/java/com/example/mongodb_mobile/LocalDBUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mongodb_mobile/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../mongodb_mobile/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mongodb_mobile/lib/carrier.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/lib/carrier.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mongodb_mobile/lib/mongodb_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../mongodb_mobile/lib/mongodb_mobile.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />

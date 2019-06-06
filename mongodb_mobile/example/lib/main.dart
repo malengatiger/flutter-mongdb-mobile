@@ -51,19 +51,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Random random = Random(DateTime.now().millisecondsSinceEpoch);
-  /*
-  {
-    "db": "testdb",
-    "collection": "testCollection",
-    "query": {
-        "$gt": {"wealth": 9000},
-        "$eq": {"lastName": "Obama"},
-        "and": true,
-        "or": false,
-        "limit": 0
-    }
-}
-   */
+
   Future insertDocument() async {
     debugPrint('\n\n💙 💙  inserting a typical document ....');
     dynamic result;
@@ -112,7 +100,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  Future getByProperty() async {
+  Future query() async {
     debugPrint('\n\n💙 💙  getByProperty ....');
     try {
       var carrier = Carrier(db: 'testdb', collection: 'testCollection', query: {
@@ -124,7 +112,7 @@ class _MyAppState extends State<MyApp> {
       });
       var object = await MongodbMobile.query(carrier);
       debugPrint(
-          '\n\n🍎 🍎 🍎 _MyAppState: getByProperty 🧩🧩🧩  retrieved : 🍎 ${object.length} documents 🍎 \n\n\n');
+          '\n\n🍎 🍎 🍎 _MyAppState: query: 🧩🧩🧩  retrieved : 🍎 ${object.length} documents 🍎 \n\n\n');
       print(object);
 
       showSnackbar(
@@ -245,13 +233,13 @@ class _MyAppState extends State<MyApp> {
                     Container(
                       width: 300,
                       child: RaisedButton(
-                        onPressed: getByProperty,
+                        onPressed: query,
                         elevation: 16,
                         color: Colors.teal.shade300,
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Text(
-                            'Get By Property',
+                            'Query By Properties',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
