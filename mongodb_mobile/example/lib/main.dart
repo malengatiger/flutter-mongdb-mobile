@@ -19,8 +19,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-
   @override
   void initState() {
     super.initState();
@@ -45,13 +43,12 @@ class _MyAppState extends State<MyApp> {
     }
     if (!mounted) return;
 
-    setState(() {
-      _platformVersion = platformVersion;
-    });
+    setState(() {});
   }
 
   Random random = Random(DateTime.now().millisecondsSinceEpoch);
 
+  /// Add document to a collection
   Future insertDocument() async {
     debugPrint('\n\n💙 💙  inserting a typical document ....');
     dynamic result;
@@ -79,7 +76,18 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  /// Remove document from collection
+  Future deleteDocument() async {
+    showSnackbar(
+        message: ' 🧩🧩🧩  Document delete under construction',
+        scaffoldKey: _key,
+        backgroundColor: Colors.black,
+        textColor: Colors.yellow);
+  }
+
   List documents = List();
+
+  /// Get all documents from a collection
   Future getAllDocuments() async {
     debugPrint('\n\n💙 💙  getAllDocuments ....');
     dynamic result;
@@ -100,6 +108,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  /// Query Mongo database using collection properties
   Future query() async {
     debugPrint('\n\n💙 💙  getByProperty ....');
     try {
@@ -251,7 +260,7 @@ class _MyAppState extends State<MyApp> {
                     Container(
                       width: 300,
                       child: RaisedButton(
-                        onPressed: getAllDocuments,
+                        onPressed: deleteDocument,
                         elevation: 16,
                         color: Colors.blue.shade400,
                         child: Padding(
