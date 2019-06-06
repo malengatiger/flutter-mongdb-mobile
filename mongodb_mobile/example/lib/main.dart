@@ -10,15 +10,15 @@ import 'package:mongodb_mobile/mongodb_mobile.dart';
 void main() {
   debugPrint(
       '🍎 🍎 🍎  Flutter MongoDB Mobile Platform Example App starting ... : 🧩🧩🧩');
-  runApp(MyApp());
+  runApp(MongoExampleApp());
 }
 
-class MyApp extends StatefulWidget {
+class MongoExampleApp extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _MongoExampleAppState createState() => _MongoExampleAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MongoExampleAppState extends State<MongoExampleApp> {
   @override
   void initState() {
     super.initState();
@@ -232,8 +232,8 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         key: _key,
         appBar: AppBar(
-          title: const Text('MongoDB Plugin Example App'),
-          backgroundColor: Colors.deepOrange.shade300,
+          title: const Text('Flutter MongoDB Plugin App'),
+          backgroundColor: Colors.blueGrey.shade400,
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(100),
             child: Padding(
@@ -242,6 +242,14 @@ class _MyAppState extends State<MyApp> {
                 children: <Widget>[
                   Text(
                     'Checking out Flutter MongoDB Plugin',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    'Use the plugin to access MongoDB embedded on-device as well as MongoDB Atlas on all the cloud providers.',
                     style: TextStyle(color: Colors.white),
                   ),
                 ],
@@ -260,9 +268,9 @@ class _MyAppState extends State<MyApp> {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Card(
-              elevation: 4,
+              elevation: 8,
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(20.0),
                 child: ListView(
                   children: <Widget>[
                     Container(

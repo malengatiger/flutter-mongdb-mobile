@@ -1,7 +1,7 @@
 name: mongodb_mobile
 description: A new flutter plugin project.
 version: 0.0.1
-author: Aubrey Malabie
+author: Aubrey Malabie <aubrey@aftarobot.com>
 homepage: https://github.com/malengatiger/flutter-mongdb-mobile
 
 environment:

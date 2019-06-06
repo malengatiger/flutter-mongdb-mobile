@@ -18,9 +18,4 @@ void main() {
   test('getPlatformVersion', () async {
     expect(await MongodbMobile.platformVersion, 'meAmor');
   });
-  test('setAppID', () async {
-    var config = {"db": "testdb", "collection": "testCollection"};
-    print(config);
-    expect(await MongodbMobile.setAppID(config), 'meAmor');
-  });
 }
