@@ -51,6 +51,19 @@ class _MyAppState extends State<MyApp> {
   }
 
   Random random = Random(DateTime.now().millisecondsSinceEpoch);
+  /*
+  {
+    "db": "testdb",
+    "collection": "testCollection",
+    "query": {
+        "$gt": {"wealth": 9000},
+        "$eq": {"lastName": "Obama"},
+        "and": true,
+        "or": false,
+        "limit": 0
+    }
+}
+   */
   Future insertDocument() async {
     debugPrint('\n\n💙 💙  inserting a typical document ....');
     dynamic result;
@@ -102,8 +115,14 @@ class _MyAppState extends State<MyApp> {
   Future getByProperty() async {
     debugPrint('\n\n💙 💙  getByProperty ....');
     try {
-      var carrier = Carrier(db: 'testdb', collection: 'testCollection');
-      var object = await MongodbMobile.getByProperty(carrier);
+      var carrier = Carrier(db: 'testdb', collection: 'testCollection', query: {
+        "gt": {"wealth": 7000},
+        "eq": {"lastName": "Obama"},
+        "and": true,
+        "or": false,
+        "limit": 0
+      });
+      var object = await MongodbMobile.query(carrier);
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState: getByProperty 🧩🧩🧩  retrieved : 🍎 ${object.length} documents 🍎 \n\n\n');
       print(object);

@@ -15,7 +15,6 @@ import com.mongodb.stitch.android.core.StitchAppClient;
 
 // Packages needed to interact with MongoDB and Stitch
 import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoCollection;
 
 // Necessary component for working with MongoDB Mobile
 import com.mongodb.stitch.android.services.mongodb.local.LocalMongoDbService;
@@ -42,10 +41,10 @@ public class MongodbMobilePlugin implements MethodCallHandler {
     
     try {
       switch (call.method) {
-        case "getByProperty":
+        case "query":
           Map args0 = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:getByProperty:  ..... args: \uD83C\uDF3F ☘ ️" + args0);
-          Object object0 = LocalDBUtil.getByProperty(mobileClient, args0);
+          Log.d(TAG, "onMethodCall:query:  ..... args: \uD83C\uDF3F ☘ ️" + args0);
+          Object object0 = LocalDBUtil.query(mobileClient, args0);
           result.success(object0);
           break;
         case "insert":

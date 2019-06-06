@@ -2,106 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5679190e-33b7-41f5-93c6-75f71356f2e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/google-java-format.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_for_Android.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/example_lib_main_dart.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.metadata" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/LocalDBUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/.metadata" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/java/com/example/mongodb_mobile_example/MainActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/res/drawable/launch_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/app/src/profile/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/android/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Flutter/AppFrameworkInfo.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Flutter/Debug.xcconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Flutter/Release.xcconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Podfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Podfile.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/AppDelegate.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Base.lproj/LaunchScreen.storyboard" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Base.lproj/Main.storyboard" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Info.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Runner-Bridging-Header.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/ios/Runner/Tester.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/test/widget_test.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Assets/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Classes/MongodbMobilePlugin.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Classes/MongodbMobilePlugin.m" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Classes/SwiftMongodbMobilePlugin.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/mongodb_mobile.podspec" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/carrier.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/mongodb_mobile.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/mongodb_mobile_test.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../flutter_mongodb_mobile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_mongodb_mobile/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flutter_mongodb_mobile/android/src/main/java/com/aftarobot/flutter_mongodb_mobile/LocalDBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_mongodb_mobile/android/src/main/java/com/aftarobot/flutter_mongodb_mobile/LocalDBUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flutter_mongodb_mobile/example/ios/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_mongodb_mobile/example/ios/Podfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flutter_mongodb_mobile/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_mongodb_mobile/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flutter_mongodb_mobile/example/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_mongodb_mobile/example/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flutter_mongodb_mobile/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_mongodb_mobile/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../flutter_mongodb_mobile/lib/flutter_mongodb_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../flutter_mongodb_mobile/lib/flutter_mongodb_mobile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/LocalDBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/LocalDBUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/carrier.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/carrier.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mongodb_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mongodb_mobile.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -121,18 +28,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/mongodb_mobile.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+                <element signature="e#761#1006#0" expanded="true" />
+                <element signature="e#1097#1374#0" expanded="true" />
+                <element signature="e#1423#1719#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="35">
-              <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="24" />
+            <state relative-caret-position="155">
+              <caret line="118" column="26" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
                 <element signature="e#299#421#0" expanded="true" />
                 <element signature="e#801#1477#0" expanded="true" />
-                <element signature="e#2691#3412#0" expanded="true" />
-                <element signature="e#3439#4110#0" expanded="true" />
-                <element signature="e#4234#4624#0" expanded="true" />
+                <element signature="e#4242#4632#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/carrier.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" selection-start-line="5" selection-end-line="15" selection-end-column="1" />
+              <folding>
+                <element signature="e#247#340#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,8 +82,9 @@
         <option value="$PROJECT_DIR$/example/ios/Podfile" />
         <option value="$PROJECT_DIR$/android/build.gradle" />
         <option value="$PROJECT_DIR$/example/android/app/build.gradle" />
-        <option value="$PROJECT_DIR$/lib/mongodb_mobile.dart" />
         <option value="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" />
+        <option value="$PROJECT_DIR$/lib/carrier.dart" />
+        <option value="$PROJECT_DIR$/lib/mongodb_mobile.dart" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
       </list>
     </option>
@@ -181,17 +114,6 @@
             <path>
               <item name="mongodb_mobile" type="b2602c69:ProjectViewProjectNode" />
               <item name="mongodb_mobile" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mongodb_mobile" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mongodb_mobile" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mongodb_mobile" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mongodb_mobile" type="462c0819:PsiDirectoryNode" />
-              <item name="android" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mongodb_mobile" type="b2602c69:ProjectViewProjectNode" />
@@ -248,6 +170,14 @@
       <option name="presentableId" value="Default" />
       <updated>1559790316734</updated>
     </task>
+    <task id="LOCAL-00001" summary="💙 commit after change to swift on th ios side 💙 💙 💙">
+      <created>1559799514126</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1559799514126</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -265,7 +195,7 @@
       <window_info anchor="bottom" id="Dart Analysis" weight="0.3297062" />
       <window_info anchor="bottom" id="Docker" />
       <window_info anchor="bottom" id="Logcat" />
-      <window_info active="true" anchor="bottom" id="Run" visible="true" weight="0.56365615" />
+      <window_info active="true" anchor="bottom" id="Run" visible="true" weight="0.60500544" />
       <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="Debug" />
       <window_info anchor="bottom" id="Terminal" weight="0.3297062" />
@@ -284,6 +214,12 @@
       <window_info anchor="right" id="Palette&#9;" />
       <window_info anchor="right" id="Maven" />
     </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value=" commit after change to swift on th ios side   " />
+    <option name="LAST_COMMIT_MESSAGE" value=" commit after change to swift on th ios side   " />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/example/ios/Podfile">
@@ -331,16 +267,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mongodb_mobile.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
@@ -351,17 +277,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/carrier.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" selection-start-line="5" selection-end-line="15" selection-end-column="1" />
+          <folding>
+            <element signature="e#247#340#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/mongodb_mobile.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#761#1006#0" expanded="true" />
+            <element signature="e#1097#1374#0" expanded="true" />
+            <element signature="e#1423#1719#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="24" />
+        <state relative-caret-position="155">
+          <caret line="118" column="26" selection-start-line="118" selection-start-column="26" selection-end-line="118" selection-end-column="26" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <element signature="e#299#421#0" expanded="true" />
             <element signature="e#801#1477#0" expanded="true" />
-            <element signature="e#2691#3412#0" expanded="true" />
-            <element signature="e#3439#4110#0" expanded="true" />
-            <element signature="e#4234#4624#0" expanded="true" />
+            <element signature="e#4242#4632#0" expanded="true" />
           </folding>
         </state>
       </provider>
