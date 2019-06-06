@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
     dynamic result;
     try {
       var carrier = Carrier(db: 'testdb', collection: 'testCollection', data: {
-        'name': 'Michelle',
+        'name': 'Malia',
         'lastName': 'Obama',
         'wealth': random.nextInt(10000) * 1.04,
         'date': DateTime.now().toUtc().toIso8601String(),
@@ -76,21 +76,11 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  /// Remove document from collection
-  Future deleteDocument() async {
-    showSnackbar(
-        message: ' 🧩🧩🧩  Document delete under construction',
-        scaffoldKey: _key,
-        backgroundColor: Colors.black,
-        textColor: Colors.yellow);
-  }
-
   List documents = List();
 
   /// Get all documents from a collection
   Future getAllDocuments() async {
     debugPrint('\n\n💙 💙  getAllDocuments ....');
-    dynamic result;
     try {
       var carrier = Carrier(db: 'testdb', collection: 'testCollection');
       documents = await MongodbMobile.getAll(carrier);
@@ -98,13 +88,85 @@ class _MyAppState extends State<MyApp> {
           '\n\n🍎 🍎 🍎 _MyAppState: getAllDocuments 🧩🧩🧩  retrieved : 🍎 ${documents.length} documents 🍎 \n\n\n');
 
       showSnackbar(
-          message: ' 🍎 🍎 🍎  ${documents.length} documents found',
+          message: '🍎 🍎 🍎  ${documents.length} documents found',
           scaffoldKey: _key,
           backgroundColor: Colors.black,
           textColor: Colors.white);
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
-      result = 'Failed to get platform version.';
+    }
+  }
+
+  /// Delete document from a collection
+  Future delete() async {
+    debugPrint('\n\n💙 💙  delete ....');
+    try {
+      var carrier = Carrier(
+          db: 'testdb',
+          collection: 'testCollection',
+          id: '5cf8a27c6bc83124d1e937b0');
+      var res = await MongodbMobile.delete(carrier);
+      debugPrint(
+          '\n\n🍎 🍎 🍎 _MyAppState:delete: 🧩🧩🧩  deleted : 🍎  : $res 🍎 \n\n\n');
+
+      showSnackbar(
+          message: '🍎 🍎 🍎  document deleted',
+          scaffoldKey: _key,
+          backgroundColor: Colors.black,
+          textColor: Colors.white);
+    } on PlatformException catch (f) {
+      print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
+    }
+  }
+
+  /// Delete document from a collection
+  Future getOne() async {
+    debugPrint('\n\n💙 💙  get one doc ....');
+    try {
+      var carrier = Carrier(
+          db: 'testdb',
+          collection: 'testCollection',
+          id: '5cf8e4aa6bc8315dd0a51755');
+      var res = await MongodbMobile.getOne(carrier);
+      debugPrint(
+          '\n\n🍎 🍎 🍎 _MyAppState:delete: 🧩🧩🧩  get one : 🍎 : $res 🍎 \n\n\n');
+
+      showSnackbar(
+          message: '🍎 🍎 🍎  document retrieved',
+          scaffoldKey: _key,
+          backgroundColor: Colors.black,
+          textColor: Colors.white);
+    } on PlatformException catch (f) {
+      print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
+    }
+  }
+
+  /// Replace document from a collection
+  Future replace() async {
+    debugPrint('\n\n💙 💙  replace  ....');
+    try {
+      var carrier = Carrier(
+          db: 'testdb',
+          collection: 'testCollection',
+          id: '5cf8a2206bc83124d1e93787',
+          data: {
+            'name': 'Barack',
+            'lastName': 'Obama',
+            'wealth': 8880080.98,
+            'date': DateTime.now().toUtc().toIso8601String(),
+            'desc': '💙 serve with UPDATED purpose 💙'
+          });
+      var res = await MongodbMobile.replace(carrier);
+      debugPrint(
+          '\n\n🍎 🍎 🍎 _MyAppState:replace: 🧩🧩🧩  replaced : 🍎 1 document : $res 🍎 \n\n\n');
+
+      showSnackbar(
+          message: '🍎 🍎 🍎  document replaced',
+          scaffoldKey: _key,
+          backgroundColor: Colors.indigo.shade800,
+          textColor: Colors.white);
+    } on PlatformException catch (f) {
+      print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
     }
   }
 
@@ -113,7 +175,7 @@ class _MyAppState extends State<MyApp> {
     debugPrint('\n\n💙 💙  getByProperty ....');
     try {
       var carrier = Carrier(db: 'testdb', collection: 'testCollection', query: {
-        "gt": {"wealth": 7000},
+        "gt": {"wealth": 90000},
         "eq": {"lastName": "Obama"},
         "and": true,
         "or": false,
@@ -121,7 +183,7 @@ class _MyAppState extends State<MyApp> {
       });
       var object = await MongodbMobile.query(carrier);
       debugPrint(
-          '\n\n🍎 🍎 🍎 _MyAppState: query: 🧩🧩🧩  retrieved : 🍎 ${object.length} documents 🍎 \n\n\n');
+          '\n\n🍎 🍎 🍎 _MyAppState: query: 🧩🧩🧩  retrieved : 🍎 ${object.length} documents 🍎 see below: \n\n\n');
       print(object);
 
       showSnackbar(
@@ -196,11 +258,11 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(12.0),
             child: Card(
               elevation: 4,
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(12.0),
                 child: ListView(
                   children: <Widget>[
                     Container(
@@ -219,7 +281,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     SizedBox(
-                      height: 40,
+                      height: 20,
                     ),
                     Container(
                       width: 300,
@@ -237,7 +299,7 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     SizedBox(
-                      height: 40,
+                      height: 20,
                     ),
                     Container(
                       width: 300,
@@ -255,18 +317,54 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     SizedBox(
-                      height: 40,
+                      height: 20,
                     ),
                     Container(
                       width: 300,
                       child: RaisedButton(
-                        onPressed: deleteDocument,
+                        onPressed: delete,
                         elevation: 16,
                         color: Colors.blue.shade400,
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Text(
                             'Delete Document',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: 300,
+                      child: RaisedButton(
+                        onPressed: replace,
+                        elevation: 16,
+                        color: Colors.brown.shade400,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(
+                            'Replace Document',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: 300,
+                      child: RaisedButton(
+                        onPressed: getOne,
+                        elevation: 16,
+                        color: Colors.indigo.shade400,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Text(
+                            'Get One Document',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),

@@ -25,7 +25,31 @@ class MongodbMobile {
   static Future insert(Carrier carrier) async {
     var res = await _channel.invokeMethod('insert', carrier.toJson());
     debugPrint(
-        '\n\n🍎 MongodbMobile: 🍀  document inserted, result: 🧩🧩🧩🧩🧩 statusCode:  $res  🧩🧩🧩🧩');
+        '\n\n🍎 MongodbMobile: 🍀  document inserted, result: 🧩🧩🧩🧩🧩 id::  $res  🧩🧩🧩🧩');
+    return res;
+  }
+
+  /// insert one document intp collection
+  static Future delete(Carrier carrier) async {
+    var res = await _channel.invokeMethod('delete', carrier.toJson());
+    debugPrint(
+        '\n\n🍎 MongodbMobile: 🍀  document deleted, result: 🧩🧩🧩🧩🧩 :  $res  🧩🧩🧩🧩');
+    return res;
+  }
+
+  /// insert one document intp collection
+  static Future getOne(Carrier carrier) async {
+    var res = await _channel.invokeMethod('getOne', carrier.toJson());
+    debugPrint(
+        '\n\n🍎 MongodbMobile: 🍀  getOne , result: 🧩🧩🧩🧩🧩 :  $res  🧩🧩🧩🧩');
+    return res;
+  }
+
+  /// replace one document in collection
+  static Future replace(Carrier carrier) async {
+    var res = await _channel.invokeMethod('replace', carrier.toJson());
+    debugPrint(
+        '\n\n🍎 MongodbMobile: 🍀  document replaced, result: 🧩🧩🧩🧩🧩 :  $res  🧩🧩🧩🧩');
     return res;
   }
 

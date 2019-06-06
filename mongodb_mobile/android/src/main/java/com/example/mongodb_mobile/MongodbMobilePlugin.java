@@ -20,6 +20,8 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.stitch.android.services.mongodb.local.LocalMongoDbService;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Map;
 
 /** MongodbMobilePlugin */
@@ -37,7 +39,7 @@ public class MongodbMobilePlugin implements MethodCallHandler {
   
   
   @Override
-  public void onMethodCall(MethodCall call, Result result) {
+  public void onMethodCall(@NotNull  MethodCall call, @NotNull Result result) {
     
     try {
       switch (call.method) {
@@ -50,14 +52,32 @@ public class MongodbMobilePlugin implements MethodCallHandler {
         case "insert":
           Map args = (Map) call.arguments;
           Log.d(TAG, "onMethodCall:insert:  ..... args: \uD83C\uDF3F ☘ ️" + args);
-          Object object = LocalDBUtil.insert(mobileClient, args);
+          String object = LocalDBUtil.insert(mobileClient, args);
           result.success(object);
+          break;
+        case "replace":
+          Map argsx = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:replace:  ..... args: \uD83C\uDF3F ☘ ️" + argsx);
+          long objectx = LocalDBUtil.replace(mobileClient, argsx);
+          result.success(objectx);
+          break;
+        case "delete":
+          Map argsz = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:delete:  ..... args: \uD83C\uDF3F ☘ ️" + argsz);
+          Object objectz = LocalDBUtil.delete(mobileClient, argsz);
+          result.success(objectz);
           break;
         case "getAll":
           Map args2 = (Map) call.arguments;
           Log.d(TAG, "onMethodCall:getAll:  ..... args: \uD83C\uDF3F ☘ ️" + args2);
           Object object2 = LocalDBUtil.getAll(mobileClient, args2);
           result.success(object2);
+          break;
+        case "getOne":
+          Map args3 = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:getOne:  ..... args: \uD83C\uDF3F ☘ ️" + args3);
+          Object object3 = LocalDBUtil.getOne(mobileClient, args3);
+          result.success(object3);
           break;
         case "getPlatformVersion":
           Log.d(TAG, "onMethodCall: getPlatformVersion requested ....");
@@ -95,7 +115,7 @@ public class MongodbMobilePlugin implements MethodCallHandler {
       }
     } catch (Exception e) {
       Log.e(TAG, "onMethodCall: ", e);
-      result.error("002", "Channel method error of some sort", "");
+      result.error("002", e.getMessage(), "Channel method error of some sort");
     }
   }
   private void setClient(String type) {
