@@ -19,27 +19,67 @@ class MongoExampleApp extends StatefulWidget {
 }
 
 class _MongoExampleAppState extends State<MongoExampleApp> {
+  static const MONGO_CONN =
+      "mongodb+srv://aubs:aubrey3@ar001-1xhdt.mongodb.net/ardb?retryWrites=true&w=majority";
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    setMongoAtlasAppID();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
+  Future<void> setLocalMongoAppID() async {
     String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await MongodbMobile.platformVersion;
       debugPrint('_MyAppState: 🧩🧩🧩 Platform Version : 🍎  $platformVersion');
       var res = await MongodbMobile.setAppID({
         'appID': 'exampleApp',
-        'type': 'local',
+        'type': MongodbMobile.LOCAL_DATABASE,
       });
       print(res);
+      showSnackbar(
+          scaffoldKey: _key,
+          message: '🏀 🏀 🏀  LOCAL DB setAppID succeeded',
+          textColor: Colors.white,
+          backgroundColor: Colors.teal.shade900);
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
-      platformVersion = 'Failed to get platform version.';
+      showSnackbar(
+          scaffoldKey: _key,
+          message: 'setAppID failed',
+          textColor: Colors.yellow,
+          backgroundColor: Colors.pink.shade900);
+    }
+    if (!mounted) return;
+
+    setState(() {});
+  }
+
+  static const API_KEY =
+      "HkcniZshpeSsJFgHxFYvBbGppUZyOEDFyrVwzsjqSXzluBy16r90EBTU5esygnuW";
+  Future<void> setMongoAtlasAppID() async {
+    try {
+      debugPrint('\n\n 🍎 🍎 🍎  setting remote MongoDB Stitch App ID ....');
+      var res = await MongodbMobile.setAppID({
+        'appID': 'routebuilder-scewg',
+        'type': MongodbMobile.ATLAS_DATABASE,
+        'email': 'hacker1@admin',
+        'password': 'aubrey3'
+      });
+      print(res);
+      showSnackbar(
+          scaffoldKey: _key,
+          message: '❤️ 🧡 💛 💚 💙 💜 Mongo Atlas DB setAppID succeeded',
+          textColor: Colors.white,
+          backgroundColor: Colors.teal.shade900);
+    } on PlatformException catch (f) {
+      print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
+      showSnackbar(
+          scaffoldKey: _key,
+          message: 'setAppID failed',
+          textColor: Colors.yellow,
+          backgroundColor: Colors.pink.shade900);
     }
     if (!mounted) return;
 
@@ -50,7 +90,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
 
   /// Add document to a collection
   Future insertDocument() async {
-    debugPrint('\n\n💙 💙  inserting a typical document ....');
+    debugPrint('\n\n💙 💙  inserting a  document ....');
     dynamic result;
     try {
       var carrier = Carrier(db: 'testdb', collection: 'testCollection', data: {
@@ -58,7 +98,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
         'lastName': 'Obama',
         'wealth': random.nextInt(100000) * 1.04,
         'date': DateTime.now().toUtc().toIso8601String(),
-        'desc': '💙  🍎 🍎  serve with purpose  🍎 🍎 💙'
+        'desc': '🍎  serve with purpose  💙'
       });
       result = await MongodbMobile.insert(carrier);
       debugPrint(
@@ -71,8 +111,6 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
       result = 'Failed to get platform version.';
-      var d =
-          "\ud83d\udc99\ud83d\udc99\ud83d\udc99 serve with purpose \ud83d\udc99\ud83d\udc99\ud83d\udc99";
     }
   }
 
@@ -258,6 +296,20 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
   }
 
   GlobalKey<ScaffoldState> _key = GlobalKey();
+  bool isRemote = false;
+  void _onSwitchChanged(bool status) {
+    debugPrint('onSwitchChanged:  🚼 🚼 $status');
+    setState(() {
+      isRemote = status;
+    });
+
+    if (isRemote) {
+      setMongoAtlasAppID();
+    } else {
+      setLocalMongoAppID();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -265,25 +317,54 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       home: Scaffold(
         key: _key,
         appBar: AppBar(
-          title: const Text('Flutter MongoDB Plugin App'),
-          backgroundColor: Colors.blueGrey.shade400,
+          title: Center(
+            child: Padding(
+              padding: EdgeInsets.all(12),
+              child: Text(
+                'MongoDB',
+                style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20,
+                    color: Colors.white),
+              ),
+            ),
+          ),
+          backgroundColor:
+              isRemote ? Colors.pink.shade300 : Colors.deepOrange.shade300,
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(100),
+            preferredSize: Size.fromHeight(80),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
-                  Text(
-                    'Checking out Flutter MongoDB Plugin',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
                   SizedBox(
                     height: 8,
                   ),
-                  Text(
-                    'Use the plugin to access MongoDB embedded on-device as well as MongoDB Atlas on all the cloud providers.',
-                    style: TextStyle(color: Colors.white),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        'MODE',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      SizedBox(
+                        width: 12,
+                      ),
+                      Switch(
+                        onChanged: _onSwitchChanged,
+                        activeColor: Colors.blue.shade800,
+                        value: isRemote,
+                      ),
+                      SizedBox(
+                        width: 12,
+                      ),
+                      Text(
+                        isRemote ? 'MongoDB Atlas' : 'Local Database',
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -294,7 +375,8 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           child: Icon(Icons.bug_report),
-          backgroundColor: Colors.red.shade700,
+          backgroundColor:
+              isRemote ? Colors.pink.shade600 : Colors.deepOrange.shade600,
           elevation: 24,
         ),
         body: Center(

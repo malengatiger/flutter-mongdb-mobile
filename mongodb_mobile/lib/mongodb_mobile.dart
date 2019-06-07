@@ -7,6 +7,10 @@ import 'carrier.dart';
 
 class MongodbMobile {
   static const MethodChannel _channel = const MethodChannel('mongodb_mobile');
+  static const String LOCAL_DATABASE = "local",
+      ATLAS_DATABASE = "atlas",
+      CARRIER_DATABASE = "db",
+      CARRIER_COLLECTION = "collection";
 
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
@@ -29,7 +33,7 @@ class MongodbMobile {
     return res;
   }
 
-  /// insert one document intp collection
+  /// delete one document from collection
   static Future delete(Carrier carrier) async {
     var res = await _channel.invokeMethod('delete', carrier.toJson());
     debugPrint(
@@ -37,7 +41,7 @@ class MongodbMobile {
     return res;
   }
 
-  /// insert one document intp collection
+  /// find one document from collection
   static Future getOne(Carrier carrier) async {
     var res = await _channel.invokeMethod('getOne', carrier.toJson());
     debugPrint(
@@ -70,6 +74,7 @@ class MongodbMobile {
     return res;
   }
 
+  /// query - get documents based on properties
   static Future query(Carrier carrier) async {
     var res = await _channel.invokeMethod('query', carrier.toJson());
     debugPrint(

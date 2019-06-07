@@ -6,8 +6,6 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Filters.*;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
@@ -15,34 +13,19 @@ import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
-import org.jetbrains.annotations.NotNull;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
-
-import static com.mongodb.client.model.Accumulators.push;
-import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.gt;
-import static com.mongodb.client.model.Filters.lt;
-import static com.mongodb.client.model.Filters.or;
+
 
 public class LocalDBUtil {
     private static final String TAG = LocalDBUtil.class.getSimpleName();
 
-    /**
-     *
-     * @param client
-     * @param carrier
-     * @return
-     */
-    static String insert(@NotNull MongoClient client, @NotNull Map carrier) {
+    static String insert( MongoClient client,  Map carrier) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ insert: document: " + carrier.toString());
         Document document = new Document();
         Map dataMap = (Map) carrier.get("data");
@@ -56,13 +39,7 @@ public class LocalDBUtil {
         return mb.toString();
     }
 
-    /**
-     *
-     * @param client
-     * @param carrier
-     * @return
-     */
-    static Object getOne(@NotNull MongoClient client, @NotNull Map carrier) {
+    static Object getOne( MongoClient client,  Map carrier) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ getOne: carrier: " + carrier.toString());
         String id = (String) carrier.get("id");
         assert id != null;
@@ -81,13 +58,7 @@ public class LocalDBUtil {
         return list;
     }
 
-    /**
-     *
-     * @param client
-     * @param carrier
-     * @return
-     */
-    static long replace(@NotNull MongoClient client, @NotNull Map carrier) {
+    static long replace( MongoClient client,  Map carrier) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ replace: document: " + carrier.toString());
         String id = (String) carrier.get("id");
         Document document = new Document();
@@ -102,13 +73,7 @@ public class LocalDBUtil {
         return result.getMatchedCount();
     }
 
-    /**
-     * This method adds an element to an array within a document identified by _id
-     * @param client
-     * @param carrier
-     * @return result.getMatchedCount
-     */
-    static long addToArray(@NotNull MongoClient client, @NotNull Map carrier) {
+    static long addToArray( MongoClient client,  Map carrier) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ addToArray: document: " + carrier.toString());
         String id = (String) carrier.get("id");
         String arrayName  = (String) carrier.get("arrayName");
@@ -126,69 +91,10 @@ public class LocalDBUtil {
         return result.getMatchedCount();
     }
 
-    /**
-     *
-     * @param client
-     * @param carrier
-     * @return
-     */
     static Object query(MongoClient client, Map carrier) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ query: carrier: " + carrier.toString());
 
-        Map query = (Map) carrier.get("query");
-        assert query != null;
-        List<Bson> filters = new ArrayList<>();
-        boolean isAnd = false;
-        boolean isOr = false;
-        Set<String> mset = query.keySet();
-        for (String key : mset) {
-             switch (key) {
-                 case "and":
-                     isAnd = (boolean) query.get(key);
-                     break;
-                 case "or":
-                     isOr = (boolean) query.get(key);
-                     break;
-                 case "eq":
-                     Map m1 = (Map) query.get(key);
-                     assert m1 != null;
-                     Set<String> kSet = m1.keySet();
-                     Bson filter = null;
-                     for (String mKey: kSet) {
-                         filter = eq(mKey, m1.get(mKey));
-                     }
-                     filters.add(filter);
-                     break;
-                 case "gt":
-                     Map m2 = (Map) query.get(key);
-                     assert m2 != null;
-                     Set<String> kSet2 = m2.keySet();
-                     Bson filter2 = null;
-                     for (String mKey: kSet2) {
-                         filter2 = gt(mKey, m2.get(mKey));
-                     }
-                     filters.add(filter2);
-                     break;
-                 case "lt":
-                     Map m3 = (Map) query.get(key);
-                     assert m3 != null;
-                     Set<String> kSet3 = m3.keySet();
-                     Bson filter3 = null;
-                     for (String mKey: kSet3) {
-                         filter3 = lt(mKey, m3.get(mKey));
-                     }
-                     filters.add(filter3);
-                     break;
-             }
-
-        }
-        Bson mFilter = null;
-        if (isAnd) {
-            mFilter = and(filters);
-        }
-        if (isOr) {
-            mFilter = or(filters);
-        }
+        Bson mFilter = Helper.getQueryFilter(carrier);
         Log.d(TAG, "❤️  ❤️   ❤️ query: mFilter:  ❤️  ❤️ " + mFilter);
         assert mFilter != null;
         FindIterable mongoIterable = getCollection(client, carrier)
@@ -207,13 +113,7 @@ public class LocalDBUtil {
         return list;
     }
 
-    /**
-     *
-     * @param client
-     * @param carrier
-     * @return
-     */
-    static long delete(@NotNull MongoClient client, @NotNull Map carrier) {
+    static long delete( MongoClient client,  Map carrier) {
         Log.d(TAG, "\uD83C\uDF3F  ✂️️ delete:  ✂️ document: " + carrier.toString());
         String id = (String) carrier.get("id");
         assert id != null;
@@ -223,14 +123,7 @@ public class LocalDBUtil {
         return result.getDeletedCount();
     }
 
-    /**
-     *
-     * @param client
-     * @param carrier
-     * @return
-     */
-    @NotNull
-    private static MongoCollection getCollection(@NotNull MongoClient client, @NotNull Map carrier) {
+    private static MongoCollection getCollection( MongoClient client,  Map carrier) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ getCollection: carrier: " + carrier.toString());
         String db = (String) carrier.get("db");
         String collection = (String) carrier.get("collection");
@@ -238,12 +131,8 @@ public class LocalDBUtil {
         assert db != null;
         return client.getDatabase(db).getCollection(collection);
     }
-    /**
-     * @param client
-     * @param carrier
-     * @return
-     */
-    static List<Object>  getAll(@NotNull MongoClient client, @NotNull Map carrier) {
+
+    static List<Object>  getAll( MongoClient client,  Map carrier) {
         Log.d(TAG, "\n🍎 getAll: get all documents in collection: " + carrier.toString() + "\n\n");
         String db = (String) carrier.get("db");
         String collectionName = (String) carrier.get("collection");
@@ -266,9 +155,7 @@ public class LocalDBUtil {
         }
 
     }
-    public static void hello() {
-        Log.d(TAG, "hello: Aubrey !!!");
-    }
+
     static final Locale locale = Locale.getDefault();
     static final SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy HH:mm:ss:ss", locale);
 }
