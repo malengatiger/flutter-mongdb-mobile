@@ -88,25 +88,6 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
 
   Random random = Random(DateTime.now().millisecondsSinceEpoch);
   static const DB = 'ardb', COLLECTION = "testCollection";
-  List<String> fNames = [
-    "John",
-    "Vusi",
-    "Lulu",
-    "Kgabi",
-    "Peter",
-    "Obby",
-    "Tiger"
-  ];
-  List<String> lNames = [
-    "Malenga",
-    "Jackson",
-    "Maringa",
-    "Johnson",
-    "Petersen",
-    "Bhengu"
-  ];
-
-  void setNames() {}
 
   /// Add document to a collection
   Future insertDocument() async {
@@ -124,7 +105,8 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       });
       result = await MongodbMobile.insert(carrier);
       debugPrint(
-          '\n\n🧩🧩🧩🧩🧩🧩  _MyAppState: insertDocument 🧩🧩🧩 document added : 🍎 statusCode: $result\n\n\n');
+          '\n\n🧩🧩🧩🧩🧩🧩  _MyAppState: insertDocument 🧩🧩🧩 document added : 🍎 id: $result\n\n\n');
+
       showSnackbar(
           message: ' 🧩🧩🧩  Document inserted',
           scaffoldKey: _key,
@@ -172,11 +154,12 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       var carrier = Carrier(
           db: DB,
           collection: COLLECTION,
-          id: "5cf8a2206bc83124d1e93787",
+          id: "5cfbb82e6bc8314a900082bd",
           arrayName: "musicTracks",
+          arrayKey: new DateTime.now().millisecondsSinceEpoch.toString(),
           data: {
             'artist': 'Michael Jackson',
-            'track': 'Crazy Suzy',
+            'track': 'Earth Song',
             'date': new DateTime.now().toIso8601String(),
           });
       result = await MongodbMobile.addToArray(carrier);
@@ -208,6 +191,11 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState: getAllDocuments 🧩🧩🧩  retrieved : 🍎 ${documents.length} documents 🍎 \n\n\n');
 
+      var cnt = 0;
+      documents.forEach((m) {
+        cnt++;
+        debugPrint(' 🧩🧩🧩 #$cnt  👌 $m');
+      });
       showSnackbar(
           message: '🍎 🍎 🍎  ${documents.length} documents found',
           scaffoldKey: _key,
@@ -223,7 +211,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     debugPrint('\n\n💙 💙  delete ....');
     try {
       var carrier = Carrier(
-          db: DB, collection: COLLECTION, id: '5cf972ec6bc831030099670d');
+          db: DB, collection: COLLECTION, id: '5cfb9f236bc831a4b48e8643');
       var res = await MongodbMobile.delete(carrier);
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState:delete: 🧩🧩🧩  deleted : 🍎  : $res 🍎 \n\n\n');
@@ -238,15 +226,15 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     }
   }
 
-  /// Delete document from a collection
+  /// get one document from a collection
   Future getOne() async {
     debugPrint('\n\n💙 💙  get one doc ....');
     try {
       var carrier = Carrier(
-          db: DB, collection: COLLECTION, id: '5cf8e4aa6bc8315dd0a51755');
+          db: DB, collection: COLLECTION, id: '5cfba1dc6bc83128d683431b');
       var res = await MongodbMobile.getOne(carrier);
       debugPrint(
-          '\n\n🍎 🍎 🍎 _MyAppState:delete: 🧩🧩🧩  get one : 🍎 : $res 🍎 \n\n\n');
+          '\n\n🍎 🍎 🍎 _MyAppState:getOne: 🧩🧩🧩  get one : 🍎 : $res 🍎 \n\n\n');
 
       showSnackbar(
           message: '🍎 🍎 🍎  document retrieved',
@@ -292,16 +280,20 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     debugPrint('\n\n💙 💙  getByProperty ....');
     try {
       var carrier = Carrier(db: DB, collection: COLLECTION, query: {
-        "gt": {"wealth": 9000},
-        "eq": {"lastName": "Obama"},
+        "gt": {"wealth": 5000},
+        "eq": {"lastName": lNames.elementAt(random.nextInt(lNames.length - 1))},
         "and": true,
         "or": false,
         "limit": 0
       });
-      var object = await MongodbMobile.query(carrier);
+      dynamic object = await MongodbMobile.query(carrier);
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState: query: 🧩🧩🧩  retrieved : 🍎 ${object.length} documents 🍎 see below: \n\n\n');
-      print(object);
+      var cnt = 0;
+      object.forEach((m) {
+        cnt++;
+        debugPrint(' 🥬🥬🥬 #$cnt  👌 $m');
+      });
 
       showSnackbar(
           message: ' 🍎 🍎 🍎  ${object.length} documents found',
@@ -589,4 +581,42 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       ),
     );
   }
+
+  List<String> fNames = [
+    "John",
+    "Vusi",
+    "Lulu",
+    "Kgabi",
+    "Peter",
+    "Cyril",
+    "Nancy",
+    "Donald",
+    'Rogers',
+    'Lesego',
+    'Leslie',
+    'Fatima',
+    "Catherine",
+    'Musapa',
+    'Benjamin',
+    'Rachel',
+    'Georgia',
+    'California',
+    "Obby",
+    "Tiger"
+  ];
+  List<String> lNames = [
+    "Marule",
+    "Woods",
+    "Obama",
+    'Trump',
+    'van der Merwe',
+    'Sithole',
+    "Ramaphosa",
+    "Malenga",
+    "Jackson",
+    "Maringa",
+    "Johnson",
+    "Petersen",
+    "Bhengu"
+  ];
 }

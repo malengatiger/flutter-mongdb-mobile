@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5679190e-33b7-41f5-93c6-75f71356f2e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/ChangeEventStreamHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/RemoteDBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/RemoteDBUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emojis.txt" beforeDir="false" afterPath="$PROJECT_DIR$/emojis.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/mongodb_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mongodb_mobile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/carrier.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/carrier.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -46,24 +45,33 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="96">
-                  <caret line="142" column="10" selection-start-line="142" selection-start-column="10" selection-end-line="142" selection-end-column="10" />
+                <state relative-caret-position="352">
+                  <caret line="161" column="32" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="32" />
                   <folding>
                     <element signature="e#0#20#0" expanded="true" />
                     <element signature="e#654#708#0" expanded="true" />
                     <element signature="e#737#1352#0" expanded="true" />
                     <element signature="e#1473#2073#0" expanded="true" />
-                    <element signature="e#2963#3866#0" expanded="true" />
-                    <element signature="e#3933#4836#0" expanded="true" />
-                    <element signature="e#5104#5734#0" expanded="true" />
-                    <element signature="e#5794#6404#0" expanded="true" />
-                    <element signature="e#6464#7080#0" expanded="true" />
-                    <element signature="e#7182#8099#0" expanded="true" />
-                    <element signature="e#8173#8968#0" expanded="true" />
-                    <element signature="e#9514#9717#0" expanded="true" />
-                    <element signature="e#8640#15917#0" expanded="true" />
+                    <element signature="e#3016#4245#0" expanded="true" />
+                    <element signature="e#4295#5088#0" expanded="true" />
+                    <element signature="e#6272#6950#0" expanded="true" />
+                    <element signature="e#7016#7626#0" expanded="true" />
+                    <element signature="e#7686#8302#0" expanded="true" />
+                    <element signature="e#8364#9281#0" expanded="true" />
+                    <element signature="e#9416#10204#0" expanded="true" />
+                    <element signature="e#11031#11234#0" expanded="true" />
+                    <element signature="e#11285#19664#0" expanded="true" />
                     <element signature="e#10464#11673#0" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lib/carrier.dart">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="296">
+                  <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
                 </state>
               </provider>
             </entry>
@@ -75,8 +83,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/emojis.txt">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="89">
-                  <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="14" />
+                <state relative-caret-position="405">
+                  <caret line="33" column="41" lean-forward="true" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="44" />
                 </state>
               </provider>
             </entry>
@@ -116,11 +124,11 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/example/test/widget_test.dart" />
         <option value="$PROJECT_DIR$/test/mongodb_mobile_test.dart" />
-        <option value="$PROJECT_DIR$/lib/carrier.dart" />
         <option value="$PROJECT_DIR$/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/emojis.txt" />
         <option value="$PROJECT_DIR$/lib/mongodb_mobile.dart" />
+        <option value="$PROJECT_DIR$/lib/carrier.dart" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
       </list>
     </option>
@@ -129,9 +137,9 @@
     <option name="directoryName" value="dRiOLmqq" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1867" />
+    <option name="x" value="-1913" />
     <option name="y" value="-47" />
-    <option name="width" value="1839" />
+    <option name="width" value="1908" />
     <option name="height" value="1011" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -173,9 +181,9 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -301,11 +309,19 @@
       <option name="project" value="LOCAL" />
       <updated>1559936132031</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary=" 🚼 added collection sync -  🚼  mobile to atlas!!  💚 💚 💚">
+      <created>1559990658020</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1559990658021</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1867" y="-47" width="1839" height="1011" extended-state="0" />
+    <frame x="-1913" y="-47" width="1908" height="1011" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Designer" />
       <window_info id="Build Variants" side_tool="true" />
@@ -313,10 +329,10 @@
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Captures" sideWeight="0.50103736" side_tool="true" weight="0.28948948" />
-      <window_info id="Structure" sideWeight="0.5813953" side_tool="true" visible="true" weight="0.16638842" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.41860464" visible="true" weight="0.120200336" />
+      <window_info id="Structure" sideWeight="0.5813953" side_tool="true" visible="true" weight="0.16023579" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.41860464" visible="true" weight="0.115755625" />
       <window_info anchor="bottom" id="Dart Analysis" weight="0.3297062" />
-      <window_info active="true" anchor="bottom" id="Run" visible="true" weight="0.5408052" />
+      <window_info active="true" anchor="bottom" id="Run" visible="true" weight="0.42002177" />
       <window_info anchor="bottom" id="Docker" />
       <window_info anchor="bottom" id="Android Profiler" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
@@ -389,7 +405,8 @@
     <MESSAGE value="  added addToArray  " />
     <MESSAGE value="   added addToArray on the Flutter side " />
     <MESSAGE value="   Yebo!  connected to MongoDB Atlas   " />
-    <option name="LAST_COMMIT_MESSAGE" value="   Yebo!  connected to MongoDB Atlas   " />
+    <MESSAGE value="  added collection sync -    mobile to atlas!!    " />
+    <option name="LAST_COMMIT_MESSAGE" value="  added collection sync -    mobile to atlas!!    " />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/example/ios/Podfile">
@@ -499,13 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/carrier.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="34" column="21" lean-forward="true" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -534,33 +544,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/emojis.txt">
+    <entry file="file://$PROJECT_DIR$/lib/carrier.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="14" />
+        <state relative-caret-position="296">
+          <caret line="34" column="19" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="142" column="10" selection-start-line="142" selection-start-column="10" selection-end-line="142" selection-end-column="10" />
+        <state relative-caret-position="352">
+          <caret line="161" column="32" selection-start-line="161" selection-start-column="32" selection-end-line="161" selection-end-column="32" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
             <element signature="e#654#708#0" expanded="true" />
             <element signature="e#737#1352#0" expanded="true" />
             <element signature="e#1473#2073#0" expanded="true" />
-            <element signature="e#2963#3866#0" expanded="true" />
-            <element signature="e#3933#4836#0" expanded="true" />
-            <element signature="e#5104#5734#0" expanded="true" />
-            <element signature="e#5794#6404#0" expanded="true" />
-            <element signature="e#6464#7080#0" expanded="true" />
-            <element signature="e#7182#8099#0" expanded="true" />
-            <element signature="e#8173#8968#0" expanded="true" />
-            <element signature="e#9514#9717#0" expanded="true" />
-            <element signature="e#8640#15917#0" expanded="true" />
+            <element signature="e#3016#4245#0" expanded="true" />
+            <element signature="e#4295#5088#0" expanded="true" />
+            <element signature="e#6272#6950#0" expanded="true" />
+            <element signature="e#7016#7626#0" expanded="true" />
+            <element signature="e#7686#8302#0" expanded="true" />
+            <element signature="e#8364#9281#0" expanded="true" />
+            <element signature="e#9416#10204#0" expanded="true" />
+            <element signature="e#11031#11234#0" expanded="true" />
+            <element signature="e#11285#19664#0" expanded="true" />
             <element signature="e#10464#11673#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emojis.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="33" column="41" lean-forward="true" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="44" />
         </state>
       </provider>
     </entry>
