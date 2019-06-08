@@ -17,7 +17,7 @@ import 'package:flutter/cupertino.dart';
  */
 class Carrier {
   String db, collection, id, arrayName, arrayKey;
-  dynamic data, query;
+  dynamic data, query, fields;
 
   Carrier(
       {@required this.db,
@@ -26,6 +26,7 @@ class Carrier {
       this.query,
       this.arrayName,
       this.arrayKey,
+      this.fields,
       this.id});
 
   Map<String, dynamic> toJson() {
@@ -35,6 +36,7 @@ class Carrier {
       'data': data,
       'query': query,
       'id': id,
+      'fields': fields,
       'arrayName': arrayName,
       'arrayKey': arrayKey,
     };

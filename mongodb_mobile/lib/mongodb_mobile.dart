@@ -30,7 +30,7 @@ class MongodbMobile {
   static Future sync(Carrier carrier) async {
     var res = await _channel.invokeMethod('sync', carrier.toJson());
     debugPrint(
-        '\n\n🍎 MongodbMobile: 🍀  sync started?, result: 🧩🧩🧩🧩🧩 id::  $res  🧩🧩🧩🧩');
+        '\n\n🍎 MongodbMobile: 🍀  sync started? 🧩🧩🧩🧩  $res  🧩🧩🧩🧩');
     return res;
   }
 
@@ -59,7 +59,7 @@ class MongodbMobile {
   }
 
   /// replace one document in collection
-  static Future replace(Carrier carrier) async {
+  static Future update(Carrier carrier) async {
     var res = await _channel.invokeMethod('replace', carrier.toJson());
     debugPrint(
         '\n\n🍎 MongodbMobile: 🍀  document replaced, result: 🧩🧩🧩🧩🧩 :  $res  🧩🧩🧩🧩');

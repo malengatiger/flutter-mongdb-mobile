@@ -213,7 +213,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     debugPrint('\n\n💙 💙  delete ....');
     try {
       var carrier = Carrier(
-          db: DB, collection: COLLECTION, id: '5cfb9f236bc831a4b48e8643');
+          db: DB, collection: COLLECTION, id: '5cfbe8b96bc8317dab43d14e');
       var res = await MongodbMobile.delete(carrier);
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState:delete: 🧩🧩🧩  deleted : 🍎  : $res 🍎 \n\n\n');
@@ -233,7 +233,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     debugPrint('\n\n💙 💙  get one doc ....');
     try {
       var carrier = Carrier(
-          db: DB, collection: COLLECTION, id: '5cfba1dc6bc83128d683431b');
+          db: DB, collection: COLLECTION, id: '5cfbe8ba6bc8317dab43d152');
       var res = await MongodbMobile.getOne(carrier);
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState:getOne: 🧩🧩🧩  get one : 🍎 : $res 🍎 \n\n\n');
@@ -249,21 +249,21 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
   }
 
   /// Replace document from a collection
-  Future replace() async {
+  Future updateDocument() async {
     debugPrint('\n\n💙 💙  replace  ....');
     try {
       var carrier = Carrier(
           db: DB,
           collection: COLLECTION,
-          id: '5cf8a0c16bc831de7f4c9b85',
-          data: {
-            'name': 'Aubrey St Vincent',
-            'lastName': 'Malabie III',
-            'wealth': 650000.09,
+          id: '5cfbe8ba6bc8317dab43d151',
+          fields: {
+            'name': 'Aubrey 👽 St. Vincent',
+            'lastName': 'Malabie 🦊🦊🦊 III',
+            'wealth': 777007.77,
             'date': DateTime.now().toUtc().toIso8601String(),
-            'desc': '💙 serve with UPDATED purpose 💙'
+            'desc': '🐬   🍎 serve with UPDATED purpose  🍎  🐬 '
           });
-      var res = await MongodbMobile.replace(carrier);
+      var res = await MongodbMobile.update(carrier);
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState:replace: 🧩🧩🧩  replaced : 🍎 1 document : $res 🍎 \n\n\n');
 
@@ -320,7 +320,8 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     }, onError: (dynamic error) {
       print('Received error: ${error.message}');
     });
-    print('🦠 🦠 🦠 Listening to Channel events for 🦠  Mongo Change Events');
+    print(
+        '\n\n🦠 🦠 🦠 Listening to Channel events for 🦠  Mongo Change Events\n');
   }
 
   void showSnackbar(
@@ -519,13 +520,13 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
                     Container(
                       width: 260,
                       child: RaisedButton(
-                        onPressed: replace,
+                        onPressed: updateDocument,
                         elevation: 16,
                         color: Colors.brown.shade400,
                         child: Padding(
                           padding: const EdgeInsets.all(20.0),
                           child: Text(
-                            'Replace Document',
+                            'Update Document',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -599,6 +600,15 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       ),
     );
   }
+
+//  _launchURL() async {
+//    const url = 'https://flutter.io';
+//    if (await canLaunch(url)) {
+//      await launch(url);
+//    } else {
+//      throw 'Could not launch $url';
+//    }
+//  }
 
   List<String> fNames = [
     "John",

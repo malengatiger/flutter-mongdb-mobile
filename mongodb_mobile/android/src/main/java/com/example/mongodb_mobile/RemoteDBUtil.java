@@ -1,7 +1,6 @@
 package com.example.mongodb_mobile;
 
-import android.database.CursorJoiner;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -9,6 +8,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.Block;
 import com.mongodb.client.model.Updates;
 import com.mongodb.stitch.android.core.Stitch;
@@ -16,7 +16,6 @@ import com.mongodb.stitch.android.core.StitchAppClient;
 import com.mongodb.stitch.android.core.auth.StitchUser;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
 import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCollection;
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoCursor;
 import com.mongodb.stitch.android.services.mongodb.remote.SyncFindIterable;
 import com.mongodb.stitch.core.auth.StitchUserProfile;
 import com.mongodb.stitch.core.auth.providers.anonymous.AnonymousCredential;
@@ -28,6 +27,7 @@ import com.mongodb.stitch.core.services.mongodb.remote.RemoteInsertOneResult;
 import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateResult;
 import com.mongodb.stitch.core.services.mongodb.remote.sync.ChangeEventListener;
 import com.mongodb.stitch.core.services.mongodb.remote.sync.DefaultSyncConflictResolvers;
+import com.mongodb.stitch.core.services.mongodb.remote.sync.SyncUpdateResult;
 
 import org.bson.BsonValue;
 import org.bson.Document;
@@ -35,13 +35,12 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
-import static com.example.mongodb_mobile.LocalDBUtil.sdf;
 import static com.mongodb.client.model.Filters.eq;
 
 //   🧡 💛 💚 💙 💜
@@ -167,26 +166,50 @@ class RemoteDBUtil {
         });
 
     }
+/*
+{ $set:
+      {
+        quantity: 500,
+        details: { model: "14Q3", make: "xyz" },
+        tags: [ "coats", "outerwear", "clothing" ]
+      }
+   }
+ */
+    static Map getUpdates(Map carrier) {
 
+        Map<String, Object> props = new HashMap<>();
+        Set<String> keys = carrier.keySet();
+        for (String key: keys) {
+            props.put(key,  carrier.get(key));
+        }
+
+        return props;
+    }
     static void replace(Map carrier, final RemoteReplaceListener remoteReplaceListener) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ replace: document: " + carrier.toString());
         String id = (String) carrier.get("id");
-        Document document = new Document();
-        Map dataMap = (Map) carrier.get("data");
-        assert dataMap != null;
-        document.putAll(dataMap);
         assert id != null;
         Bson filter = eq("_id", new ObjectId(id));
-        Task task = getRemoteCollection(carrier).sync().updateOne(filter, document);
+        assert filter != null;
+
+        Map<String, Object> props = (Map) carrier.get("fields");
+        Map<String, Object> map = new HashMap<>();
+        map.put("$set", props);
+        Bson document = new BasicDBObject(map);
+
+        Task<SyncUpdateResult> task = getRemoteCollection(carrier).sync()
+                .updateOne(filter, document);
         task.addOnSuccessListener(new OnSuccessListener() {
             @Override
             public void onSuccess(Object o) {
-                Log.d(TAG, "onSuccess: replace succeeded");
-                remoteReplaceListener.onReplace((long) o);
+                SyncUpdateResult result = (SyncUpdateResult)o;
+                Log.d(TAG, "\uD83D\uDC2C onSuccess: \uD83D\uDC2C \uD83D\uDC2C " +
+                        "replace succeeded; modified: \uD83E\uDDA0 \uD83E\uDDA0" + result.getModifiedCount());
+                remoteReplaceListener.onReplace(result.getModifiedCount());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@android.support.annotation.NonNull Exception e) {
+            public void onFailure(@androidx.annotation.NonNull Exception e) {
                 Log.e(TAG, "onFailure: replace failed: ", e);
                 remoteReplaceListener.onError(e.getMessage());
             }
@@ -195,7 +218,7 @@ class RemoteDBUtil {
     }
 
     static void addToArray(Map carrier, final RemoteAddToArrayListener remoteInsertListener) {
-        Log.d(TAG, "\uD83C\uDF3F ☘️ addToArray: document: " + carrier.toString());
+        Log.d(TAG, "\uD83C\uDF3F ☘️ addToArray:add to nested array element to document: " + carrier.toString());
         String id = (String) carrier.get("id");
         String arrayName = (String) carrier.get("arrayName");
         Map data = (Map) carrier.get("data");
@@ -217,7 +240,7 @@ class RemoteDBUtil {
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@android.support.annotation.NonNull Exception e) {
+            public void onFailure(@androidx.annotation.NonNull Exception e) {
                 Log.e(TAG, "onFailure: addToArray failed: ", e);
                 remoteInsertListener.onError(e.getMessage());
             }
@@ -356,7 +379,7 @@ class RemoteDBUtil {
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@android.support.annotation.NonNull Exception e) {
+            public void onFailure(@androidx.annotation.NonNull Exception e) {
                 Log.e(TAG, "onFailure: delete failed", e);
                 remoteDeleteListener.onError(e.getMessage());
 
