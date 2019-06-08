@@ -21,8 +21,16 @@ class MongodbMobile {
   static Future<String> setAppID(dynamic config) async {
     var res = await _channel.invokeMethod('setAppID', config);
     debugPrint(
-        '🍎 MongodbMobile: 🍀  Stitch AppID has been set, result: 🧩🧩🧩 $res');
+        '🍎 MongodbMobile: 🍀  MongoDB Mobile should be connected, result: 🧩🧩🧩 $res');
     return '🧩🧩🧩 appID has been set';
+  }
+
+  /// insert one document intp collection
+  static Future sync(Carrier carrier) async {
+    var res = await _channel.invokeMethod('sync', carrier.toJson());
+    debugPrint(
+        '\n\n🍎 MongodbMobile: 🍀  sync started?, result: 🧩🧩🧩🧩🧩 id::  $res  🧩🧩🧩🧩');
+    return res;
   }
 
   /// insert one document intp collection

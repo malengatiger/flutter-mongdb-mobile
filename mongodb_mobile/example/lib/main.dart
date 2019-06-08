@@ -40,14 +40,14 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       print(res);
       showSnackbar(
           scaffoldKey: _key,
-          message: '🏀 🏀 🏀  LOCAL DB setAppID succeeded',
+          message: '🏀 🏀 🏀  LOCAL DB connection succeeded',
           textColor: Colors.white,
           backgroundColor: Colors.teal.shade900);
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
       showSnackbar(
           scaffoldKey: _key,
-          message: 'setAppID failed',
+          message: '👽 Local database connection failed 👽 👽 👽 ',
           textColor: Colors.yellow,
           backgroundColor: Colors.pink.shade900);
     }
@@ -70,14 +70,14 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       print(res);
       showSnackbar(
           scaffoldKey: _key,
-          message: '❤️ 🧡 💛 💚 💙 💜 Mongo Atlas DB setAppID succeeded',
+          message: '❤️ 🧡 💛 💚 💙 💜 Mongo Atlas connected',
           textColor: Colors.white,
           backgroundColor: Colors.teal.shade900);
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
       showSnackbar(
           scaffoldKey: _key,
-          message: 'setAppID failed',
+          message: '👽 Atlas connection failed 👽 👽 👽 ',
           textColor: Colors.yellow,
           backgroundColor: Colors.pink.shade900);
     }
@@ -87,15 +87,37 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
   }
 
   Random random = Random(DateTime.now().millisecondsSinceEpoch);
+  static const DB = 'ardb', COLLECTION = "testCollection";
+  List<String> fNames = [
+    "John",
+    "Vusi",
+    "Lulu",
+    "Kgabi",
+    "Peter",
+    "Obby",
+    "Tiger"
+  ];
+  List<String> lNames = [
+    "Malenga",
+    "Jackson",
+    "Maringa",
+    "Johnson",
+    "Petersen",
+    "Bhengu"
+  ];
+
+  void setNames() {}
 
   /// Add document to a collection
   Future insertDocument() async {
     debugPrint('\n\n💙 💙  inserting a  document ....');
     dynamic result;
     try {
-      var carrier = Carrier(db: 'testdb', collection: 'testCollection', data: {
-        'name': 'Kassambe',
-        'lastName': 'Obama',
+      var fIndex = random.nextInt(fNames.length - 1);
+      var lIndex = random.nextInt(lNames.length - 1);
+      var carrier = Carrier(db: DB, collection: COLLECTION, data: {
+        'name': fNames.elementAt(fIndex),
+        'lastName': lNames.elementAt(lIndex),
         'wealth': random.nextInt(100000) * 1.04,
         'date': DateTime.now().toUtc().toIso8601String(),
         'desc': '🍎  serve with purpose  💙'
@@ -110,7 +132,35 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
           textColor: Colors.white);
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
-      result = 'Failed to get platform version.';
+      showSnackbar(
+          message: ' 😡  😡 Document insert failed',
+          scaffoldKey: _key,
+          backgroundColor: Colors.red.shade700,
+          textColor: Colors.yellow);
+    }
+  }
+
+  /// Sync collection
+  Future syncCollection() async {
+    debugPrint('\n\n💙 💙  syncCollection  ....');
+    dynamic result;
+    try {
+      var carrier = Carrier(db: DB, collection: COLLECTION);
+      result = await MongodbMobile.sync(carrier);
+      debugPrint(
+          '\n\n🧩🧩🧩🧩🧩🧩  _MyAppState: syncCollection: 🧩🧩🧩  🍎 result: $result\n\n\n');
+      showSnackbar(
+          message: ' 🧩🧩🧩  Document inserted',
+          scaffoldKey: _key,
+          backgroundColor: Colors.black,
+          textColor: Colors.white);
+    } on PlatformException catch (f) {
+      print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
+      showSnackbar(
+          message: ' 😡  😡 Sync Collection failed',
+          scaffoldKey: _key,
+          backgroundColor: Colors.red.shade700,
+          textColor: Colors.yellowAccent);
     }
   }
 
@@ -120,8 +170,8 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     dynamic result;
     try {
       var carrier = Carrier(
-          db: 'testdb',
-          collection: 'testCollection',
+          db: DB,
+          collection: COLLECTION,
           id: "5cf8a2206bc83124d1e93787",
           arrayName: "musicTracks",
           data: {
@@ -153,7 +203,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
   Future getAllDocuments() async {
     debugPrint('\n\n💙 💙  getAllDocuments ....');
     try {
-      var carrier = Carrier(db: 'testdb', collection: 'testCollection');
+      var carrier = Carrier(db: DB, collection: COLLECTION);
       documents = await MongodbMobile.getAll(carrier);
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState: getAllDocuments 🧩🧩🧩  retrieved : 🍎 ${documents.length} documents 🍎 \n\n\n');
@@ -173,9 +223,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     debugPrint('\n\n💙 💙  delete ....');
     try {
       var carrier = Carrier(
-          db: 'testdb',
-          collection: 'testCollection',
-          id: '5cf972ec6bc831030099670d');
+          db: DB, collection: COLLECTION, id: '5cf972ec6bc831030099670d');
       var res = await MongodbMobile.delete(carrier);
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState:delete: 🧩🧩🧩  deleted : 🍎  : $res 🍎 \n\n\n');
@@ -195,9 +243,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     debugPrint('\n\n💙 💙  get one doc ....');
     try {
       var carrier = Carrier(
-          db: 'testdb',
-          collection: 'testCollection',
-          id: '5cf8e4aa6bc8315dd0a51755');
+          db: DB, collection: COLLECTION, id: '5cf8e4aa6bc8315dd0a51755');
       var res = await MongodbMobile.getOne(carrier);
       debugPrint(
           '\n\n🍎 🍎 🍎 _MyAppState:delete: 🧩🧩🧩  get one : 🍎 : $res 🍎 \n\n\n');
@@ -217,8 +263,8 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     debugPrint('\n\n💙 💙  replace  ....');
     try {
       var carrier = Carrier(
-          db: 'testdb',
-          collection: 'testCollection',
+          db: DB,
+          collection: COLLECTION,
           id: '5cf8a0c16bc831de7f4c9b85',
           data: {
             'name': 'Aubrey St Vincent',
@@ -245,7 +291,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
   Future query() async {
     debugPrint('\n\n💙 💙  getByProperty ....');
     try {
-      var carrier = Carrier(db: 'testdb', collection: 'testCollection', query: {
+      var carrier = Carrier(db: DB, collection: COLLECTION, query: {
         "gt": {"wealth": 9000},
         "eq": {"lastName": "Obama"},
         "and": true,
@@ -296,7 +342,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
   }
 
   GlobalKey<ScaffoldState> _key = GlobalKey();
-  bool isRemote = false;
+  bool isRemote = true;
   void _onSwitchChanged(bool status) {
     debugPrint('onSwitchChanged:  🚼 🚼 $status');
     setState(() {
@@ -512,7 +558,27 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
                       ),
                     ),
                     SizedBox(
-                      height: 40,
+                      height: 20,
+                    ),
+                    isRemote
+                        ? Container(
+                            width: 260,
+                            child: RaisedButton(
+                              onPressed: syncCollection,
+                              elevation: 16,
+                              color: Colors.lime.shade700,
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Text(
+                                  'Sync Collection',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container(),
+                    SizedBox(
+                      height: 20,
                     ),
                   ],
                 ),

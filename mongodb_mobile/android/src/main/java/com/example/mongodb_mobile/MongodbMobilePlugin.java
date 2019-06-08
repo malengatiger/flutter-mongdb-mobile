@@ -19,9 +19,7 @@ import com.mongodb.client.MongoClient;
 
 // Necessary component for working with MongoDB Mobile
 import com.mongodb.stitch.android.services.mongodb.local.LocalMongoDbService;
-import com.mongodb.stitch.android.services.mongodb.remote.RemoteMongoClient;
 import com.mongodb.stitch.core.auth.StitchUserProfile;
-import com.mongodb.stitch.core.services.mongodb.remote.ChangeEvent;
 
 import java.util.Map;
 import java.util.Objects;
@@ -31,8 +29,9 @@ public class MongodbMobilePlugin implements MethodCallHandler {
   /** Plugin registration. */
   private static StitchAppClient client;
   private static MongoClient mobileClient;
-  private static RemoteMongoClient  remoteMongoClient;
-  private static final String TAG = MongodbMobilePlugin.class.getSimpleName(), CHANNEL_NAME = "aftarobot.com/mongo";
+  private static EventChannel eventChannel;
+  private static ChangeEventStreamHandler changeEventStreamHandler;
+  private static final String TAG = MongodbMobilePlugin.class.getSimpleName(), MONGO_CHANGE_EVENTS = "mongo_change_events";
 
 
   private static Registrar mRegistrar;
@@ -40,6 +39,10 @@ public class MongodbMobilePlugin implements MethodCallHandler {
     mRegistrar = registrar;
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "mongodb_mobile");
     channel.setMethodCallHandler(new MongodbMobilePlugin());
+    eventChannel = new EventChannel(mRegistrar.messenger(), MONGO_CHANGE_EVENTS);
+    changeEventStreamHandler = new ChangeEventStreamHandler();
+    eventChannel.setStreamHandler(changeEventStreamHandler);
+    Log.d(TAG, "registerWith:  \uD83D\uDEBC \uD83D\uDEBC  method and event channels established   \uD83D\uDEBC \uD83D\uDEBC ");
 
   }
   
@@ -49,39 +52,6 @@ public class MongodbMobilePlugin implements MethodCallHandler {
     
     try {
       switch (call.method) {
-        case "setListeners":
-          final Map listenerArgs = (Map) call.arguments;
-          EventChannel eventChannel = new EventChannel(mRegistrar.messenger(), CHANNEL_NAME);
-          Log.d(TAG, "onMethodCall: eventChannel obtained: \uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9  eventChannel setStreamHandler: ".concat(eventChannel.toString()) );
-          eventChannel.setStreamHandler(new EventChannel.StreamHandler() {
-            @Override
-            public void onListen(Object o, final EventChannel.EventSink eventSink) {
-              Log.d(TAG, "onListen: \uD83E\uDDE9\uD83E\uDDE9\uD83E\uDDE9  eventChannel listening ...  " + o);
-              try {
-                RemoteDBUtil.setListeners(listenerArgs, new MongoEventListener() {
-                  @Override
-                  public void onChangeEvent(ChangeEvent changeEvent) {
-                    eventSink.success(changeEvent.getFullDocument());
-                  }
-
-                  @Override
-                  public void onError(String message) {
-                    eventSink.error("011", message, "");
-                  }
-                });
-              } catch (Exception e) {
-                Log.e(TAG, "onListen: ", e );
-                result.error("012", e.getMessage(), "");
-              }
-            }
-
-            @Override
-            public void onCancel(Object o) {
-              Log.e(TAG, "eventChannel onCancel: " + o );
-            }
-          });
-
-          break;
         case "query":
           Map queryArgs = (Map) call.arguments;
           Log.d(TAG, "onMethodCall:query:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + queryArgs);
@@ -183,7 +153,7 @@ public class MongodbMobilePlugin implements MethodCallHandler {
           break;
         case "getAll":
           Map getArgs = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:getAll:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + getArgs);
+          Log.d(TAG, "onMethodCall:getAll:  ..... getArgs: \uD83C\uDF3F ☘ ️" + getArgs);
           if (mobileClient != null) {
             Object resultList = LocalDBUtil.getAll(mobileClient, getArgs);
             result.success(resultList);
@@ -203,7 +173,7 @@ public class MongodbMobilePlugin implements MethodCallHandler {
           break;
         case "getOne":
           Map oneArgs = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:getOne:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + oneArgs);
+          Log.d(TAG, "onMethodCall:getOne:  ..... oneArgs: \uD83C\uDF3F ☘ ️" + oneArgs);
           if (mobileClient != null) {
             Object document = LocalDBUtil.getOne(mobileClient, oneArgs);
             result.success(document);
@@ -219,6 +189,15 @@ public class MongodbMobilePlugin implements MethodCallHandler {
                 result.error("009", message, "");
               }
             });
+          }
+          break;
+        case "sync":
+          final Map syncArgs = (Map) call.arguments;
+          Log.d(TAG, "onMethodCall:sync:  ..... syncArgs: \uD83C\uDF3F ☘ ️" + syncArgs);
+          if (mobileClient != null) {
+            result.error("014", "\uD83C\uDF36  Sync not appropriate for \uD83C\uDF36 LOCAL \uD83C\uDF36  database", "");
+          } else {
+            handleSync(result, syncArgs);
           }
           break;
         case "getPlatformVersion":
@@ -246,6 +225,34 @@ public class MongodbMobilePlugin implements MethodCallHandler {
       Log.e(TAG, "onMethodCall: ", e);
       result.error("002", e.getMessage(), "onMethodCall: error of some sort. Houston kinda error :(");
     }
+  }
+
+  private void handleSync(final Result result, final Map syncArgs) {
+
+    RemoteDBUtil.syncCollection(syncArgs, new RemoteDBUtil.SyncListener() {
+
+      @Override
+      public void onChangeEvent(Object changeEvent) {
+
+        if (changeEventStreamHandler.getEventSink() == null) {
+          Log.e(TAG, "onChangeEvent: \uD83D\uDC7F ERROR - \uD83D\uDC7F \uD83D\uDC7F  eventSink inside handler is NULL!" );
+        }  else {
+          Log.d(TAG, "onChangeEvent:  \uD83D\uDEBC \uD83D\uDEBC sending changeEvent to changeEventStreamHandler ... ..... ");
+          changeEventStreamHandler.send(changeEvent);
+        }
+
+      }
+
+      @Override
+      public void onSyncCreated() {
+        result.success(syncArgs.get("collection") + " has remote MongoDB Atlas sync set up!  \uD83D\uDEBC \uD83D\uDEBC ");
+      }
+
+      @Override
+      public void onError(String message) {
+        result.error("015", message, "");
+      }
+    });
   }
 
   private void setupDatabase(Result result, String appID, String type) {
@@ -280,6 +287,7 @@ public class MongodbMobilePlugin implements MethodCallHandler {
 
     Log.d(TAG, "\nsetupAtlasDatabase: ....... starting anon  auth ...  \uD83C\uDF38  \uD83C\uDF38  \uD83C\uDF38 ");
     try {
+      mobileClient = null;
       RemoteDBUtil.anonymousAuth( appID, new MongoAuthListener() {
         @Override
         public void onAuth(StitchUserProfile userProfile) {

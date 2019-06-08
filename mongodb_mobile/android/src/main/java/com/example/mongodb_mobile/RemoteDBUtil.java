@@ -1,13 +1,15 @@
 package com.example.mongodb_mobile;
 
+import android.database.CursorJoiner;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
+import com.mongodb.Block;
 import com.mongodb.client.model.Updates;
 import com.mongodb.stitch.android.core.Stitch;
 import com.mongodb.stitch.android.core.StitchAppClient;
@@ -22,8 +24,6 @@ import com.mongodb.stitch.core.auth.providers.userpassword.UserPasswordCredentia
 import com.mongodb.stitch.core.services.mongodb.remote.ChangeEvent;
 import com.mongodb.stitch.core.services.mongodb.remote.ExceptionListener;
 import com.mongodb.stitch.core.services.mongodb.remote.RemoteInsertOneResult;
-import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateOptions;
-import com.mongodb.stitch.core.services.mongodb.remote.RemoteUpdateResult;
 import com.mongodb.stitch.core.services.mongodb.remote.sync.ChangeEventListener;
 import com.mongodb.stitch.core.services.mongodb.remote.sync.DefaultSyncConflictResolvers;
 
@@ -34,6 +34,7 @@ import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -257,7 +258,7 @@ class RemoteDBUtil {
             @Override
             public void onComplete(final Task<RemoteInsertOneResult> task) {
                 if (task.isSuccessful()) {
-                    String id = task.getResult().getInsertedId().toString();
+                    String id = task.getResult().getInsertedId().asObjectId().getValue().toString();
                     Log.d(TAG, "onComplete: \uD83C\uDF3F ☘ \uD83C\uDF3F ☘ ".concat("Document inserted, id: ")
                             .concat(id).concat("  \uD83E\uDDE1 \uD83D\uDC9B \uD83D\uDC9A \uD83D\uDC99 \uD83D\uDC9C "));
                     remoteInsertListener.onInsert(id);
@@ -298,41 +299,61 @@ class RemoteDBUtil {
 
     }
 
+    static int cnt = 0;
     static void getAll(Map carrier, final RemoteGetAllListener remoteGetAllListener) {
         Log.d(TAG, "\n🍎 getAll: get all documents in collection: " + carrier.toString() + "\n\n");
-        String db = (String) carrier.get("db");
-        String collectionName = (String) carrier.get("collection");
-
-        assert collectionName != null;
-        assert db != null;
 
         RemoteMongoCollection collection = getRemoteCollection(carrier);
-        Task<RemoteMongoCursor> task = collection.sync().find().iterator();
-        task.addOnSuccessListener(new OnSuccessListener<RemoteMongoCursor>() {
+        final List<Object> list = new ArrayList<>();
+        SyncFindIterable iterable =  collection.sync().find();
+        cnt = 0;
+        iterable.forEach(new Block() {
+
             @Override
-            public void onSuccess(RemoteMongoCursor remoteMongoCursor) {
-                List<Object> list = new ArrayList<>();
-                Task task1 = remoteMongoCursor.hasNext();
-                if (task1.isSuccessful()) {
-                    while (remoteMongoCursor.hasNext().isSuccessful()) {
-                        list.add(remoteMongoCursor.next());
-                    }
-                    Log.d(TAG, "getAll: 🍎 🍎 documents found: " + list.size() + "  🍎 🍎 🍎 🍎 \n");
+            public void apply(Object o) {
+                cnt++;
+                Log.d(TAG, "\uD83E\uDDE9 \uD83E\uDDE9 apply: #" + cnt + " - " + o);
+                list.add(o.toString());
+            }
+        }).addOnCompleteListener(new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                Log.d(TAG, "\uD83E\uDDE9 getAll: 🍎 🍎 🍎 🍎 documents found after iteration: "
+                        + list.size() + ", sending to listener ");
+                if (task.isSuccessful()) {
                     remoteGetAllListener.onGetAll(list);
                 } else {
-                    remoteGetAllListener.onError(task1.getResult().toString());
+                    remoteGetAllListener.onError(task.getException().getMessage());
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@android.support.annotation.NonNull Exception e) {
-                remoteGetAllListener.onError(e.getMessage());
             }
         });
 
 
     }
 
+    static void syncCollection(final Map carrier, final SyncListener syncListener)  {
+        RemoteMongoCollection collection = getRemoteCollection(carrier);
+        collection.sync().configure(DefaultSyncConflictResolvers.remoteWins(), new ChangeEventListener() {
+            @Override 
+            public void onEvent(BsonValue documentId, ChangeEvent event) {
+                        Log.d(TAG, "\n\uD83D\uDEBC \uD83D\uDEBC onEvent: \uD83D\uDEBC operationType: "
+                                + event.getOperationType().name() + " documentID: "
+                                + documentId.toString() + "  \uD83E\uDDE9\uD83E\uDDE9  doc: " + event.getFullDocument());
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("document", event.toBsonDocument().toJson());
+                        map.put("operationType", event.getOperationType().name());
+                        syncListener.onChangeEvent(map);
+                    }
+                }, new ExceptionListener() {
+                    @Override
+                    public void onError(BsonValue documentId, Exception error) {
+                        Log.e(TAG, "onError: \uD83D\uDEBC \uD83D\uDEBC \uD83D\uDEBC documentId: " + documentId, error );
+                        syncListener.onError(error.getMessage());
+                    }
+                });
+        Log.d(TAG, "syncCollection: \uD83D\uDC8E \uD83D\uDC8E \uD83D\uDC8E sync set up for "
+                +  carrier.get("collection"));
+    }
     static void delete(Map carrier, final RemoteDeleteListener remoteDeleteListener) {
         Log.d(TAG, "\uD83C\uDF3F  ✂️️ delete:  ✂️ document: " + carrier.toString());
         String id = (String) carrier.get("id");
@@ -362,8 +383,12 @@ class RemoteDBUtil {
         String colName = (String) carrier.get("collection");
         assert db != null;
         assert colName != null;
+
         RemoteMongoCollection collection = remoteMongoClient.getDatabase(db).getCollection(colName);
-        Log.d(TAG, "getRemoteCollection: collection:  \uD83C\uDFC8 ".concat(collection.getNamespace().getFullName()).concat("  \uD83C\uDFC8 "));
+        Log.d(TAG, "\n\ngetRemoteCollection: collection:  \uD83C\uDFC8 ".concat(collection.getNamespace()
+                .getFullName()).concat("  \uD83C\uDFC8 "));
+
+
         return collection;
 
     }
@@ -409,9 +434,9 @@ class RemoteDBUtil {
 
         void onError(String message);
     }
-    public interface SetAppListener {
-        void onSetup();
-
+    public interface SyncListener {
+        void onChangeEvent(Object changeEvent);
+        void onSyncCreated();
         void onError(String message);
     }
 
