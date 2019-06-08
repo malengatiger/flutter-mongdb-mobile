@@ -21,6 +21,9 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.stitch.android.services.mongodb.local.LocalMongoDbService;
 import com.mongodb.stitch.core.auth.StitchUserProfile;
 
+import org.bson.Document;
+
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -39,6 +42,7 @@ public class MongodbMobilePlugin implements MethodCallHandler {
     mRegistrar = registrar;
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "mongodb_mobile");
     channel.setMethodCallHandler(new MongodbMobilePlugin());
+    Log.d(TAG, "registerWith:  \uD83D\uDEBC \uD83D\uDEBC creating event channel ......");
     eventChannel = new EventChannel(mRegistrar.messenger(), MONGO_CHANGE_EVENTS);
     changeEventStreamHandler = new ChangeEventStreamHandler();
     eventChannel.setStreamHandler(changeEventStreamHandler);
@@ -232,20 +236,26 @@ public class MongodbMobilePlugin implements MethodCallHandler {
     RemoteDBUtil.syncCollection(syncArgs, new RemoteDBUtil.SyncListener() {
 
       @Override
-      public void onChangeEvent(Object changeEvent) {
+      public void onChangeEvent(Object changeEvent, Object document) {
 
         if (changeEventStreamHandler.getEventSink() == null) {
-          Log.e(TAG, "onChangeEvent: \uD83D\uDC7F ERROR - \uD83D\uDC7F \uD83D\uDC7F  eventSink inside handler is NULL!" );
+          Log.e(TAG, "\uD83E\uDDA0 \uD83E\uDDA0 onChangeEvent: \uD83D\uDC7F ERROR - \uD83D\uDC7F \uD83D\uDC7F  eventSink inside handler is NULL!" );
         }  else {
-          Log.d(TAG, "onChangeEvent:  \uD83D\uDEBC \uD83D\uDEBC sending changeEvent to changeEventStreamHandler ... ..... ");
-          changeEventStreamHandler.send(changeEvent);
+          Log.d(TAG, "\uD83E\uDDA0 \uD83E\uDDA0 onChangeEvent:  \uD83D\uDEBC \uD83D\uDEBC sending changeEvent to changeEventStreamHandler ... ..... ");
+          Map<String, Object> map = new HashMap<>();
+          Document m = (Document)document;
+          map.put("document", m.toJson());
+          map.put("changeEvent", changeEvent);
+          changeEventStreamHandler.getEventSink().success(map);
+          Log.d(TAG, "\uD83E\uDDA0 \uD83E\uDDA0 onChangeEvent: \uD83C\uDF3A \uD83C\uDF3A  event sink has accepted a change event");
         }
 
       }
 
       @Override
       public void onSyncCreated() {
-        result.success(syncArgs.get("collection") + " has remote MongoDB Atlas sync set up!  \uD83D\uDEBC \uD83D\uDEBC ");
+        Log.d(TAG, "onSyncCreated: \uD83D\uDCA7 \uD83D\uDCA7 \uD83D\uDCA7 \uD83D\uDCA7 \uD83D\uDCA7");
+        result.success(syncArgs.get("collection") + " has \uD83E\uDDA0 \uD83E\uDDA0  MongoDB Atlas sync set up!  \uD83D\uDEBC \uD83D\uDEBC ");
       }
 
       @Override

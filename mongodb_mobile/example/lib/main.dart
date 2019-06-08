@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -25,6 +26,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
   void initState() {
     super.initState();
     setMongoAtlasAppID();
+    listenToMongoChangeEvents();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -303,6 +305,22 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
     }
+  }
+
+  void listenToMongoChangeEvents() {
+    // Consuming events on the Dart side.
+    const channel = EventChannel(MongodbMobile.MONGO_CHANGE_EVENTS);
+    channel.receiveBroadcastStream().listen((dynamic event) {
+      print(
+          '\n\n🌺 🌺 🌺 Received change event from Mongo: 🦠  $event   🦠 🦠 🦠 \n\n');
+      var changeEvent = json.decode(event['changeEvent']);
+      var document = json.decode(event['document']);
+      print(changeEvent);
+      print(document);
+    }, onError: (dynamic error) {
+      print('Received error: ${error.message}');
+    });
+    print('🦠 🦠 🦠 Listening to Channel events for 🦠  Mongo Change Events');
   }
 
   void showSnackbar(

@@ -10,7 +10,8 @@ class MongodbMobile {
   static const String LOCAL_DATABASE = "local",
       ATLAS_DATABASE = "atlas",
       CARRIER_DATABASE = "db",
-      CARRIER_COLLECTION = "collection";
+      CARRIER_COLLECTION = "collection",
+      MONGO_CHANGE_EVENTS = 'mongo_change_events';
 
   static Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');

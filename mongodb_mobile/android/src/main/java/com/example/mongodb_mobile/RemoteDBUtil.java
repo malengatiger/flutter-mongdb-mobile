@@ -324,10 +324,8 @@ class RemoteDBUtil {
                         Log.d(TAG, "\n\uD83D\uDEBC \uD83D\uDEBC onEvent: \uD83D\uDEBC operationType: "
                                 + event.getOperationType().name() + " documentID: "
                                 + documentId.toString() + "  \uD83E\uDDE9\uD83E\uDDE9  doc: " + event.getFullDocument());
-                        Map<String, Object> map = new HashMap<>();
-                        map.put("document", event.toBsonDocument().toJson());
-                        map.put("operationType", event.getOperationType().name());
-                        syncListener.onChangeEvent(map);
+
+                        syncListener.onChangeEvent(event.toBsonDocument().toJson(), event.getFullDocument());
                     }
                 }, new ExceptionListener() {
                     @Override
@@ -338,6 +336,7 @@ class RemoteDBUtil {
                 });
         Log.d(TAG, "syncCollection: \uD83D\uDC8E \uD83D\uDC8E \uD83D\uDC8E sync set up for "
                 +  carrier.get("collection"));
+        syncListener.onSyncCreated();
     }
     static void delete(Map carrier, final RemoteDeleteListener remoteDeleteListener) {
         Log.d(TAG, "\uD83C\uDF3F  ✂️️ delete:  ✂️ document: " + carrier.toString());
@@ -423,7 +422,7 @@ class RemoteDBUtil {
         void onError(String message);
     }
     public interface SyncListener {
-        void onChangeEvent(Object changeEvent);
+        void onChangeEvent(Object changeEvent, Object document);
         void onSyncCreated();
         void onError(String message);
     }
