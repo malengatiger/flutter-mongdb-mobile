@@ -134,7 +134,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       debugPrint(
           '\n\n🧩🧩🧩🧩🧩🧩  _MyAppState: syncCollection: 🧩🧩🧩  🍎 result: $result\n\n\n');
       showSnackbar(
-          message: ' 🧩🧩🧩  Document inserted',
+          message: ' 🧩🧩🧩 Mobile - Atlas Sync started',
           scaffoldKey: _key,
           backgroundColor: Colors.black,
           textColor: Colors.white);
@@ -156,12 +156,12 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
       var carrier = Carrier(
           db: DB,
           collection: COLLECTION,
-          id: "5cfbb82e6bc8314a900082bd",
+          id: "5cfc15746bc8314e89118348",
           arrayName: "musicTracks",
           arrayKey: new DateTime.now().millisecondsSinceEpoch.toString(),
           data: {
             'artist': 'Michael Jackson',
-            'track': 'Earth Song',
+            'track': 'Dirty Diana',
             'date': new DateTime.now().toIso8601String(),
           });
       result = await MongodbMobile.addToArray(carrier);
@@ -307,9 +307,10 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
     }
   }
 
+  EventChannel channel = EventChannel(MongodbMobile.MONGO_CHANGE_EVENTS);
   void listenToMongoChangeEvents() {
     // Consuming events on the Dart side.
-    const channel = EventChannel(MongodbMobile.MONGO_CHANGE_EVENTS);
+
     channel.receiveBroadcastStream().listen((dynamic event) {
       print(
           '\n\n🌺 🌺 🌺 Received change event from Mongo: 🦠  $event   🦠 🦠 🦠 \n\n');
@@ -378,7 +379,7 @@ class _MongoExampleAppState extends State<MongoExampleApp> {
             child: Padding(
               padding: EdgeInsets.all(12),
               child: Text(
-                'MongoDB',
+                'MongoDB Plugin',
                 style: TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 20,
