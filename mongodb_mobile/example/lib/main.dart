@@ -386,14 +386,7 @@ class _MongoExamplePageState extends State<MongoExamplePage> {
     }
   }
 
-  void _onConfigSwitchChanged(bool status) {
-    debugPrint('_onConfigSwitchChanged:  🚼 🚼   $status');
-    Navigator.pop(context);
-    setState(() {
-      isRemote = status;
-    });
-    _openConfig();
-  }
+
   setSelectedRadio(int val) {
     setState(() {
       selectedRadio = val;
@@ -453,21 +446,7 @@ class _MongoExamplePageState extends State<MongoExamplePage> {
                 ),
                 Row(
                   children: <Widget>[
-                    Text(
-                      'MODE',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(
-                      width: 12,
-                    ),
-                    Switch(
-                      onChanged: _onSwitchChanged,
-                      activeColor: Colors.blue.shade800,
-                      value: isRemote,
-                    ),
-                    SizedBox(
-                      width: 12,
-                    ),
+
                     Text(
                       isRemote ? 'MongoDB Atlas' : 'Local Database',
                       style: TextStyle(

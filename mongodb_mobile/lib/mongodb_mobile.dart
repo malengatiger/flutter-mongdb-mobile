@@ -26,7 +26,7 @@ class MongodbMobile {
     return '🧩🧩🧩 appID has been set';
   }
 
-  /// insert one document intp collection
+  /// start atlas sync collection
   static Future sync(Carrier carrier) async {
     var res = await _channel.invokeMethod('sync', carrier.toJson());
     return res;
@@ -56,7 +56,7 @@ class MongodbMobile {
     return res;
   }
 
-  /// replace one document in collection
+  /// add to nested array in document
   static Future addToArray(Carrier carrier) async {
     var res = await _channel.invokeMethod('addToArray', carrier.toJson());
     return res;
