@@ -9,3 +9,15 @@
 ## 0.0.3
 
 *  Removed @NotNull annotations causing runtime issue
+
+## 0.0.4
+
+*  Added mobile to atlas sync 🍎 🍎 🍎
+
+## 0.0.5
+
+*  💙   Fixed query filter bug    💙 
+
+## 0.0.6
+
+*  💙   Added local query    💙 

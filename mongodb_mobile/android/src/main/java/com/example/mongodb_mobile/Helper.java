@@ -14,7 +14,16 @@ import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.gt;
 import static com.mongodb.client.model.Filters.lt;
 import static com.mongodb.client.model.Filters.or;
+/*
+carrier: {data=null, query={
+    position={$near={$geometry={
+        coordinates=[27.8525642, -25.7605472],
+        type=Point},
+    $maxDistance=20000}}},
 
+    arrayKey=null, arrayName=null, collection=newLandmarks, id=null, fields=null, db=arLocalDBx3}
+
+ */
 class Helper {
     private static final String TAG = Helper.class.getSimpleName();
 
@@ -23,6 +32,7 @@ class Helper {
 
         Map query = (Map) carrier.get("query");
         assert query != null;
+        Log.d(TAG, "getQueryFilter: " + query.toString());
         List<Bson> filters = new ArrayList<>();
         boolean isAnd = false;
         boolean isOr = false;
@@ -65,15 +75,20 @@ class Helper {
                     }
                     filters.add(filter3);
                     break;
+
             }
 
         }
         Bson mFilter = null;
-        if (isAnd) {
-            mFilter = and(filters);
-        }
-        if (isOr) {
-            mFilter = or(filters);
+        if (filters.size() == 1) {
+            mFilter = filters.get(0);
+        } else {
+            if (isAnd) {
+                mFilter = and(filters);
+            }
+            if (isOr) {
+                mFilter = or(filters);
+            }
         }
         Log.d(TAG, "❤️  ❤️   ❤️ query: mFilter:  ❤️  ❤️ " + mFilter);
         assert mFilter != null;

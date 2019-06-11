@@ -29,66 +29,48 @@ class MongodbMobile {
   /// insert one document intp collection
   static Future sync(Carrier carrier) async {
     var res = await _channel.invokeMethod('sync', carrier.toJson());
-    debugPrint(
-        '\n\n🍎 MongodbMobile: 🍀  sync started? 🧩🧩🧩🧩  $res  🧩🧩🧩🧩');
     return res;
   }
 
   /// insert one document intp collection
   static Future insert(Carrier carrier) async {
     var res = await _channel.invokeMethod('insert', carrier.toJson());
-    debugPrint(
-        '\n\n🍎 MongodbMobile: 🍀  document inserted, result: 🧩🧩🧩🧩🧩 id::  $res  🧩🧩🧩🧩');
     return res;
   }
 
   /// delete one document from collection
   static Future delete(Carrier carrier) async {
     var res = await _channel.invokeMethod('delete', carrier.toJson());
-    debugPrint(
-        '\n\n🍎 MongodbMobile: 🍀  document deleted, result: 🧩🧩🧩🧩🧩 :  $res  🧩🧩🧩🧩');
     return res;
   }
 
   /// find one document from collection
   static Future getOne(Carrier carrier) async {
     var res = await _channel.invokeMethod('getOne', carrier.toJson());
-    debugPrint(
-        '\n\n🍎 MongodbMobile: 🍀  getOne , result: 🧩🧩🧩🧩🧩 :  $res  🧩🧩🧩🧩');
     return res;
   }
 
   /// replace one document in collection
   static Future update(Carrier carrier) async {
     var res = await _channel.invokeMethod('replace', carrier.toJson());
-    debugPrint(
-        '\n\n🍎 MongodbMobile: 🍀  document replaced, result: 🧩🧩🧩🧩🧩 :  $res  🧩🧩🧩🧩');
     return res;
   }
 
   /// replace one document in collection
   static Future addToArray(Carrier carrier) async {
     var res = await _channel.invokeMethod('addToArray', carrier.toJson());
-    debugPrint(
-        '\n\n🍎 MongodbMobile: 🍀  element added to array, result: 🧩🧩🧩🧩🧩 :  $res  🧩🧩🧩🧩');
     return res;
   }
 
   /// getAll - get all documents from collection
   static Future getAll(Carrier carrier) async {
     var res = await _channel.invokeMethod('getAll', carrier.toJson());
-    debugPrint(
-        '\n\n🍎 MongodbMobile: 🍀  records retrieved, result from call: \n\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩 '
-        '\n\n$res\n\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩\n\n');
     return res;
   }
 
   /// query - get documents based on properties
   static Future query(Carrier carrier) async {
     var res = await _channel.invokeMethod('query', carrier.toJson());
-    debugPrint(
-        '\n\n🍎 MongodbMobile: 🍀  query records retrieved, result from call: \n\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩 '
-        '\n\n$res\n\n🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩🧩\n');
     return res;
   }
 }

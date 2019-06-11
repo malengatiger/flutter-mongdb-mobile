@@ -1,6 +1,5 @@
 package com.example.mongodb_mobile;
 
-import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -82,7 +81,7 @@ class RemoteDBUtil {
         client.getAuth().loginWithCredential(new AnonymousCredential())
                 .addOnCompleteListener(new OnCompleteListener<StitchUser>() {
             @Override
-            public void onComplete(@NonNull Task<StitchUser> task) {
+            public void onComplete(Task<StitchUser> task) {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "Successfully logged in as user  🍎 🍎 : " + task.getResult().getId());
                     stitchUserProfile = task.getResult().getProfile();
@@ -154,7 +153,7 @@ class RemoteDBUtil {
             }
         }).addOnCompleteListener(new OnCompleteListener() {
             @Override
-            public void onComplete(@NonNull Task task) {
+            public void onComplete( Task task) {
                 Log.d(TAG, "\uD83E\uDDE9 query: 🍎 🍎 🍎 🍎 documents found after query: "
                         + list.size() + ", sending to listener ");
                 if (task.isSuccessful()) {
@@ -291,7 +290,7 @@ class RemoteDBUtil {
             }
         }).addOnCompleteListener(new OnCompleteListener() {
             @Override
-            public void onComplete(@NonNull Task task) {
+            public void onComplete( Task task) {
                 Log.d(TAG, "\uD83E\uDDE9 getOne: 🍎 🍎 🍎 🍎 documents found after iteration: "
                         + list.size() + ", sending to listener ");
                 if (task.isSuccessful()) {
@@ -325,7 +324,7 @@ class RemoteDBUtil {
             }
         }).addOnCompleteListener(new OnCompleteListener() {
             @Override
-            public void onComplete(@NonNull Task task) {
+            public void onComplete( Task task) {
                 Log.d(TAG, "\uD83E\uDDE9 getAll: 🍎 🍎 🍎 🍎 documents found after iteration: "
                         + list.size() + ", sending to listener ");
                 if (task.isSuccessful()) {
@@ -341,6 +340,7 @@ class RemoteDBUtil {
 
     static void syncCollection(final Map carrier, final SyncListener syncListener)  {
         RemoteMongoCollection collection = getRemoteCollection(carrier);
+
         collection.sync().configure(DefaultSyncConflictResolvers.remoteWins(), new ChangeEventListener() {
             @Override 
             public void onEvent(BsonValue documentId, ChangeEvent event) {
@@ -379,7 +379,7 @@ class RemoteDBUtil {
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@androidx.annotation.NonNull Exception e) {
+            public void onFailure(Exception e) {
                 Log.e(TAG, "onFailure: delete failed", e);
                 remoteDeleteListener.onError(e.getMessage());
 

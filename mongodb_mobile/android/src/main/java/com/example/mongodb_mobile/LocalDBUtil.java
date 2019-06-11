@@ -101,13 +101,10 @@ public class LocalDBUtil {
                 .find(mFilter);
         MongoCursor cursor = mongoIterable.iterator();
         List<Object> list = new ArrayList<>();
-        int cnt = 0;
+
         while (cursor.hasNext()) {
             Document doc = (Document) cursor.next();
             list.add(doc.toJson());
-            cnt++;
-            Log.d(TAG, "🍎 getAll: doc: \uD83D\uDC99  #"+cnt+"  \uD83C\uDF6F  \uD83C\uDF6F  " + doc.toJson());
-
         }
         Log.d(TAG, "query: 🍎 🍎 documents found: " + list.size()  +"  🍎 🍎 🍎 🍎 \n");
         return list;
@@ -142,14 +139,12 @@ public class LocalDBUtil {
         MongoCollection<Document> collection = client.getDatabase(db).getCollection(collectionName);
         List<Object> list = new ArrayList<>();
         Log.d(TAG, "\ngetAll: documents found: ☘ ️"  + collection.countDocuments() + " 🍎 🍎\n");
-        int cnt = 0;
+
         try (MongoCursor<Document> cur = collection.find().iterator()) {
             while (cur.hasNext()) {
                 Document doc = cur.next();
                 list.add(doc.toJson());
-                cnt++;
-                Log.d(TAG, "🍎 getAll: doc: \uD83D\uDC99  #"+cnt+"  \uD83C\uDF6F  \uD83C\uDF6F  " + doc.toJson());
-            }
+             }
             Log.d(TAG, "getAll: returning  \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 \uD83D\uDD06 " + list.size() + " documents");
             return list;
         }
