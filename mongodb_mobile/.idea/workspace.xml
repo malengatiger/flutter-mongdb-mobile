@@ -2,22 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5679190e-33b7-41f5-93c6-75f71356f2e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/android/.idea/markdown-navigator/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/lib/configurator.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/lib/slide_right.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/generated/i18n.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/values/strings_en.arb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lib/util.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/Helper.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/Helper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/LocalDBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/LocalDBUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/MongodbMobilePlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/RemoteDBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/example/mongodb_mobile/RemoteDBUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/carrier.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/carrier.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/mongodb_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mongodb_mobile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
@@ -39,41 +36,98 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.29154727">
+    <splitter split-orientation="horizontal" split-proportion="0.6277483">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/lib/mongodb_mobile.dart">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="460">
-                  <caret line="76" selection-start-line="76" selection-end-line="76" />
+                <state relative-caret-position="448">
+                  <caret line="56" column="3" selection-start-line="56" selection-start-column="3" selection-end-line="56" selection-end-column="3" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="16">
-                  <caret line="419" selection-start-line="419" selection-end-line="419" />
+                <state relative-caret-position="452">
+                  <caret line="404" column="42" lean-forward="true" selection-start-line="404" selection-start-column="42" selection-end-line="404" selection-end-column="45" />
+                  <folding>
+                    <element signature="e#0#20#0" expanded="true" />
+                    <element signature="e#1311#2211#0" />
+                    <element signature="e#2348#3219#0" />
+                    <element signature="e#8636#9786#0" />
+                    <element signature="e#9847#10789#0" />
+                    <element signature="e#12149#13106#0" />
+                    <element signature="e#14815#17478#0" />
+                    <element signature="e#18805#19417#0" />
+                    <element signature="e#19449#19510#0" />
+                    <element signature="e#19543#20156#0" />
+                    <element signature="e#20188#20249#0" />
+                    <element signature="e#20282#20885#0" />
+                    <element signature="e#20917#20978#0" />
+                    <element signature="e#21011#21611#0" />
+                    <element signature="e#21643#21704#0" />
+                    <element signature="e#21737#22346#0" />
+                    <element signature="e#22378#22439#0" />
+                    <element signature="e#22472#23075#0" />
+                    <element signature="e#23107#23168#0" />
+                    <element signature="e#23201#23811#0" />
+                    <element signature="e#23843#23904#0" />
+                    <element signature="e#23974#24582#0" />
+                    <element signature="e#24654#24715#0" />
+                    <element signature="e#25290#27399#0" />
+                    <element signature="n#!!block;n#Config#0" />
+                    <element signature="n#!!block;n#_ConfigState#0" />
+                    <element signature="e#28562#28599#0" />
+                    <element signature="e#28854#28891#0" />
+                    <element signature="e#29199#29438#0" />
+                    <element signature="e#31045#31295#0" />
+                    <element signature="e#32703#32917#0" />
+                    <element signature="e#31586#31829#0" />
+                    <element signature="e#31864#32072#0" />
+                    <element signature="e#32104#32330#0" />
+                    <element signature="e#33726#33921#0" />
+                    <element signature="e#32592#32839#0" />
+                    <element signature="e#32874#33083#0" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/example/lib/slide_right.dart">
+            <entry file="file://$PROJECT_DIR$/example/pubspec.yaml">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="352">
-                  <caret line="22" selection-start-line="22" selection-end-line="22" />
+                <state relative-caret-position="176">
+                  <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
                 </state>
               </provider>
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/example/lib/configurator.dart">
+            <entry file="file://$PROJECT_DIR$/example/lib/util.dart">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="288">
-                  <caret line="18" selection-start-line="18" selection-end-line="18" />
+                <state relative-caret-position="208">
+                  <caret line="46" selection-start-line="1" selection-end-line="46" />
+                  <folding>
+                    <element signature="e#0#41#0" expanded="true" />
+                    <element signature="e#144#389#0" />
+                    <element signature="e#426#640#0" />
+                    <element signature="e#680#920#0" />
+                    <element signature="e#955#1163#0" />
+                    <element signature="e#1195#1421#0" />
+                    <element signature="e#1449#1644#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="192">
+                  <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
                 </state>
               </provider>
             </entry>
@@ -91,25 +145,16 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
               <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
                 <state split_layout="SPLIT">
-                  <first_editor relative-caret-position="212">
-                    <caret line="19" selection-start-line="19" selection-end-line="19" />
+                  <first_editor relative-caret-position="288">
+                    <caret line="18" column="32" lean-forward="true" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="35" />
                   </first_editor>
                   <second_editor>
                     <markdownNavigatorState />
                   </second_editor>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/pubspec.yaml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="32">
-                  <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
                 </state>
               </provider>
             </entry>
@@ -133,12 +178,14 @@
       <find>'testCollection'</find>
       <find>isRemote</find>
       <find>height: 16</find>
+      <find>Carrier(databaseName</find>
     </findStrings>
     <replaceStrings>
       <replace>20</replace>
       <replace>260</replace>
       <replace>COLLECTION</replace>
       <replace>height: 12</replace>
+      <replace>Carrier(db</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -157,26 +204,27 @@
         <option value="$PROJECT_DIR$/example/test/widget_test.dart" />
         <option value="$PROJECT_DIR$/test/mongodb_mobile_test.dart" />
         <option value="$PROJECT_DIR$/emojis.txt" />
-        <option value="$PROJECT_DIR$/lib/carrier.dart" />
         <option value="$PROJECT_DIR$/example/lib/GitLink.dart" />
         <option value="$PROJECT_DIR$/example/lib/gitlink.dart" />
         <option value="$PROJECT_DIR$/example/lib/main2.dart" />
         <option value="$PROJECT_DIR$/example/android/app/build.gradle" />
-        <option value="$PROJECT_DIR$/example/pubspec.yaml" />
         <option value="$PROJECT_DIR$/example/lib/configurator.dart" />
         <option value="$PROJECT_DIR$/example/lib/slide_right.dart" />
         <option value="$PROJECT_DIR$/example/android/build.gradle" />
-        <option value="$PROJECT_DIR$/example/lib/main.dart" />
-        <option value="$PROJECT_DIR$/CHANGELOG.md" />
+        <option value="$PROJECT_DIR$/lib/carrier.dart" />
+        <option value="$PROJECT_DIR$/example/pubspec.yaml" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
+        <option value="$PROJECT_DIR$/example/lib/util.dart" />
         <option value="$PROJECT_DIR$/lib/mongodb_mobile.dart" />
+        <option value="$PROJECT_DIR$/CHANGELOG.md" />
+        <option value="$PROJECT_DIR$/example/lib/main.dart" />
       </list>
     </option>
   </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="dRiOLmqq" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-1920" />
     <option name="y" value="-37" />
     <option name="width" value="1680" />
@@ -205,6 +253,22 @@
               <item name="mongodb_mobile" type="462c0819:PsiDirectoryNode" />
               <item name="android" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="mongodb_mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mongodb_mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mongodb_mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mongodb_mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mongodb_mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mongodb_mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -215,15 +279,16 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/example/lib" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.smartKeys" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/example/lib" />
       <recent name="$PROJECT_DIR$/lib" />
     </key>
   </component>
@@ -383,7 +448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1560026233265</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary=" 💙 cleaned up example UI">
+      <created>1560270961049</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1560270961049</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView">
@@ -396,22 +468,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1920" y="-37" width="1680" height="988" extended-state="1" />
+    <frame x="-1920" y="-37" width="1680" height="988" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.73063976" visible="true" weight="0.14774115" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7300178" visible="true" weight="0.1947497" />
       <window_info id="Designer" order="1" />
       <window_info id="Build Variants" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Captures" order="6" sideWeight="0.50103736" side_tool="true" weight="0.28948948" />
-      <window_info id="Structure" order="7" sideWeight="0.26936027" side_tool="true" visible="true" weight="0.14774115" />
+      <window_info id="Structure" order="7" sideWeight="0.26998225" side_tool="true" visible="true" weight="0.1947497" />
       <window_info id="UI Designer" order="8" />
-      <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.3297062" />
-      <window_info active="true" anchor="bottom" id="Run" order="1" sideWeight="0.4994641" visible="true" weight="0.3310811" />
+      <window_info anchor="bottom" id="Dart Analysis" order="0" weight="0.32882884" />
+      <window_info active="true" anchor="bottom" id="Run" order="1" sideWeight="0.9175824" visible="true" weight="0.365991" />
       <window_info anchor="bottom" id="Docker" order="2" />
       <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.5005359" side_tool="true" weight="0.56365615" />
+      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.082417585" side_tool="true" visible="true" weight="0.365991" />
       <window_info anchor="bottom" id="Logcat" order="5" />
       <window_info anchor="bottom" id="Flutter Performance" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" />
@@ -487,15 +560,21 @@
     <MESSAGE value="   added query sync feature     " />
     <MESSAGE value=" cleaned up ..." />
     <MESSAGE value=" CHECKPOINT CHARLIE !!!     basic functionality for Android  " />
-    <option name="LAST_COMMIT_MESSAGE" value=" CHECKPOINT CHARLIE !!!     basic functionality for Android  " />
+    <MESSAGE value="  cleaned up example UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="  cleaned up example UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="Dart">
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
-          <line>79</line>
+          <line>110</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
+          <line>495</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -561,13 +640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/carrier.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/gitlink.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
@@ -621,17 +693,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/pubspec.yaml">
+    <entry file="file://$PROJECT_DIR$/emojis.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/lib/slide_right.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="273">
+          <caret line="63" column="10" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -642,25 +707,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
+    <entry file="file://$PROJECT_DIR$/example/lib/slide_right.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="419" selection-start-line="419" selection-end-line="419" />
+        <state relative-caret-position="352">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/emojis.txt">
+    <entry file="file://$PROJECT_DIR$/lib/carrier.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="63" column="10" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="12" />
+        <state relative-caret-position="288">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/lib/util.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="46" selection-start-line="1" selection-end-line="46" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#144#389#0" />
+            <element signature="e#426#640#0" />
+            <element signature="e#680#920#0" />
+            <element signature="e#955#1163#0" />
+            <element signature="e#1195#1421#0" />
+            <element signature="e#1449#1644#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/mongodb_mobile.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="56" column="3" selection-start-line="56" selection-start-column="3" selection-end-line="56" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="212">
-            <caret line="19" selection-start-line="19" selection-end-line="19" />
+          <first_editor relative-caret-position="288">
+            <caret line="18" column="32" lean-forward="true" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="35" />
           </first_editor>
           <second_editor>
             <markdownNavigatorState />
@@ -668,17 +770,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mongodb_mobile.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        <state relative-caret-position="452">
+          <caret line="404" column="42" lean-forward="true" selection-start-line="404" selection-start-column="42" selection-end-line="404" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#1311#2211#0" />
+            <element signature="e#2348#3219#0" />
+            <element signature="e#8636#9786#0" />
+            <element signature="e#9847#10789#0" />
+            <element signature="e#12149#13106#0" />
+            <element signature="e#14815#17478#0" />
+            <element signature="e#18805#19417#0" />
+            <element signature="e#19449#19510#0" />
+            <element signature="e#19543#20156#0" />
+            <element signature="e#20188#20249#0" />
+            <element signature="e#20282#20885#0" />
+            <element signature="e#20917#20978#0" />
+            <element signature="e#21011#21611#0" />
+            <element signature="e#21643#21704#0" />
+            <element signature="e#21737#22346#0" />
+            <element signature="e#22378#22439#0" />
+            <element signature="e#22472#23075#0" />
+            <element signature="e#23107#23168#0" />
+            <element signature="e#23201#23811#0" />
+            <element signature="e#23843#23904#0" />
+            <element signature="e#23974#24582#0" />
+            <element signature="e#24654#24715#0" />
+            <element signature="e#25290#27399#0" />
+            <element signature="n#!!block;n#Config#0" />
+            <element signature="n#!!block;n#_ConfigState#0" />
+            <element signature="e#28562#28599#0" />
+            <element signature="e#28854#28891#0" />
+            <element signature="e#29199#29438#0" />
+            <element signature="e#31045#31295#0" />
+            <element signature="e#32703#32917#0" />
+            <element signature="e#31586#31829#0" />
+            <element signature="e#31864#32072#0" />
+            <element signature="e#32104#32330#0" />
+            <element signature="e#33726#33921#0" />
+            <element signature="e#32592#32839#0" />
+            <element signature="e#32874#33083#0" />
+          </folding>
         </state>
       </provider>
     </entry>

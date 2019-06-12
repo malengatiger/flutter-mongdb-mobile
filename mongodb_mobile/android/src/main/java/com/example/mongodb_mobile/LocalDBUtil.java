@@ -9,20 +9,21 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
-
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
+
+import java.security.Key;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+
 import static com.mongodb.client.model.Filters.eq;
 
 
-public class LocalDBUtil {
+class LocalDBUtil {
     private static final String TAG = LocalDBUtil.class.getSimpleName();
 
     static String insert( MongoClient client,  Map carrier) {
@@ -41,9 +42,12 @@ public class LocalDBUtil {
 
     static Object getOne( MongoClient client,  Map carrier) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ getOne: carrier: " + carrier.toString());
-        String id = (String) carrier.get("id");
-        assert id != null;
-        Bson filter =  eq("_id", new ObjectId(id));
+
+        Map idMap = (Map) carrier.get("id");
+        assert idMap != null;
+        String field = (String) idMap.get("field");
+        String value = (String) idMap.get("value");
+        Bson filter =  eq(field, value);
         FindIterable result = getCollection(client, carrier).find(filter);
         MongoCursor cursor = result.iterator();
         List<Object> list = new ArrayList<>();
@@ -58,33 +62,45 @@ public class LocalDBUtil {
         return list;
     }
 
-    static long replace( MongoClient client,  Map carrier) {
-        Log.d(TAG, "\uD83C\uDF3F ☘️ replace: document: " + carrier.toString());
-        String id = (String) carrier.get("id");
-        Document document = new Document();
-        Map dataMap = (Map) carrier.get("data");
+    static long update(MongoClient client, Map carrier) {
+        Log.d(TAG, "\uD83C\uDF3F ☘️ update: document: " + carrier.toString());
+        Map idMap = (Map) carrier.get("id");
+        assert idMap != null;
+        String field = (String) idMap.get("field");
+        String value = (String) idMap.get("value");
+        Map<String, Object> dataMap = (Map) carrier.get("fields");
         assert dataMap != null;
-        document.putAll(dataMap);
-        assert id != null;
-        Bson filter =  eq("_id", new ObjectId(id));
-        UpdateResult result = getCollection(client, carrier).replaceOne(filter, document);
-        Log.d(TAG, "replace: \uD83C\uDFC0  MatchedCount: " + result.getMatchedCount() + " \uD83C\uDFC0 ModifiedCount: " + result.getModifiedCount()  + " \uD83D\uDD06 wasAcknowledged: " + result.wasAcknowledged());
+        MongoCollection collection = getCollection(client, carrier);
+        Document m1 = (Document) collection.find(new Document(field, value)).first();
+        if (m1 != null) {
+            Bson updated =  new Document(dataMap);
+            Bson operation = new Document("$set", updated);
+            UpdateResult result = collection.updateOne(m1,operation);
+            Log.d(TAG, "update: \uD83C\uDFC0  MatchedCount: " + result.getMatchedCount() + " \uD83C\uDFC0 ModifiedCount: " + result.getModifiedCount()  + " \uD83D\uDD06 wasAcknowledged: " + result.wasAcknowledged());
 
-        return result.getMatchedCount();
+            return result.getMatchedCount();
+        } else  {
+            return 0;
+        }
+
     }
 
     static long addToArray( MongoClient client,  Map carrier) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ addToArray: document: " + carrier.toString());
-        String id = (String) carrier.get("id");
+        Map idMap = (Map) carrier.get("id");
+        assert idMap != null;
+        String field = (String) idMap.get("field");
+        String value = (String) idMap.get("value");
+
         String arrayName  = (String) carrier.get("arrayName");
         Map data = (Map) carrier.get("data");
         assert data != null;
         assert arrayName != null;
-        assert id != null;
 
-        Document document = new Document().append(sdf.format(new Date()), data);
+//        Document document = new Document().append(sdf.format(new Date()), data);
+        Document document = new Document(data);
 
-        Bson filter =  eq("_id", new ObjectId(id));
+        Bson filter =  eq(field, value);
         UpdateResult result = getCollection(client, carrier).updateOne(filter, Updates.addToSet(arrayName, document));
         Log.d(TAG, "addToArray: \uD83C\uDFC0  MatchedCount: " + result.getMatchedCount() + " \uD83C\uDFC0 ModifiedCount: " + result.getModifiedCount()  + " \uD83D\uDD06 wasAcknowledged: " + result.wasAcknowledged());
 
@@ -112,9 +128,12 @@ public class LocalDBUtil {
 
     static long delete( MongoClient client,  Map carrier) {
         Log.d(TAG, "\uD83C\uDF3F  ✂️️ delete:  ✂️ document: " + carrier.toString());
-        String id = (String) carrier.get("id");
-        assert id != null;
-        Bson filter = eq("_id", new ObjectId(id));
+        Map idMap = (Map) carrier.get("id");
+        assert idMap != null;
+        String field = (String) idMap.get("field");
+        String value = (String) idMap.get("value");
+
+        Bson filter = eq(field, value);
         DeleteResult result = getCollection(client, carrier).deleteOne(filter);
         Log.d(TAG, "delete:  ✂️ ✂️ document deleted, deletedCount:  ✂️ " + result.getDeletedCount()  + " wasAcknowledged:  🍎️ "  + result.wasAcknowledged() +"   ✂️ ✂️ \n");
         return result.getDeletedCount();

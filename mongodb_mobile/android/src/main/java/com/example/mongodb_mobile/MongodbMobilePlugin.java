@@ -115,14 +115,14 @@ public class MongodbMobilePlugin implements MethodCallHandler {
             });
           }
           break;
-        case "replace":
+        case "update":
           Map replaceArgs = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:replace:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + replaceArgs);
+          Log.d(TAG, "onMethodCall:update:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + replaceArgs);
           if (mobileClient != null) {
-            long replaceResult = LocalDBUtil.replace(mobileClient, replaceArgs);
+            long replaceResult = LocalDBUtil.update(mobileClient, replaceArgs);
             result.success(replaceResult);
           } else {
-            RemoteDBUtil.replace(replaceArgs, new RemoteDBUtil.RemoteReplaceListener() {
+            RemoteDBUtil.update(replaceArgs, new RemoteDBUtil.RemoteReplaceListener() {
               @Override
               public void onReplace(Object object) {
                 result.success(object);

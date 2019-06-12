@@ -52,7 +52,7 @@ class MongodbMobile {
 
   /// replace one document in collection
   static Future update(Carrier carrier) async {
-    var res = await _channel.invokeMethod('replace', carrier.toJson());
+    var res = await _channel.invokeMethod('update', carrier.toJson());
     return res;
   }
 

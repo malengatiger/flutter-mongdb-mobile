@@ -21,3 +21,7 @@
 ## 0.0.6
 
 *  💙   Added local query    💙 
+
+## 0.0.7
+
+*  💙   Refactored addToArray  and update functions    💙 

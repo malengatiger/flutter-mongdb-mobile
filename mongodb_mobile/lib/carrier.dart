@@ -16,8 +16,8 @@ import 'package:flutter/cupertino.dart';
 }
  */
 class Carrier {
-  String db, collection, id, arrayName, arrayKey;
-  dynamic data, query, fields;
+  String db, collection, arrayName, arrayKey;
+  dynamic data, query, fields, id;
 
   Carrier(
       {@required this.db,

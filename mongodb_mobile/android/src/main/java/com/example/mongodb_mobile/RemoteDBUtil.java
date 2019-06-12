@@ -31,14 +31,11 @@ import com.mongodb.stitch.core.services.mongodb.remote.sync.SyncUpdateResult;
 import org.bson.BsonValue;
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -165,31 +162,15 @@ class RemoteDBUtil {
         });
 
     }
-/*
-{ $set:
-      {
-        quantity: 500,
-        details: { model: "14Q3", make: "xyz" },
-        tags: [ "coats", "outerwear", "clothing" ]
-      }
-   }
- */
-    static Map getUpdates(Map carrier) {
 
-        Map<String, Object> props = new HashMap<>();
-        Set<String> keys = carrier.keySet();
-        for (String key: keys) {
-            props.put(key,  carrier.get(key));
-        }
+    static void update(Map carrier, final RemoteReplaceListener remoteReplaceListener) {
+        Log.d(TAG, "\uD83C\uDF3F ☘️ update: document: " + carrier.toString());
+        Map idMap = (Map) carrier.get("id");
+        assert idMap != null;
+        String field = (String) idMap.get("field");
+        String value = (String) idMap.get("value");
 
-        return props;
-    }
-    static void replace(Map carrier, final RemoteReplaceListener remoteReplaceListener) {
-        Log.d(TAG, "\uD83C\uDF3F ☘️ replace: document: " + carrier.toString());
-        String id = (String) carrier.get("id");
-        assert id != null;
-        Bson filter = eq("_id", new ObjectId(id));
-        assert filter != null;
+        Bson filter = eq(field, value);
 
         Map<String, Object> props = (Map) carrier.get("fields");
         Map<String, Object> map = new HashMap<>();
@@ -203,13 +184,13 @@ class RemoteDBUtil {
             public void onSuccess(Object o) {
                 SyncUpdateResult result = (SyncUpdateResult)o;
                 Log.d(TAG, "\uD83D\uDC2C onSuccess: \uD83D\uDC2C \uD83D\uDC2C " +
-                        "replace succeeded; modified: \uD83E\uDDA0 \uD83E\uDDA0" + result.getModifiedCount());
+                        "update succeeded; modified: \uD83E\uDDA0 \uD83E\uDDA0" + result.getModifiedCount());
                 remoteReplaceListener.onReplace(result.getModifiedCount());
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@androidx.annotation.NonNull Exception e) {
-                Log.e(TAG, "onFailure: replace failed: ", e);
+                Log.e(TAG, "onFailure: update failed: ", e);
                 remoteReplaceListener.onError(e.getMessage());
             }
         });
@@ -218,16 +199,19 @@ class RemoteDBUtil {
 
     static void addToArray(Map carrier, final RemoteAddToArrayListener remoteInsertListener) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ addToArray:add to nested array element to document: " + carrier.toString());
-        String id = (String) carrier.get("id");
+        Map idMap = (Map) carrier.get("id");
+        assert idMap != null;
+        String field = (String) idMap.get("field");
+        String value = (String) idMap.get("value");
+
         String arrayName = (String) carrier.get("arrayName");
         Map data = (Map) carrier.get("data");
         String key = (String) carrier.get("arrayKey");
         assert data != null;
         assert arrayName != null;
-        assert id != null;
 
         Document document = new Document().append(key, data);
-        Bson filter = eq("_id", new ObjectId(id));
+        Bson filter = eq(field, value);
 
         Task<RemoteUpdateResult> task = getRemoteCollection(carrier).updateOne(filter, Updates.addToSet(arrayName, document));
         task.addOnSuccessListener(new OnSuccessListener() {
@@ -272,9 +256,13 @@ class RemoteDBUtil {
 
     static void getOne(Map carrier, final RemoteGetOneListener remoteGetOneListener) {
         Log.d(TAG, "\uD83C\uDF3F ☘️ getOne: carrier: " + carrier.toString());
-        String id = (String) carrier.get("id");
-        assert id != null;
-        Bson filter = eq("_id", new ObjectId(id));
+        Map idMap = (Map) carrier.get("id");
+        assert idMap != null;
+        String field = (String) idMap.get("field");
+        String value = (String) idMap.get("value");
+
+        Bson filter = eq(field, value);
+
         RemoteMongoCollection collection = getRemoteCollection(carrier);
         SyncFindIterable iterable = collection.sync().find(filter);
         final List<Document> list = new ArrayList<>();
@@ -294,8 +282,12 @@ class RemoteDBUtil {
                 Log.d(TAG, "\uD83E\uDDE9 getOne: 🍎 🍎 🍎 🍎 documents found after iteration: "
                         + list.size() + ", sending to listener ");
                 if (task.isSuccessful()) {
-                    Document document = list.get(0);
-                    remoteGetOneListener.onGetOne(document.toJson());
+                    if (!list.isEmpty()) {
+                        Document document = list.get(0);
+                        remoteGetOneListener.onGetOne(document.toJson());
+                    } else {
+                        remoteGetOneListener.onError("Document not found");
+                    }
                 } else {
                     remoteGetOneListener.onError(Objects.requireNonNull(task.getException()).getMessage());
                 }
@@ -363,9 +355,12 @@ class RemoteDBUtil {
     }
     static void delete(Map carrier, final RemoteDeleteListener remoteDeleteListener) {
         Log.d(TAG, "\uD83C\uDF3F  ✂️️ delete:  ✂️ document: " + carrier.toString());
-        String id = (String) carrier.get("id");
-        assert id != null;
-        Bson filter = eq("_id", new ObjectId(id));
+        Map idMap = (Map) carrier.get("id");
+        assert idMap != null;
+        String field = (String) idMap.get("field");
+        String value = (String) idMap.get("value");
+
+        Bson filter = eq(field, value);
         RemoteMongoCollection collection = getRemoteCollection(carrier);
         Task task = collection.deleteOne(filter);
         task.addOnSuccessListener(new OnSuccessListener() {
