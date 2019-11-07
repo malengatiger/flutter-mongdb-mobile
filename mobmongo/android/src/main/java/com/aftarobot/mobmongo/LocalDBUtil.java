@@ -26,21 +26,21 @@ class LocalDBUtil {
     private static final String TAG = LocalDBUtil.class.getSimpleName();
 
     static String insert( MongoClient client,  Map carrier) {
-        Log.d(TAG, "\uD83C\uDF3F ☘️ insert: document: " + carrier.toString());
+//        Log.d(TAG, "\uD83C\uDF3F ☘️ insert: document: " + carrier.toString());
         Document document = new Document();
         Map dataMap = (Map) carrier.get("data");
         assert dataMap != null;
         document.putAll(dataMap);
-        Log.d(TAG, "insert: \uD83D\uDD35 \uD83D\uDD35   document before insert: " + document.toJson()  +"  \uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35  \n");
+//        Log.d(TAG, "insert: \uD83D\uDD35 \uD83D\uDD35   document before insert: " + document.toJson()  +"  \uD83D\uDD35 \uD83D\uDD35 \uD83D\uDD35  \n");
         getCollection(client, carrier).insertOne(document);
         Object mb = document.get("_id");
-        Log.d(TAG, "insert: 🍎 🍎 document inserted; check generated id:  \uD83C\uDFC8  " + mb  +"   \uD83C\uDFC8 🍎 🍎 🍎 🍎 \n");
+        Log.d(TAG, "insert: 🍎 🍎 document inserted; check generated id:  \uD83C\uDFC8  " + mb  +"   \uD83C\uDFC8 🍎 🍎 🍎 🍎 ");
         assert mb != null;
         return mb.toString();
     }
 
     static Object getOne( MongoClient client,  Map carrier) {
-        Log.d(TAG, "\uD83C\uDF3F ☘️ getOne: carrier: " + carrier.toString());
+//        Log.d(TAG, "\uD83C\uDF3F ☘️ getOne: carrier: " + carrier.toString());
 
         Map idMap = (Map) carrier.get("id");
         assert idMap != null;
@@ -50,19 +50,17 @@ class LocalDBUtil {
         FindIterable<Document> result = getCollection(client, carrier).find(filter);
         MongoCursor<Document> cursor = result.iterator();
         List<Object> list = new ArrayList<>();
-        int cnt = 0;
         while (cursor.hasNext()) {
             Document doc = cursor.next();
             list.add(doc.toJson());
-            cnt++;
-            Log.d(TAG, "🍎 getOne: doc: \uD83D\uDC99  #"+cnt+"  \uD83C\uDF6F  \uD83C\uDF6F  " + doc.toJson());
+//            Log.d(TAG, "🍎 getOne: doc: \uD83D\uDC99  #"+cnt+"  \uD83C\uDF6F  \uD83C\uDF6F  " + doc.toJson());
         }
         Log.d(TAG, "getOne: 🍎 🍎 documents found: " + list.size()  +"  🍎 🍎 🍎 🍎 \n");
         return list;
     }
 
     static long update(MongoClient client, Map carrier) {
-        Log.d(TAG, "\uD83C\uDF3F ☘️ update: document: " + carrier.toString());
+//        Log.d(TAG, "\uD83C\uDF3F ☘️ update: document: " + carrier.toString());
         Map idMap = (Map) carrier.get("id");
         assert idMap != null;
         String field = (String) idMap.get("field");
@@ -75,7 +73,9 @@ class LocalDBUtil {
             Bson updated =  new Document(dataMap);
             Bson operation = new Document("$set", updated);
             UpdateResult result = collection.updateOne(m1,operation);
-            Log.d(TAG, "update: \uD83C\uDFC0  MatchedCount: " + result.getMatchedCount() + " \uD83C\uDFC0 ModifiedCount: " + result.getModifiedCount()  + " \uD83D\uDD06 wasAcknowledged: " + result.wasAcknowledged());
+            Log.d(TAG, "update: \uD83C\uDFC0  MatchedCount: " + result.getMatchedCount()
+                    + " \uD83C\uDFC0 ModifiedCount: " + result.getModifiedCount()
+                    + " \uD83D\uDD06 wasAcknowledged: " + result.wasAcknowledged());
 
             return result.getMatchedCount();
         } else  {
@@ -85,7 +85,6 @@ class LocalDBUtil {
     }
 
     static long addToArray( MongoClient client,  Map carrier) {
-        Log.d(TAG, "\uD83C\uDF3F ☘️ addToArray: document: " + carrier.toString());
         Map idMap = (Map) carrier.get("id");
         assert idMap != null;
         String field = (String) idMap.get("field");
@@ -96,18 +95,19 @@ class LocalDBUtil {
         assert data != null;
         assert arrayName != null;
 
-//        Document document = new Document().append(sdf.format(new Date()), data);
         Document document = new Document(data);
 
         Bson filter =  eq(field, value);
         UpdateResult result = getCollection(client, carrier).updateOne(filter, Updates.addToSet(arrayName, document));
-        Log.d(TAG, "addToArray: \uD83C\uDFC0  MatchedCount: " + result.getMatchedCount() + " \uD83C\uDFC0 ModifiedCount: " + result.getModifiedCount()  + " \uD83D\uDD06 wasAcknowledged: " + result.wasAcknowledged());
+        Log.d(TAG, "addToArray: \uD83C\uDFC0  MatchedCount: " + result.getMatchedCount()
+                + " \uD83C\uDFC0 ModifiedCount: " + result.getModifiedCount()
+                + " \uD83D\uDD06 wasAcknowledged: " + result.wasAcknowledged());
 
         return result.getMatchedCount();
     }
 
     static Object query(MongoClient client, Map carrier) {
-        Log.d(TAG, "\uD83C\uDF3F ☘️ query: carrier: " + carrier.toString());
+//        Log.d(TAG, "\uD83C\uDF3F ☘️ query: carrier: " + carrier.toString());
 
         Bson mFilter = Helper.getQueryFilter(carrier);
         Log.d(TAG, "❤️  ❤️   ❤️ query: mFilter:  ❤️  ❤️ " + mFilter);
@@ -139,7 +139,7 @@ class LocalDBUtil {
     }
 
     private static MongoCollection<Document> getCollection(MongoClient client, Map carrier) {
-        Log.d(TAG, "\uD83C\uDF3F ☘️ getCollection: carrier: " + carrier.toString());
+//        Log.d(TAG, "\uD83C\uDF3F ☘️ getCollection: carrier: " + carrier.toString());
         String db = (String) carrier.get("db");
         String collection = (String) carrier.get("collection");
         assert collection != null;
@@ -148,7 +148,7 @@ class LocalDBUtil {
     }
 
     static List<Object>  getAll( MongoClient client,  Map carrier) {
-        Log.d(TAG, "\n🍎 getAll: get all documents in collection: " + carrier.toString() + "\n\n");
+//        Log.d(TAG, "\n🍎 getAll: get all documents in collection: " + carrier.toString() + "\n\n");
         String db = (String) carrier.get("db");
         String collectionName = (String) carrier.get("collection");
 
@@ -156,7 +156,7 @@ class LocalDBUtil {
         assert db != null;
         MongoCollection<Document> collection = client.getDatabase(db).getCollection(collectionName);
         List<Object> list = new ArrayList<>();
-        Log.d(TAG, "\ngetAll: documents found: ☘ ️"  + collection.countDocuments() + " 🍎 🍎\n");
+//        Log.d(TAG, "getAll: documents found: ☘ ️"  + collection.countDocuments() + " 🍎 🍎");
 
         try (MongoCursor<Document> cur = collection.find().iterator()) {
             while (cur.hasNext()) {

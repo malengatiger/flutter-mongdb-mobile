@@ -45,7 +45,7 @@ public class MobmongoPlugin implements MethodCallHandler {
 
         case "query":
           Map queryArgs = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:query:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + queryArgs);
+//          Log.d(TAG, "onMethodCall:query:   \uD83C\uDF3F ☘ ️" + queryArgs);
           if (mobileClient != null) {
             Object list = LocalDBUtil.query(mobileClient, queryArgs);
             result.success(list);
@@ -65,7 +65,7 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "insert":
           Map insArgs = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:insert:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + insArgs);
+//          Log.d(TAG, "onMethodCall:insert:   \uD83C\uDF3F ☘ ️");
           if (mobileClient != null) {
             String objectId = LocalDBUtil.insert(mobileClient, insArgs);
             result.success(objectId);
@@ -84,7 +84,7 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "addToArray":
           Map arrArgs = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:insert:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + arrArgs);
+//          Log.d(TAG, "onMethodCall:addToArray:   \uD83C\uDF3F ☘ ️" );
           if (mobileClient != null) {
             long arrResult = LocalDBUtil.addToArray(mobileClient, arrArgs);
             result.success(arrResult);
@@ -104,7 +104,7 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "update":
           Map replaceArgs = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:update:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + replaceArgs);
+//          Log.d(TAG, "onMethodCall:update:   \uD83C\uDF3F ☘ ️");
           if (mobileClient != null) {
             long replaceResult = LocalDBUtil.update(mobileClient, replaceArgs);
             result.success(replaceResult);
@@ -124,7 +124,7 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "delete":
           Map deleteArgs = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:delete:  ..... arrArgs: \uD83C\uDF3F ☘ ️" + deleteArgs);
+//          Log.d(TAG, "onMethodCall:delete:  .....  \uD83C\uDF3F ☘ ️");
           if (mobileClient != null) {
             Object deleteResult = LocalDBUtil.delete(mobileClient, deleteArgs);
             result.success(deleteResult);
@@ -144,7 +144,7 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "getAll":
           Map getArgs = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:getAll:  ..... getArgs: \uD83C\uDF3F ☘ ️" + getArgs);
+//          Log.d(TAG, "onMethodCall:getAll:  \uD83C\uDF3F ☘ ️");
           if (mobileClient != null) {
             Object resultList = LocalDBUtil.getAll(mobileClient, getArgs);
             result.success(resultList);
@@ -164,7 +164,7 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "getOne":
           Map oneArgs = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:getOne:  ..... oneArgs: \uD83C\uDF3F ☘ ️" + oneArgs);
+//          Log.d(TAG, "onMethodCall:getOne:   \uD83C\uDF3F ☘ ️");
           if (mobileClient != null) {
             Object document = LocalDBUtil.getOne(mobileClient, oneArgs);
             result.success(document);
@@ -192,7 +192,7 @@ public class MobmongoPlugin implements MethodCallHandler {
           }
           break;
         case "getPlatformVersion":
-          Log.d(TAG, "onMethodCall: getPlatformVersion requested ....");
+//          Log.d(TAG, "onMethodCall: getPlatformVersion requested ....");
           result.success("ANDROID " + android.os.Build.VERSION.RELEASE + " " + Build.DEVICE
                   + " " + Build.MODEL);
           Log.d(TAG, "🍎 onMethodCall: getPlatformVersion: 🧩🧩🧩 MANUFACTURER: "
