@@ -196,7 +196,7 @@ public class MobmongoPlugin implements MethodCallHandler {
           result.success("ANDROID " + android.os.Build.VERSION.RELEASE + " " + Build.DEVICE
                   + " " + Build.MODEL);
           Log.d(TAG, "🍎 onMethodCall: getPlatformVersion: 🧩🧩🧩 MANUFACTURER: "
-                  + Build.MANUFACTURER + " " + Build.DEVICE + " " + Build.MODEL);
+                  + Build.MANUFACTURER + " " + Build.DEVICE + " " + Build.MODEL + " " + new Date().toString());
           break;
         case "setAppID":
           String appID = call.argument("appID");

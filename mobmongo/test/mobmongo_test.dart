@@ -16,6 +16,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await Mobmongo.platformVersion, '42');
+    expect(await MobMongo.platformVersion, '42');
   });
 }
