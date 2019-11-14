@@ -7,6 +7,7 @@ import org.bson.conversions.Bson;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import static com.mongodb.client.model.Filters.and;
@@ -27,52 +28,49 @@ carrier: {data=null, query={
  */
 class Helper {
     private static final String TAG = Helper.class.getSimpleName();
-
     static Bson getQueryFilter(Map carrier)  {
-        Log.d(TAG, "\uD83C\uDF3F ☘️ query: carrier: " + carrier.toString());
-
         Map query = (Map) carrier.get("query");
         assert query != null;
-        Log.d(TAG, "getQueryFilter: " + query.toString());
         List<Bson> filters = new ArrayList<>();
         boolean isAnd = false;
         boolean isOr = false;
-        Set<String> mset = query.keySet();
-        for (String key : mset) {
-            switch (key) {
+        Set keySet = query.keySet();
+        for (Object key : keySet) {
+            switch ((String) key) {
                 case "and":
                     isAnd = (boolean) query.get(key);
                     break;
                 case "or":
                     isOr = (boolean) query.get(key);
                     break;
+                    //Filter{fieldName='routeID', value=abe621dd-4d7c-4b2e-9d75-972a3b513d83}
                 case "eq":
                     Map m1 = (Map) query.get(key);
                     assert m1 != null;
-                    Set<String> kSet = m1.keySet();
+                    Set kSet = m1.keySet();
                     Bson filter = null;
-                    for (String mKey: kSet) {
-                        filter = eq(mKey, m1.get(mKey));
+                    for (Object mKey: kSet) {
+                        filter = eq((String)mKey, m1.get(mKey));
                     }
                     filters.add(filter);
                     break;
                 case "gt":
                     Map m2 = (Map) query.get(key);
                     assert m2 != null;
-                    Set<String> kSet2 = m2.keySet();
+                    Set kSet2 = m2.keySet();
                     Bson filter2 = null;
-                    for (String mKey: kSet2) {
-                        filter2 = gt(mKey, m2.get(mKey));
+                    for (Object mKey: kSet2) {
+                        filter2 = gt((String) mKey, Objects.requireNonNull(m2.get(mKey)));
                     }
                     filters.add(filter2);
                     break;
                 case "lt":
                     Map m3 = (Map) query.get(key);
                     assert m3 != null;
-                    Set<String> kSet3 = m3.keySet();
+                    Set kSet3 = m3.keySet();
                     Bson filter3 = null;
-                    for (String mKey: kSet3) {
-                        filter3 = lt(mKey, m3.get(mKey));
+                    for (Object mKey: kSet3) {
+                        filter3 = lt((String) mKey, Objects.requireNonNull(m3.get(mKey)));
                     }
                     filters.add(filter3);
                     break;
@@ -91,8 +89,8 @@ class Helper {
                 mFilter = or(filters);
             }
         }
-        Log.d(TAG, "❤️  ❤️   ❤️ query: mFilter:  ❤️  ❤️ " + mFilter);
         assert mFilter != null;
         return mFilter;
     }
+
 }

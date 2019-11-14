@@ -42,10 +42,15 @@ public class MobmongoPlugin implements MethodCallHandler {
 
     try {
       switch (call.method) {
-
+        case "deleteMany":
+          Map map = (Map) call.arguments;
+          if (mobileClient != null) {
+            long resultDelete = LocalDBUtil.deleteMany(mobileClient, map);
+            result.success(resultDelete);
+          }
+          break;
         case "query":
           Map queryArgs = (Map) call.arguments;
-//          Log.d(TAG, "onMethodCall:query:   \uD83C\uDF3F ☘ ️" + queryArgs);
           if (mobileClient != null) {
             Object list = LocalDBUtil.query(mobileClient, queryArgs);
             result.success(list);
@@ -63,9 +68,16 @@ public class MobmongoPlugin implements MethodCallHandler {
             });
           }
           break;
+        case "createIndex":
+          Map arguments = (Map) call.arguments;
+          if (mobileClient != null) {
+            LocalDBUtil.createIndex(mobileClient, arguments);
+            result.success("Index created");
+          }
+          break;
+
         case "insert":
           Map insArgs = (Map) call.arguments;
-//          Log.d(TAG, "onMethodCall:insert:   \uD83C\uDF3F ☘ ️");
           if (mobileClient != null) {
             String objectId = LocalDBUtil.insert(mobileClient, insArgs);
             result.success(objectId);
@@ -84,7 +96,6 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "addToArray":
           Map arrArgs = (Map) call.arguments;
-//          Log.d(TAG, "onMethodCall:addToArray:   \uD83C\uDF3F ☘ ️" );
           if (mobileClient != null) {
             long arrResult = LocalDBUtil.addToArray(mobileClient, arrArgs);
             result.success(arrResult);
@@ -104,7 +115,6 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "update":
           Map replaceArgs = (Map) call.arguments;
-//          Log.d(TAG, "onMethodCall:update:   \uD83C\uDF3F ☘ ️");
           if (mobileClient != null) {
             long replaceResult = LocalDBUtil.update(mobileClient, replaceArgs);
             result.success(replaceResult);
@@ -124,7 +134,6 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "delete":
           Map deleteArgs = (Map) call.arguments;
-//          Log.d(TAG, "onMethodCall:delete:  .....  \uD83C\uDF3F ☘ ️");
           if (mobileClient != null) {
             Object deleteResult = LocalDBUtil.delete(mobileClient, deleteArgs);
             result.success(deleteResult);
@@ -144,7 +153,6 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "getAll":
           Map getArgs = (Map) call.arguments;
-//          Log.d(TAG, "onMethodCall:getAll:  \uD83C\uDF3F ☘ ️");
           if (mobileClient != null) {
             Object resultList = LocalDBUtil.getAll(mobileClient, getArgs);
             result.success(resultList);
@@ -164,7 +172,6 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "getOne":
           Map oneArgs = (Map) call.arguments;
-//          Log.d(TAG, "onMethodCall:getOne:   \uD83C\uDF3F ☘ ️");
           if (mobileClient != null) {
             Object document = LocalDBUtil.getOne(mobileClient, oneArgs);
             result.success(document);
@@ -307,6 +314,7 @@ public class MobmongoPlugin implements MethodCallHandler {
     mobileClient =
             client.getServiceClient(LocalMongoDbService.clientFactory);
     Log.d(TAG, "🍎 onMethodCall:setClient: \uD83C\uDF40 LOCAL MongoDB client stood up!");
+
     result.success(" \uD83C\uDF38  \uD83C\uDF38  \uD83C\uDF38  onMethodCall: We cool with LOCAL appID: 🍎 " + key + " 🍎 on the wild side   \uD83C\uDF38 ");
   }
 

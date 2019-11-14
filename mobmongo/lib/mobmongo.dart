@@ -73,4 +73,16 @@ class MobMongo {
     var res = await _channel.invokeMethod('query', carrier.toJson());
     return res;
   }
+
+  /// deleteMany - delete all docs in collection
+  static Future deleteMany(Carrier carrier) async {
+    var res = await _channel.invokeMethod('deleteMany', carrier.toJson());
+    return res;
+  }
+
+  /// createIndex - create index on collection
+  static Future createIndex(Carrier carrier) async {
+    var res = await _channel.invokeMethod('createIndex', carrier.toJson());
+    return res;
+  }
 }

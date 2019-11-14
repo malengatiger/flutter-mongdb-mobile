@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
  */
 class Carrier {
   String db, collection, arrayName, arrayKey;
-  dynamic data, query, fields, id;
+  dynamic data, query, fields, id, index;
 
   Carrier(
       {@required this.db,
@@ -27,6 +27,7 @@ class Carrier {
       this.arrayName,
       this.arrayKey,
       this.fields,
+      this.index,
       this.id});
 
   Map<String, dynamic> toJson() {
@@ -36,6 +37,7 @@ class Carrier {
       'data': data,
       'query': query,
       'id': id,
+      'index': index,
       'fields': fields,
       'arrayName': arrayName,
       'arrayKey': arrayKey,

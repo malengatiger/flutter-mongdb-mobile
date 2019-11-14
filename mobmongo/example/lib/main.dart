@@ -36,8 +36,6 @@ class MongoExamplePage extends StatefulWidget {
 
 class _MongoExamplePageState extends State<MongoExamplePage>
     implements ConfigListener {
-  static const MONGO_CONN =
-      "mongodb+srv://aubs:aubrey3@ar001-1xhdt.mongodb.net/ardb?retryWrites=true&w=majority";
   @override
   void initState() {
     super.initState();
@@ -429,6 +427,60 @@ class _MongoExamplePageState extends State<MongoExamplePage>
     }
   }
 
+  Future _createIndex() async {
+    debugPrint('\n\n💙 💙  _createIndex ....');
+    try {
+      _logWidgets.add(LogDisplay(
+          type: 1, message: 'start CreateIndex', date: DateTime.now()));
+      var carrier = Carrier(
+          db: databaseName,
+          collection: collectionName,
+          index: {"position": "2dsphere"});
+      dynamic object = await MobMongo.createIndex(carrier);
+      _logWidgets.add(LogDisplay(
+          type: 2,
+          message: 'CreateIndex found ${object.length}',
+          date: DateTime.now()));
+      debugPrint(
+          '\n\n🍎 🍎 🍎 _MyAppState: _createIndex: 🧩🧩🧩  result : 🍎 $object  🍎 \n');
+
+      showSnackbar(
+          message: ' 🍎 🍎 🍎  $object ',
+          scaffoldKey: _key,
+          backgroundColor: Colors.purple,
+          textColor: Colors.white);
+    } on PlatformException catch (f) {
+      print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
+    }
+  }
+
+  Future _deleteMany() async {
+    debugPrint('\n\n💙 💙  _deleteMany ....');
+    try {
+      _logWidgets.add(LogDisplay(
+          type: 1, message: 'start _deleteMany', date: DateTime.now()));
+      var carrier = Carrier(
+        db: databaseName,
+        collection: collectionName,
+      );
+      dynamic object = await MobMongo.deleteMany(carrier);
+      _logWidgets.add(LogDisplay(
+          type: 2,
+          message: '_deleteMany deleted  $object docs',
+          date: DateTime.now()));
+      debugPrint(
+          '\n\n🍎 🍎 🍎 _MyAppState: _deleteMany: 🧩🧩🧩  result : 🍎 $object  deleted 🍎 \n');
+
+      showSnackbar(
+          message: ' 🍎 🍎 🍎  $object docs deleted',
+          scaffoldKey: _key,
+          backgroundColor: Colors.purple,
+          textColor: Colors.white);
+    } on PlatformException catch (f) {
+      print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
+    }
+  }
+
   /// Query Mongo database using collection properties
   Future query() async {
     debugPrint('\n\n💙 💙  getByProperty ....');
@@ -619,7 +671,7 @@ class _MongoExamplePageState extends State<MongoExamplePage>
           ),
         ),
       ),
-      backgroundColor: Colors.brown.shade50,
+      backgroundColor: Colors.brown[100],
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_logWidgets.isEmpty) {
@@ -654,11 +706,29 @@ class _MongoExamplePageState extends State<MongoExamplePage>
                           children: <Widget>[
                             Center(
                               child: Text(
-                                '8 Mongo API\'s',
+                                '10 Mongo API\'s',
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w900,
                                     color: Colors.indigo.shade200),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Container(
+                              width: 260,
+                              child: RaisedButton(
+                                onPressed: _createIndex,
+                                elevation: 16,
+                                color: Colors.indigo.shade300,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Text(
+                                    'Create Index',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -692,6 +762,24 @@ class _MongoExamplePageState extends State<MongoExamplePage>
                                   padding: const EdgeInsets.all(20.0),
                                   child: Text(
                                     'Get All Documents',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Container(
+                              width: 260,
+                              child: RaisedButton(
+                                onPressed: _deleteMany,
+                                elevation: 16,
+                                color: Colors.brown.shade300,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: Text(
+                                    'Delete All Documents',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
