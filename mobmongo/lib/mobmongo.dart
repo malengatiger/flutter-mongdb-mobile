@@ -80,7 +80,7 @@ class MobMongo {
     return res;
   }
 
-  /// createIndex - create index on collection
+  /// createIndex - create index on specified collection
   static Future createIndex(Carrier carrier) async {
     var res = await _channel.invokeMethod('createIndex', carrier.toJson());
     return res;
