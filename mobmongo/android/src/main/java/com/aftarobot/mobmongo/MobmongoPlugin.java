@@ -191,7 +191,6 @@ public class MobmongoPlugin implements MethodCallHandler {
           break;
         case "sync":
           final Map syncArgs = (Map) call.arguments;
-          Log.d(TAG, "onMethodCall:sync:  ..... syncArgs: \uD83C\uDF3F ☘ ️" + syncArgs);
           if (mobileClient != null) {
             result.error("014", "\uD83C\uDF36  Sync not appropriate for \uD83C\uDF36 LOCAL \uD83C\uDF36  database", "");
           } else {
@@ -202,8 +201,6 @@ public class MobmongoPlugin implements MethodCallHandler {
 //          Log.d(TAG, "onMethodCall: getPlatformVersion requested ....");
           result.success("ANDROID " + android.os.Build.VERSION.RELEASE + " " + Build.DEVICE
                   + " " + Build.MODEL);
-          Log.d(TAG, "🍎 onMethodCall: getPlatformVersion: 🧩🧩🧩 MANUFACTURER: "
-                  + Build.MANUFACTURER + " " + Build.DEVICE + " " + Build.MODEL + " " + new Date().toString());
           break;
         case "setAppID":
           String appID = call.argument("appID");
@@ -236,20 +233,17 @@ public class MobmongoPlugin implements MethodCallHandler {
         if (changeEventStreamHandler.getEventSink() == null) {
           Log.e(TAG, "\uD83E\uDDA0 \uD83E\uDDA0 onChangeEvent: \uD83D\uDC7F ERROR - \uD83D\uDC7F \uD83D\uDC7F  eventSink inside handler is NULL!" );
         }  else {
-          Log.d(TAG, "\uD83E\uDDA0 \uD83E\uDDA0 onChangeEvent:  \uD83D\uDEBC \uD83D\uDEBC sending changeEvent to changeEventStreamHandler ... ..... ");
           Map<String, Object> map = new HashMap<>();
           Document m = (Document)document;
           map.put("document", m.toJson());
           map.put("changeEvent", changeEvent);
           changeEventStreamHandler.getEventSink().success(map);
-          Log.d(TAG, "\uD83E\uDDA0 \uD83E\uDDA0 onChangeEvent: \uD83C\uDF3A \uD83C\uDF3A  event sink has accepted a change event");
         }
 
       }
 
       @Override
       public void onSyncCreated() {
-        Log.d(TAG, "onSyncCreated: \uD83D\uDCA7 \uD83D\uDCA7 \uD83D\uDCA7 \uD83D\uDCA7 \uD83D\uDCA7");
         result.success(syncArgs.get("collection") + " has \uD83E\uDDA0 \uD83E\uDDA0  MongoDB Atlas sync set up!  \uD83D\uDEBC \uD83D\uDEBC ");
       }
 
@@ -261,11 +255,9 @@ public class MobmongoPlugin implements MethodCallHandler {
   }
 
   private void setupDatabase(Result result, String appID, String type) {
-    Log.d(TAG, "🍎 setupDatabase: appID : " + appID + ", setting up database with type: ".concat(type));
     try {
       if (type.equalsIgnoreCase(LOCAL_DATABASE)) {
         try {
-          Log.d(TAG, "setupDatabase: 🍎 🍎  LOCAL LOCAL LOCAL   \uD83E\uDDE1 \uD83D\uDC9B");
           setupLocalDatabase(result, appID);
         } catch (IllegalStateException e) {
           Log.e(TAG, "\uD83D\uDC7F \uD83D\uDC7F \uD83D\uDC7F onMethodCall:  MongoDB mobile client already set up with appID, \uD83D\uDC7D \uD83D\uDC7D IGNORE \uD83D\uDC7D \uD83D\uDC7D");
@@ -273,7 +265,6 @@ public class MobmongoPlugin implements MethodCallHandler {
         }
 
       } else {
-        Log.d(TAG, "setupDatabase: 🍎 🍎  ATLAS ATLAS ATLAS   \uD83E\uDDE1 \uD83D\uDC9B");
         setupAtlasDatabase(result, appID);
       }
 
@@ -285,13 +276,11 @@ public class MobmongoPlugin implements MethodCallHandler {
 
   private void setupAtlasDatabase(final Result result, String appID) {
 
-    Log.d(TAG, "\nsetupAtlasDatabase: ....... starting anon  auth ...  \uD83C\uDF38  \uD83C\uDF38  \uD83C\uDF38 ");
     try {
       mobileClient = null;
       RemoteDBUtil.anonymousAuth( appID, new MongoAuthListener() {
         @Override
         public void onAuth(StitchUserProfile userProfile) {
-          Log.d(TAG, "onAuth: userProfile received : ".concat(Objects.requireNonNull(userProfile.toString())));
           result.success("MongoDB Atlas auth succeeded. \uD83E\uDDE1 \uD83D\uDC9B  Yebo!  \uD83E\uDDE1 \uD83D\uDC9B");
         }
 
@@ -309,11 +298,8 @@ public class MobmongoPlugin implements MethodCallHandler {
 
   private void setupLocalDatabase(Result result, String key) {
     client = Stitch.initializeDefaultAppClient(key);
-    Log.e(TAG, "\uD83D\uDC7F \uD83D\uDC7F \uD83D\uDC7F initializeAppClient: LOCAL MongoDB mobile client set up!  \uD83D\uDC7D \uD83D\uDC7D IGNORE \uD83D\uDC7D \uD83D\uDC7D");
-    Log.d(TAG, "🍎 🍎 onMethodCall: initializeAppClient 🧩🧩🧩 " + key + "  🧩🧩🧩");
     mobileClient =
             client.getServiceClient(LocalMongoDbService.clientFactory);
-    Log.d(TAG, "🍎 onMethodCall:setClient: \uD83C\uDF40 LOCAL MongoDB client stood up!");
 
     result.success(" \uD83C\uDF38  \uD83C\uDF38  \uD83C\uDF38  onMethodCall: We cool with LOCAL appID: 🍎 " + key + " 🍎 on the wild side   \uD83C\uDF38 ");
   }

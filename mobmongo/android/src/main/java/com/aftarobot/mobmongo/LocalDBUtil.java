@@ -152,9 +152,7 @@ class LocalDBUtil {
         }
 
     }
-    /*
-    db.collection.createIndex( { <location field> : "2dsphere" } )
-     */
+
     static void createIndex(MongoClient client,  Map carrier) {
         String db = (String) carrier.get("db");
         String collection = (String) carrier.get("collection");
@@ -164,10 +162,6 @@ class LocalDBUtil {
         assert index != null;
 
         Document indexDocument = new Document(index);
-        logger.log(Level.INFO, " \uD83C\uDF3A index document: " + indexDocument.toString());
-
         client.getDatabase(db).getCollection(collection).createIndex(indexDocument);
-        logger.log(Level.INFO, " \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A  \uD83C\uDF3A " +
-                "index has been created for:  \uD83C\uDF3A " + collection);
     }
 }

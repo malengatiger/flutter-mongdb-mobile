@@ -16,16 +16,6 @@ import static com.mongodb.client.model.Filters.gt;
 import static com.mongodb.client.model.Filters.lt;
 import static com.mongodb.client.model.Filters.or;
 
-/*
-carrier: {data=null, query={
-    position={$near={$geometry={
-        coordinates=[27.8525642, -25.7605472],
-        type=Point},
-    $maxDistance=20000}}},
-
-    arrayKey=null, arrayName=null, collection=newLandmarks, id=null, fields=null, db=arLocalDBx3}
-
- */
 class Helper {
     private static final String TAG = Helper.class.getSimpleName();
     static Bson getQueryFilter(Map carrier)  {
@@ -43,7 +33,6 @@ class Helper {
                 case "or":
                     isOr = (boolean) query.get(key);
                     break;
-                    //Filter{fieldName='routeID', value=abe621dd-4d7c-4b2e-9d75-972a3b513d83}
                 case "eq":
                     Map m1 = (Map) query.get(key);
                     assert m1 != null;
