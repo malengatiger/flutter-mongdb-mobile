@@ -1,6 +1,6 @@
-# flutter-mongdb-mobile
+# flutter-mongodb-mobile
 
-Flutter plugin for MongoDB Mobile database to support Android and iOS
+Flutter plugin for MongoDB Mobile database to support ANDROID and iOS
 
 # Flutter MongoDB Plugin
 
