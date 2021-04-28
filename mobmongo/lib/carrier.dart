@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 ///Object that carries data to Java and iOS
 ////*
 /*
@@ -16,12 +14,13 @@ import 'package:flutter/material.dart';
 }
  */
 class Carrier {
-  String db, collection, arrayName, arrayKey;
+  String db, collection;
+  String? arrayName, arrayKey;
   dynamic data, query, fields, id, index;
 
   Carrier(
-      {@required this.db,
-      @required this.collection,
+      {required this.db,
+      required this.collection,
       this.data,
       this.query,
       this.arrayName,

@@ -1,6 +1,6 @@
-# mobmongo_example
+# mobmongo3_example
 
-Demonstrates how to use the mobmongo plugin.
+Demonstrates how to use the mobmongo3 plugin.
 
 ## Getting Started
 

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -26,7 +25,7 @@ class LocalDBUtil {
     private static final String TAG = LocalDBUtil.class.getSimpleName();
     private static final Logger logger = Logger.getLogger(LocalDBUtil.class.getSimpleName());
 
-    static String insert( MongoClient client,  Map carrier) {
+    static String insert(MongoClient client, Map carrier) {
         Document document = new Document();
         Map dataMap = (Map) carrier.get("data");
         assert dataMap != null;
@@ -134,7 +133,7 @@ class LocalDBUtil {
         return client.getDatabase(db).getCollection(collection);
     }
 
-    static List<Object>  getAll( MongoClient client,  Map carrier) {
+    static List<Object> getAll(MongoClient client, Map carrier) {
         String db = (String) carrier.get("db");
         String collectionName = (String) carrier.get("collection");
 

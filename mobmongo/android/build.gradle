@@ -1,4 +1,4 @@
-group 'com.aftarobot.mobmongo'
+group 'com.aftarobot.mobmongo3'
 version '1.0'
 
 buildscript {
@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.1'
+        classpath 'com.android.tools.build:gradle:4.1.3'
     }
 }
 
@@ -22,16 +22,13 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 21
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    lintOptions {
-        disable 'InvalidPackage'
     }
 }
 dependencies {
     implementation 'org.mongodb:stitch-android-sdk:4.2.1'
 }
+

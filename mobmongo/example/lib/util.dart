@@ -9,7 +9,7 @@ Future saveCollectionName(String token) async {
   debugPrint("✏️️ CollectionName saved in prefs: 💙 💜   $token");
 }
 
-Future<String> getCollectionName() async {
+Future<String?> getCollectionName() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var token = prefs.getString("CollectionName");
   debugPrint("✏️️ SharedPrefs - CollectionName from prefs: 🧡  $token");
@@ -24,7 +24,7 @@ Future saveDatabaseName(String token) async {
   debugPrint("✏️️ DatabaseName saved in prefs: 💛 💚  $token");
 }
 
-Future<String> getDatabaseName() async {
+Future<String?> getDatabaseName() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var token = prefs.getString("DatabaseName");
   debugPrint("✏️️ SharedPrefs - DatabaseName from prefs:❤️ $token");
@@ -39,7 +39,7 @@ Future saveAppID(String token) async {
   debugPrint("✏️️ AppID saved in prefs: ❤️ 🧡  $token");
 }
 
-Future<String> getAppID() async {
+Future<String?> getAppID() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var token = prefs.getString("appID");
   debugPrint("✏️️ SharedPrefs - AppID from prefs: 💜 $token");

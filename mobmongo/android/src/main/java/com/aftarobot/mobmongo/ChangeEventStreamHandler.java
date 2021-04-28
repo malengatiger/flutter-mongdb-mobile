@@ -1,7 +1,5 @@
 package com.aftarobot.mobmongo;
 
-import android.util.Log;
-
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.EventChannel.StreamHandler;
 

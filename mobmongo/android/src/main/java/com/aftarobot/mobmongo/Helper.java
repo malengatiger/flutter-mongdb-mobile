@@ -1,7 +1,5 @@
 package com.aftarobot.mobmongo;
 
-import android.util.Log;
-
 import org.bson.conversions.Bson;
 
 import java.util.ArrayList;

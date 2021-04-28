@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobmongo/carrier.dart';
-import 'package:mobmongo/mobmongo.dart';
+import 'package:mobmongo/mobmongo3.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),
-      home: MongoExamplePage(),
+      home: Config(),
     );
   }
 }
@@ -34,64 +34,41 @@ class MongoExamplePage extends StatefulWidget {
   _MongoExamplePageState createState() => _MongoExamplePageState();
 }
 
-class _MongoExamplePageState extends State<MongoExamplePage>
-    implements ConfigListener {
+class _MongoExamplePageState extends State<MongoExamplePage> {
   @override
   void initState() {
     super.initState();
-//    setMongoAtlasAppID();
-//    listenToMongoChangeEvents();
-    _getState();
-  }
-
-  @override
-  onConfigSaved() {
-    isConfig = false;
     _getState();
   }
 
   _getState() async {
-    appID = await getAppID();
-    collectionName = await getCollectionName();
-    databaseName = await getDatabaseName();
-    databaseType = await getDatabaseType();
+    appID = (await getAppID())!;
+    collectionName = (await getCollectionName())!;
+    databaseName = (await getDatabaseName())!;
+    databaseType = (await getDatabaseType())!;
 
-    if (appID == null || collectionName == null || databaseName == null) {
-      setState(() {
-        isConfig = true;
-      });
-      return;
-    }
-    _logWidgets = List();
+    _logWidgets = [];
     _logWidgets.add(LogDisplay(
         type: 1, message: 'Call Logging Started', date: DateTime.now()));
+
     setState(() {
-      if (databaseType.contains('Mobile')) {
-        setLocalMongoAppID();
-        isRemote = false;
-      } else {
-        setMongoAtlasAppID();
-        isRemote = true;
-      }
+      isRemote = false;
     });
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> setLocalMongoAppID() async {
+  Future setLocalMongoAppID() async {
     String platformVersion;
     try {
-      platformVersion = await MobMongo.platformVersion;
-      debugPrint('_MyAppState: 🧩🧩🧩 Platform Version : 🍎  $platformVersion');
+      platformVersion = (await MobMongo.platformVersion);
+      debugPrint(
+          '_MyAppState: 🧩🧩🧩 Platform Version from the PLUGIN : 🍎  $platformVersion');
       var res = await MobMongo.setAppID({
         'appID': 'exampleApp',
         'type': MobMongo.LOCAL_DATABASE,
       });
-      print(res);
-      showSnackbar(
-          scaffoldKey: _key,
-          message: '🏀 🏀 🏀  LOCAL DB connection succeeded',
-          textColor: Colors.white,
-          backgroundColor: Colors.teal.shade900);
+      print(
+          ' 🍎 🍎 🍎 🍎 🍎 🍎 response from setAppID: $res ::: 🏀 🏀 🏀  LOCAL DB connection succeeded');
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
       showSnackbar(
@@ -103,36 +80,7 @@ class _MongoExamplePageState extends State<MongoExamplePage>
     if (!mounted) return;
 
     setState(() {});
-  }
-
-  static const API_KEY =
-      "HkcniZshpeSsJFgHxFYvBbGppUZyOEDFyrVwzsjqSXzluBy16r90EBTU5esygnuW";
-  Future<void> setMongoAtlasAppID() async {
-    try {
-      debugPrint('\n\n 🍎 🍎 🍎  setting remote MongoDB Stitch App ID ....');
-      var res = await MobMongo.setAppID({
-        'appID': 'routebuilder-scewg',
-        'type': MobMongo.ATLAS_DATABASE,
-        'email': 'hacker1@admin',
-        'password': 'aubrey3'
-      });
-      print(res);
-      showSnackbar(
-          scaffoldKey: _key,
-          message: '❤️ 🧡 💛 💚 💙 💜 Mongo Atlas connected',
-          textColor: Colors.white,
-          backgroundColor: Colors.teal.shade900);
-    } on PlatformException catch (f) {
-      print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
-      showSnackbar(
-          scaffoldKey: _key,
-          message: '👽 Atlas connection failed 👽 👽 👽 ',
-          textColor: Colors.yellow,
-          backgroundColor: Colors.pink.shade900);
-    }
-    if (!mounted) return;
-
-    setState(() {});
+    return null;
   }
 
   Random random = Random(DateTime.now().millisecondsSinceEpoch);
@@ -252,16 +200,18 @@ class _MongoExamplePageState extends State<MongoExamplePage>
           textColor: Colors.lightBlue);
     } on PlatformException catch (f) {
       print('👿👿👿👿👿👿👿👿 PlatformException 🍎 🍎 🍎 - $f');
-      showSnackbar(
-          scaffoldKey: _key,
-          message: f.message,
-          textColor: Colors.yellow,
-          backgroundColor: Colors.red);
+      if (f.message != null) {
+        showSnackbar(
+            scaffoldKey: _key,
+            message: f.message!,
+            textColor: Colors.yellow,
+            backgroundColor: Colors.red);
+      }
     }
   }
 
-  List<String> clientIDs = List();
-  List documents = List();
+  List<String> clientIDs = [];
+  List documents = [];
 
   /// Get all documents from a collection
   Future getAllDocuments() async {
@@ -294,7 +244,7 @@ class _MongoExamplePageState extends State<MongoExamplePage>
       showSnackbar(
           message: '🍎 🍎 🍎  ${documents.length} documents failed',
           scaffoldKey: _key,
-          backgroundColor: Colors.red[700],
+          backgroundColor: Colors.red[700]!,
           textColor: Colors.yellow);
     }
   }
@@ -338,7 +288,7 @@ class _MongoExamplePageState extends State<MongoExamplePage>
       showSnackbar(
           message: '🍎 🍎 🍎  document delete failed',
           scaffoldKey: _key,
-          backgroundColor: Colors.pink[700],
+          backgroundColor: Colors.pink[700]!,
           textColor: Colors.white);
     }
   }
@@ -392,7 +342,7 @@ class _MongoExamplePageState extends State<MongoExamplePage>
           scaffoldKey: _key,
           message: 'Please insert document first',
           textColor: Colors.yellow,
-          backgroundColor: Colors.red[800]);
+          backgroundColor: Colors.red[800]!);
       return;
     }
     try {
@@ -540,16 +490,16 @@ class _MongoExamplePageState extends State<MongoExamplePage>
   }
 
   void showSnackbar(
-      {@required GlobalKey<ScaffoldState> scaffoldKey,
-      @required String message,
-      @required Color textColor,
-      @required Color backgroundColor}) {
+      {required GlobalKey<ScaffoldState> scaffoldKey,
+      required String message,
+      required Color textColor,
+      required Color backgroundColor}) {
     if (scaffoldKey.currentState == null) {
       print('AppSnackbar.showSnackbar --- currentState is NULL, quit ..');
       return;
     }
-    scaffoldKey.currentState.removeCurrentSnackBar();
-    scaffoldKey.currentState.showSnackBar(new SnackBar(
+    // scaffoldKey.currentState!.removeCurrentSnackBar();
+    ScaffoldMessenger.of(scaffoldKey.currentContext!).showSnackBar(new SnackBar(
       content: _getText(message, textColor),
       duration: new Duration(seconds: 15),
       backgroundColor: backgroundColor,
@@ -569,348 +519,346 @@ class _MongoExamplePageState extends State<MongoExamplePage>
 
   GlobalKey<ScaffoldState> _key = GlobalKey();
   bool isRemote = false;
-  BuildContext mContext;
+  late BuildContext mContext;
 
-  String appID, collectionName, databaseName, databaseType;
+  String appID = 'exampleApp',
+      collectionName = 'collection1',
+      databaseName = 'localdb',
+      databaseType = "Mobile";
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _key,
-      appBar: AppBar(
-        title: Center(
-          child: Padding(
-            padding: EdgeInsets.all(12),
-            child: Text(
-              'MongoDB Plugin',
-              style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 20,
-                  color: Colors.white),
+    return SafeArea(
+      child: Scaffold(
+        key: _key,
+        appBar: AppBar(
+          title: Center(
+            child: Padding(
+              padding: EdgeInsets.all(12),
+              child: Text(
+                'MongoDB Plugin',
+                style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20,
+                    color: Colors.white),
+              ),
             ),
           ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              setState(() {
-                isConfig = true;
-              });
-            },
-          ),
-        ],
-        backgroundColor:
-            isRemote ? Colors.pink.shade300 : Colors.deepOrange.shade300,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(140),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      (isRemote != null && isRemote)
-                          ? 'MongoDB Atlas'
-                          : 'Mobile Database',
-                      style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      'Database Name:',
-                      style: TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      (databaseName == null) ? '' : databaseName,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: <Widget>[
-                    Text(
-                      'Collection Name:',
-                      style: TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      (collectionName == null) ? '' : collectionName,
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900),
-                    ),
-                  ],
-                ),
-              ],
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {
+                setState(() {
+                  isConfig = true;
+                });
+              },
             ),
-          ),
-        ),
-      ),
-      backgroundColor: Colors.brown[100],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (_logWidgets.isEmpty) {
-            _showInfo();
-          } else {
-            _showLogs();
-          }
-        },
-        child: Icon(Icons.bug_report),
-        backgroundColor: (isRemote != null && isRemote)
-            ? Colors.pink.shade600
-            : Colors.deepOrange.shade600,
-        elevation: 24,
-      ),
-      body: Stack(
-        children: <Widget>[
-          isConfig
-              ? Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Config(
-                    listener: this,
+          ],
+          backgroundColor:
+              isRemote ? Colors.pink.shade300 : Colors.deepOrange.shade300,
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(140),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 8,
                   ),
-                )
-              : Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Card(
-                      elevation: 8,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: ListView(
-                          children: <Widget>[
-                            Center(
-                              child: Text(
-                                '10 Mongo API\'s',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w900,
-                                    color: Colors.indigo.shade200),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Container(
-                              width: 260,
-                              child: RaisedButton(
-                                onPressed: _createIndex,
-                                elevation: 16,
-                                color: Colors.indigo.shade300,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Text(
-                                    'Create Index',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Container(
-                              width: 260,
-                              child: RaisedButton(
-                                onPressed: insertDocument,
-                                elevation: 16,
-                                color: Colors.pink.shade300,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Text(
-                                    'Insert One Document',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              width: 260,
-                              child: RaisedButton(
-                                onPressed: getAllDocuments,
-                                elevation: 16,
-                                color: Colors.purple.shade300,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Text(
-                                    'Get All Documents',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              width: 260,
-                              child: RaisedButton(
-                                onPressed: _deleteMany,
-                                elevation: 16,
-                                color: Colors.brown.shade300,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Text(
-                                    'Delete All Documents',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              width: 260,
-                              child: RaisedButton(
-                                onPressed: query,
-                                elevation: 16,
-                                color: Colors.teal.shade300,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Text(
-                                    'Query By Properties',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              width: 260,
-                              child: RaisedButton(
-                                onPressed: delete,
-                                elevation: 16,
-                                color: Colors.blue.shade400,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Text(
-                                    'Delete Document',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              width: 260,
-                              child: RaisedButton(
-                                onPressed: updateDocument,
-                                elevation: 16,
-                                color: Colors.brown.shade400,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Text(
-                                    'Update Document',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              width: 260,
-                              child: RaisedButton(
-                                onPressed: getOne,
-                                elevation: 16,
-                                color: Colors.indigo.shade400,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Text(
-                                    'Get One Document',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Container(
-                              width: 260,
-                              child: RaisedButton(
-                                onPressed: addToArray,
-                                elevation: 16,
-                                color: Colors.orange.shade500,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Text(
-                                    'Add To Nested Array',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            isRemote
-                                ? Container(
-                                    width: 260,
-                                    child: RaisedButton(
-                                      onPressed: syncCollection,
-                                      elevation: 16,
-                                      color: Colors.lime.shade700,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Text(
-                                          'Sync Collection',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : Container(),
-                            SizedBox(
-                              height: 12,
-                            ),
-                            Text(txt),
-                          ],
-                        ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        (isRemote != null && isRemote)
+                            ? 'MongoDB Atlas'
+                            : 'Mobile Database',
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900),
                       ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        'Database Name:',
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        databaseName,
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        'Collection Name:',
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        (collectionName == null) ? '' : collectionName,
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        backgroundColor: Colors.brown[100],
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            if (_logWidgets.isEmpty) {
+              _showInfo();
+            } else {
+              _showLogs();
+            }
+          },
+          child: Icon(Icons.bug_report),
+          backgroundColor: (isRemote != null && isRemote)
+              ? Colors.pink.shade600
+              : Colors.deepOrange.shade600,
+          elevation: 24,
+        ),
+        body: Stack(
+          children: <Widget>[
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Card(
+                  elevation: 8,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: ListView(
+                      children: <Widget>[
+                        Center(
+                          child: Text(
+                            '10 Mongo API\'s',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.indigo.shade200),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Container(
+                          width: 260,
+                          child: RaisedButton(
+                            onPressed: _createIndex,
+                            elevation: 16,
+                            color: Colors.indigo.shade300,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'Create Index',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Container(
+                          width: 260,
+                          child: RaisedButton(
+                            onPressed: insertDocument,
+                            elevation: 16,
+                            color: Colors.pink.shade300,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'Insert One Document',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Container(
+                          width: 260,
+                          child: RaisedButton(
+                            onPressed: getAllDocuments,
+                            elevation: 16,
+                            color: Colors.purple.shade300,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'Get All Documents',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Container(
+                          width: 260,
+                          child: RaisedButton(
+                            onPressed: _deleteMany,
+                            elevation: 16,
+                            color: Colors.brown.shade300,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'Delete All Documents',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Container(
+                          width: 260,
+                          child: RaisedButton(
+                            onPressed: query,
+                            elevation: 16,
+                            color: Colors.teal.shade300,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'Query By Properties',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Container(
+                          width: 260,
+                          child: RaisedButton(
+                            onPressed: delete,
+                            elevation: 16,
+                            color: Colors.blue.shade400,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'Delete Document',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Container(
+                          width: 260,
+                          child: RaisedButton(
+                            onPressed: updateDocument,
+                            elevation: 16,
+                            color: Colors.brown.shade400,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'Update Document',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Container(
+                          width: 260,
+                          child: RaisedButton(
+                            onPressed: getOne,
+                            elevation: 16,
+                            color: Colors.indigo.shade400,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'Get One Document',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Container(
+                          width: 260,
+                          child: RaisedButton(
+                            onPressed: addToArray,
+                            elevation: 16,
+                            color: Colors.orange.shade500,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Text(
+                                'Add To Nested Array',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        isRemote
+                            ? Container(
+                                width: 260,
+                                child: RaisedButton(
+                                  onPressed: syncCollection,
+                                  elevation: 16,
+                                  color: Colors.lime.shade700,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Text(
+                                      'Sync Collection',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Text(txt),
+                      ],
                     ),
                   ),
                 ),
-        ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  List<LogDisplay> _logWidgets = List();
+  List<LogDisplay> _logWidgets = [];
   bool isConfig = false;
 
   var txt = '💚 💙 💜 Flutter MongoDB Mobile Plugin ' +
@@ -1034,9 +982,6 @@ class _MongoExamplePageState extends State<MongoExamplePage>
 enum DatabaseType { Atlas, Mobile }
 
 class Config extends StatefulWidget {
-  final ConfigListener listener;
-  Config({@required this.listener});
-  @override
   _ConfigState createState() => _ConfigState();
 }
 
@@ -1045,7 +990,7 @@ class _ConfigState extends State<Config> {
   TextEditingController _appIDController = TextEditingController();
   TextEditingController _dbController = TextEditingController();
   TextEditingController _collectionController = TextEditingController();
-  String appID, collectionName, databaseName, databaseType;
+  String? appID, collectionName, databaseName, databaseType;
 
   @override
   initState() {
@@ -1054,42 +999,31 @@ class _ConfigState extends State<Config> {
   }
 
   _getState() async {
-    appID = await getAppID();
-    collectionName = await getCollectionName();
-    databaseName = await getDatabaseName();
-    databaseType = await getDatabaseType();
-    if (appID != null) {
-      _appIDController.text = appID;
-    }
-    if (databaseName != null) {
-      _dbController.text = databaseName;
-    }
-    if (collectionName != null) {
-      _collectionController.text = collectionName;
-    }
-    if (databaseType != null && databaseType.contains('Mobile')) {
-      _databaseType = DatabaseType.Mobile;
-    } else {
-      _databaseType = DatabaseType.Atlas;
-    }
+    appID = (await getAppID())!;
+    collectionName = (await getCollectionName())!;
+    databaseName = (await getDatabaseName())!;
+    _appIDController.text = appID!;
+    _dbController.text = databaseName!;
+    _collectionController.text = collectionName!;
+    _databaseType = DatabaseType.Mobile;
   }
 
   _onAppIDChanged(String value) async {
     print(value);
     appID = value;
-    await saveAppID(appID);
+    await saveAppID(appID!);
   }
 
   _onDBChanged(String value) async {
     print(value);
     databaseName = value;
-    await saveDatabaseName(databaseName);
+    await saveDatabaseName(databaseName!);
   }
 
   _onCollectionChanged(String value) async {
     print(value);
     collectionName = value;
-    await saveCollectionName(collectionName);
+    await saveCollectionName(collectionName!);
   }
 
   @override
@@ -1104,10 +1038,10 @@ class _ConfigState extends State<Config> {
               title: const Text('Atlas DB'),
               value: DatabaseType.Atlas,
               groupValue: _databaseType,
-              onChanged: (DatabaseType value) {
+              onChanged: (value) {
                 saveDatabaseType('Atlas');
                 setState(() {
-                  _databaseType = value;
+                  _databaseType = value!;
                 });
                 print('🍎 🍎 🍎  databaseName selected: $_databaseType');
               },
@@ -1116,10 +1050,10 @@ class _ConfigState extends State<Config> {
               title: const Text('Mobile DB'),
               value: DatabaseType.Mobile,
               groupValue: _databaseType,
-              onChanged: (DatabaseType value) {
+              onChanged: (value) {
                 saveDatabaseType('Mobile');
                 setState(() {
-                  _databaseType = value;
+                  _databaseType = value!;
                 });
                 print('🍎 🍎 🍎  databaseName selected: $_databaseType');
               },
@@ -1154,9 +1088,7 @@ class _ConfigState extends State<Config> {
             SizedBox(
               height: 24,
             ),
-            RaisedButton(
-              elevation: 8,
-              color: Colors.blue[700],
+            ElevatedButton(
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Text(
@@ -1165,8 +1097,11 @@ class _ConfigState extends State<Config> {
                 ),
               ),
               onPressed: () {
-                print('🍎 🍎 🍎 save config pressed');
-                widget.listener.onConfigSaved();
+                print('🍎 🍎 🍎 save config pressed, starting app ..... ');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MongoExamplePage()));
               },
             ),
           ],
@@ -1174,10 +1109,6 @@ class _ConfigState extends State<Config> {
       ),
     );
   }
-}
-
-abstract class ConfigListener {
-  onConfigSaved();
 }
 
 Future saveCollectionName(String token) async {
@@ -1188,7 +1119,7 @@ Future saveCollectionName(String token) async {
   debugPrint("✏️️ CollectionName saved in prefs: 💙 💜   $token");
 }
 
-Future<String> getCollectionName() async {
+Future<String?> getCollectionName() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var token = prefs.getString("CollectionName");
   debugPrint("✏️️ SharedPrefs - CollectionName from prefs: 🧡  $token");
@@ -1203,7 +1134,7 @@ Future saveDatabaseName(String token) async {
   debugPrint("✏️️ DatabaseName saved in prefs: 💛 💚  $token");
 }
 
-Future<String> getDatabaseName() async {
+Future<String?> getDatabaseName() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var token = prefs.getString("DatabaseName");
   debugPrint("✏️️ SharedPrefs - DatabaseName from prefs:❤️ $token");
@@ -1218,7 +1149,7 @@ Future saveAppID(String token) async {
   debugPrint("✏️️ AppID saved in prefs: ❤️ 🧡  $token");
 }
 
-Future<String> getAppID() async {
+Future<String?> getAppID() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var token = prefs.getString("appID");
   debugPrint("✏️️ SharedPrefs - AppID from prefs: 💜 $token");
@@ -1233,7 +1164,7 @@ Future saveDatabaseType(String token) async {
   debugPrint("✏️️ databaseType saved in prefs: ❤️ 🧡  $token");
 }
 
-Future<String> getDatabaseType() async {
+Future<String?> getDatabaseType() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var token = prefs.getString("databaseType");
   debugPrint("✏️️ SharedPrefs - databaseType from prefs: 💜 $token");
@@ -1244,8 +1175,7 @@ class LogDisplay extends StatelessWidget {
   final int type;
   final String message;
   final DateTime date;
-  LogDisplay(
-      {@required this.type, @required this.message, @required this.date});
+  LogDisplay({required this.type, required this.message, required this.date});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -1262,7 +1192,7 @@ class LogDisplay extends StatelessWidget {
 class LogDisplayList extends StatelessWidget {
   final List<LogDisplay> logDisplays;
 
-  LogDisplayList({@required this.logDisplays});
+  LogDisplayList({required this.logDisplays});
 
   @override
   Widget build(BuildContext context) {
