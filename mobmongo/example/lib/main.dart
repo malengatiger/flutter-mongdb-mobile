@@ -987,10 +987,12 @@ class Config extends StatefulWidget {
 
 class _ConfigState extends State<Config> {
   DatabaseType _databaseType = DatabaseType.Atlas;
-  TextEditingController _appIDController = TextEditingController();
-  TextEditingController _dbController = TextEditingController();
-  TextEditingController _collectionController = TextEditingController();
-  String? appID, collectionName, databaseName, databaseType;
+  TextEditingController _appIDController = TextEditingController(text: 'app001');
+  TextEditingController _dbController = TextEditingController(text: 'databse001');
+  TextEditingController _collectionController = TextEditingController(text: 'collection001');
+  String? appID, collectionName, databaseName;
+
+  var databaseType = DatabaseType.Mobile;
 
   @override
   initState() {
@@ -999,13 +1001,12 @@ class _ConfigState extends State<Config> {
   }
 
   _getState() async {
-    appID = (await getAppID())!;
-    collectionName = (await getCollectionName())!;
-    databaseName = (await getDatabaseName())!;
-    _appIDController.text = appID!;
-    _dbController.text = databaseName!;
-    _collectionController.text = collectionName!;
-    _databaseType = DatabaseType.Mobile;
+    // appID = (await getAppID())!;
+    // collectionName = (await getCollectionName())!;
+    // databaseName = (await getDatabaseName())!;
+    // _appIDController.text = appID!;
+    // _dbController.text = databaseName!;
+    // _collectionController.text = collectionName!;
   }
 
   _onAppIDChanged(String value) async {
