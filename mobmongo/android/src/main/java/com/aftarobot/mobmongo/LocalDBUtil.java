@@ -25,9 +25,9 @@ class LocalDBUtil {
     private static final String TAG = LocalDBUtil.class.getSimpleName();
     private static final Logger logger = Logger.getLogger(LocalDBUtil.class.getSimpleName());
 
-    static String insert(MongoClient client, Map carrier) {
+    static String insert(MongoClient client, Map<String, Object> carrier) {
         Document document = new Document();
-        Map dataMap = (Map) carrier.get("data");
+        Map<String, Object> dataMap = (Map) carrier.get("data");
         assert dataMap != null;
         document.putAll(dataMap);
         getCollection(client, carrier).insertOne(document);
@@ -36,9 +36,9 @@ class LocalDBUtil {
         return mb.toString();
     }
 
-    static List<Object> getOne(MongoClient client, Map carrier) {
+    static List<Object> getOne(MongoClient client, Map<String, Object> carrier) {
 
-        Map idMap = (Map) carrier.get("id");
+        Map<String, Object> idMap = (Map) carrier.get("id");
         assert idMap != null;
         String field = (String) idMap.get("field");
         String value = (String) idMap.get("value");
@@ -53,12 +53,12 @@ class LocalDBUtil {
         return list;
     }
 
-    static long update(MongoClient client, Map carrier) {
-        Map idMap = (Map) carrier.get("id");
+    static long update(MongoClient client, Map<String, Object> carrier) {
+        Map<String, Object> idMap = (Map) carrier.get("id");
         assert idMap != null;
         String field = (String) idMap.get("field");
         String value = (String) idMap.get("value");
-        Map dataMap = (Map) carrier.get("fields");
+        Map<String, Object> dataMap = (Map) carrier.get("fields");
         assert dataMap != null;
         MongoCollection<Document> collection = getCollection(client, carrier);
         Document m1 = collection.find(new Document(field, value)).first();
@@ -74,8 +74,8 @@ class LocalDBUtil {
 
     }
 
-    static long addToArray( MongoClient client,  Map carrier) {
-        Map idMap = (Map) carrier.get("id");
+    static long addToArray( MongoClient client,  Map<String, Object> carrier) {
+        Map<String, Object> idMap = (Map) carrier.get("id");
         assert idMap != null;
         String field = (String) idMap.get("field");
         String value = (String) idMap.get("value");
@@ -92,7 +92,7 @@ class LocalDBUtil {
         return result.getMatchedCount();
     }
 
-    static List<Object> query(MongoClient client, Map carrier) {
+    static List<Object> query(MongoClient client, Map<String, Object> carrier) {
 
         Bson mFilter = Helper.getQueryFilter(carrier);
         assert mFilter != null;
@@ -108,8 +108,8 @@ class LocalDBUtil {
         return list;
     }
 
-    static long delete( MongoClient client,  Map carrier) {
-        Map idMap = (Map) carrier.get("id");
+    static long delete( MongoClient client,  Map<String, Object> carrier) {
+        Map<String, Object> idMap = (Map) carrier.get("id");
         assert idMap != null;
         String field = (String) idMap.get("field");
         String value = (String) idMap.get("value");
@@ -125,7 +125,7 @@ class LocalDBUtil {
     }
 
 
-    private static MongoCollection<Document> getCollection(MongoClient client, Map carrier) {
+    private static MongoCollection<Document> getCollection(MongoClient client, Map<String, Object> carrier) {
         String db = (String) carrier.get("db");
         String collection = (String) carrier.get("collection");
         assert collection != null;
@@ -133,7 +133,7 @@ class LocalDBUtil {
         return client.getDatabase(db).getCollection(collection);
     }
 
-    static List<Object> getAll(MongoClient client, Map carrier) {
+    static List<Object> getAll(MongoClient client, Map<String, Object> carrier) {
         String db = (String) carrier.get("db");
         String collectionName = (String) carrier.get("collection");
 
@@ -152,10 +152,10 @@ class LocalDBUtil {
 
     }
 
-    static void createIndex(MongoClient client,  Map carrier) {
+    static void createIndex(MongoClient client,  Map<String, Object> carrier) {
         String db = (String) carrier.get("db");
         String collection = (String) carrier.get("collection");
-        Map index = (Map) carrier.get("index");
+        Map<String, Object> index = (Map) carrier.get("index");
         assert db != null;
         assert collection != null;
         assert index != null;

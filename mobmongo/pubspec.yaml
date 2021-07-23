@@ -1,6 +1,6 @@
 name: mobmongo
 description: A new flutter plugin project.
-version: 0.0.9+3
+version: 0.0.10
 homepage: https://github.com/malengatiger/flutter-mongdb-mobile
 
 environment:
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^2.0.5
+  shared_preferences: ^2.0.6
 
 dev_dependencies:
   flutter_test:

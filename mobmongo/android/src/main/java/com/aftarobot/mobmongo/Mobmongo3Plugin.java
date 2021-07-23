@@ -51,12 +51,12 @@ public class Mobmongo3Plugin implements FlutterPlugin, MethodCallHandler {
             setupLocalDatabase("localApp");
             switch (call.method) {
                 case "deleteMany":
-                    Map map = (Map) call.arguments();
+                    Map<String, Object> map = (Map) call.arguments();
                     long resultDelete = LocalDBUtil.deleteMany(mobileClient, map);
                     result.success(resultDelete);
                     break;
                 case "query":
-                    Map queryArgs = (Map) call.arguments;
+                    Map<String, Object> queryArgs = (Map) call.arguments;
                     Object list = LocalDBUtil.query(mobileClient, queryArgs);
                     result.success(list);
                     break;
